@@ -39,6 +39,12 @@ module.exports = {
     // ...itemsSchema,
     ...ordersSchema,
     // ...customersSchema
+    },
+    securitySchemes: {
+      binglestore_auth: {
+        type: "http",
+        scheme: "basic"
+      }
     }
   },
 

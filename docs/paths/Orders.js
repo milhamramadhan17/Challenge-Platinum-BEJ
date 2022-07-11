@@ -53,7 +53,15 @@ module.exports = {
                         }
                     }
                 }
-            }
+            },
+            security: [
+                {
+                    binglestore_auth: [
+                        'write:orders',
+                        'read:orders'
+                    ]
+                }
+            ]
         }
     },
 
@@ -98,7 +106,15 @@ module.exports = {
                         }
                     }
                 }
-            }
+            },
+            security: [
+                {
+                    binglestore_auth: [
+                        'write:orders',
+                        'read:orders'
+                    ]
+                }
+            ]
         }
     },
 
@@ -145,9 +161,16 @@ module.exports = {
                             }
                         }
                     }
-                },
-
-            }
+                }
+            },
+            security: [
+                {
+                    binglestore_auth: [
+                        'write:orders',
+                        'read:orders'
+                    ]
+                }
+            ]
         },
 
         put: {
@@ -204,7 +227,15 @@ module.exports = {
                         }
                     }
                 }
-            }
+            },
+            security: [
+                {
+                    binglestore_auth: [
+                        'write:orders',
+                        'read:orders'
+                    ]
+                }
+            ]
         },
 
         delete: {
@@ -259,7 +290,15 @@ module.exports = {
                         }
                     }
                 }
-            }
+            },
+            security: [
+                {
+                    binglestore_auth: [
+                        'write:orders',
+                        'read:orders'
+                    ]
+                }
+            ]
         }
     },
 
