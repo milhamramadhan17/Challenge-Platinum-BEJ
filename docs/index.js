@@ -1,11 +1,11 @@
-const usersSchema = require('./schemas/Users');
-const usersPath = require('./paths/users');
+const userSchema = require('./schemas/user');
+const userPath = require('./paths/user');
 const itemsSchema = require('./schemas/Items');
 const itemsPath = require('./paths/Items');
 const ordersSchema = require('./schemas/Orders');
 const ordersPath = require('./paths/Orders');
-const customersSchema = require('./schemas/Customers');
-const customersPath = require('./paths/Customers');
+const customerSchema = require('./schemas/customer');
+const customerPath = require('./paths/customer');
 
 module.exports = {
   openapi: '3.0.0',
@@ -35,10 +35,10 @@ module.exports = {
   },
   components: {
     schemas: {
-    // ...usersSchema,
+    ...usersSchema,
     // ...itemsSchema,
     ...ordersSchema,
-    // ...customersSchema
+    ...customersSchema
     },
     securitySchemes: {
       binglestore_auth: {
