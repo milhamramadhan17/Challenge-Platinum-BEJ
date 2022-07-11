@@ -102,7 +102,7 @@ module.exports = {
         }
     },
 
-    '/api/order/orders/:id': {
+    '/api/order/orders/{id}': {
         get: {
             tags: ['order'],
             summary: 'Get order by id',
@@ -112,12 +112,14 @@ module.exports = {
             produces: ['application/json'],
             parameters: [
                 {
-                    in: 'path',
                     name: 'id',
+                    in: 'path',
                     description: 'ID of order that needs to be fetched',
                     required: true,
-                    type: 'integer',
-                    format: 'int64'
+                    schema : {
+                        type: 'integer',
+                        format: 'int64'
+                    }
                 }
             ],
             responses: {
@@ -129,7 +131,7 @@ module.exports = {
                                 $ref: '#/components/schemas/Orders'
                             }
                         }
-                    },
+                    }
                 },
                 400: {
                     description: 'Invalid ID supplied',
@@ -157,27 +159,29 @@ module.exports = {
             produces: ['application/json'],
             parameters: [
                 {
+                    name: 'customer_id',
                     in: 'path',
-                    name: 'id',
-                    description: 'Order id',
+                    description: 'ID of order that needs to be updated',
                     required: true,
-                    schema: {
-                        type: 'string'
+                    schema : {
+                        type: 'integer',
+                        format: 'int64'
                     }
                 }
+
             ],
-            responses: {
-                200: {
-                    description: 'Success',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
-                            }
+            requestBody: {
+                description: 'Order object that needs to be updated',
+                required: true,
+                content: {
+                    '*/*': {
+                        schema: {
+                            $ref: '#/components/schemas/Orders'
                         }
                     }
-                },
+                }
+            },
+            responses: {
                 401: {
                     description: 'Unauthorized',
                     schema: {

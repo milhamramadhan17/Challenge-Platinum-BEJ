@@ -11,13 +11,6 @@ module.exports = {
             'payment_method'
         ],
         properties: {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: 'integer',
-                
-            },
             customer_id: {
                 type: 'integer',
                 format: 'int64',
