@@ -35,10 +35,10 @@ module.exports = {
   },
   components: {
     schemas: {
-    ...usersSchema,
+    ...userSchema,
     // ...itemsSchema,
     ...ordersSchema,
-    ...customersSchema
+    ...customerSchema
     },
     securitySchemes: {
       binglestore_auth: {
