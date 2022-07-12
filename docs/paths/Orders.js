@@ -170,7 +170,7 @@ module.exports = {
                         'read:orders'
                     ]
                 }
-            ]
+            ]  
         },
 
         put: {
