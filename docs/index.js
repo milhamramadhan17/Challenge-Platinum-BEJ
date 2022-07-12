@@ -1,11 +1,11 @@
-const userSchema = require('./schemas/user');
-const userPath = require('./paths/user');
+const userSchema = require('./schemas/Users');
+const userPath = require('./paths/Users');
 const itemsSchema = require('./schemas/Items');
 const itemsPath = require('./paths/Items');
 const ordersSchema = require('./schemas/Orders');
 const ordersPath = require('./paths/Orders');
-const customerSchema = require('./schemas/customer');
-const customerPath = require('./paths/customer');
+const customerSchema = require('./schemas/Customers');
+const customerPath = require('./paths/Customers');
 
 module.exports = {
   openapi: '3.0.0',
@@ -28,10 +28,10 @@ module.exports = {
     }
   },
   paths: {
-    // ...usersPath,
+    ...userPath,
     // ...itemsPath,
     ...ordersPath,
-    // ...customersPath
+    ...customerPath
   },
   components: {
     schemas: {
