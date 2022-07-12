@@ -1,5 +1,5 @@
 module.exports = {
-    User: {
+    Users: {
         type: "object",
         properties: {
           id: {
