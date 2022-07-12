@@ -1,5 +1,5 @@
 module.exports = {
-    "/customer": {
+    "/Customer": {
         post: {
           tags: [
             "customer"
@@ -70,7 +70,7 @@ module.exports = {
           description: "",
           operationId: "createCustomersWithListInput",
           produces: [
-            "application/xml",
+           
             "application/json"
           ],
           parameters: [
@@ -103,7 +103,6 @@ module.exports = {
           description: "",
           operationId: "loginCustomer",
           produces: [
-            "application/xml",
             "application/json"
           ],
           parameters: [
@@ -156,7 +155,6 @@ module.exports = {
           description: "",
           operationId: "logoutCustomer",
           produces: [
-            "application/xml",
             "application/json"
           ],
           parameters: [],
@@ -176,7 +174,6 @@ module.exports = {
           description: "",
           operationId: "getCustomerByName",
           produces: [
-            "application/xml",
             "application/json"
           ],
           parameters: [
@@ -204,16 +201,11 @@ module.exports = {
           }
         },
         put: {
-          tags: [
-            customer
-          ],
+          tags: ["customer"],
           summary: "Updated customer",
           description: "This can only be done by the logged in customer.",
           operationId: "updateCustomer",
-          produces: [
-            "application/xml",
-            "application/json"
-          ],
+          produces: ["application/json"],
           parameters: [
             {
               name: "customername",
@@ -242,16 +234,11 @@ module.exports = {
           }
         },
         delete: {
-          tags: [
-            "customer"
-          ],
+          tags: ["customer"],
           summary: "Delete Customer",
           description: "This can only be done by the logged in customer.",
           operationId: "deleteCustomer",
-          produces: [
-            "application/xml",
-            "application/json"
-          ],
+          produces: ["application/json"],
           parameters: [
             {
               name: "customername",
