@@ -1,5 +1,5 @@
 module.exports = {
-    Customer: {
+    Customers: {
         type: "object",
         properties: {
           id: {
