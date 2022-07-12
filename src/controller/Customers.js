@@ -1,76 +1,72 @@
 const { customer : customers } = require('../models');
 const customers = require('../models/customer');
+const { Op } = require("sequelize");
 
-exports.register = async (req, res) => {
-  try {
-    const newUser = {
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password
-    };
-
-    await customers.create(newUser);
-  
-    return res.status(201).json({
-      message: 'Berhasil mendaftar.',
-      user_email: newUser.email
-    })
-  } catch (err) {
-    return res
-      .status(err.status || 500)
-      .json({
-        message: err.message || 'Internal server error.',
-      })
-  }
-}
-
-exports.updatePassword = async (req, res) => {
-  try {
-    await customers.update({ password: req.body.password }, {
-      where: {
-        id: req.body.id
+class CustomerController {
+  static async addCustomer(req, res) {
+    try {
+      if (!req.body.id) throw {
+        status: 400,
+        message: 'parameter name tidak boleh kosong.'
       }
-    });
-  
-    return res.status(200).json({
-      message: 'Berhasil merubah password.'
-    })
-  } catch (err) {
-    return res
-      .status(err.status || 500)
-      .json({
-        message: err.message || 'Internal server error.',
-      })
-  }
-}
-
-exports.login = async (req, res) => {
-  try {
-    let mycustomer = await customer.findOne({
-      attributes: ['id', 'name', 'email'],
-      where: {
-        email: req.body.email,
-        password: req.body.password
+       const newCustomer = {
+        user_id: 18
       }
-    })
-
-    mycustomer = mycustomer?.dataValues;
-
-    if (!mycustomer) throw {
-      status: 400,
-      message: 'Username atau password tidak sesuai.'
+  
+      await customers.create(newCustomer);
+  
+      return res.status(201).json({
+        message: 'Berhasil menambahkan customer '})
+    } catch (err) {
+      return res
+        .status(err.status ||  500)
+        .json({ message: err.message || 'Internal server error' })
     }
-  
-    return res.status(201).json({
-      message: 'Berhasil login.',
-      user: req.body.email
+  }
+
+  static async getAllcustomer(req, res) {
+    const rows = await customers.findAll({
+      where: condition
+  })
+  .then(results => {
+      res.send(results)
+  })
+} catch (err) {
+  res.status(500).send({
+      message:
+        err.message || "Internal server error"
+    });
+    return res.status(200).json({
+      message: 'Berhasil mendapatkan customer',
+      data: rows
     })
-  } catch (err) {
-    return res
-      .status(err.status || 500)
-      .json({
-        message: err.message || 'Internal server error.',
+  }  
+  static updateCustomer(req, res) {
+    const user_id = req.params.id;
+
+    return res.status(200).json({
+      message: 'Berhasil merubah id ',
+    })
+  }
+
+
+  static async deleteCustomer(req, res) {
+    try {
+      if (!req.body.id) throw { status: 400, message: 'parameter id tidak boleh kosong' };
+
+      await customers.destroy({
+        where: { id: req.body.id }
+      });
+
+      return res.status(200).json({
+        message: 'Berhasil menghapus customer ' + req.body.id
       })
+    } catch (err) {
+      return res
+        .status(err.status ||  500)
+        .json({ message: err.message || 'Internal server error' })
+    }
   }
 }
 
+module.exports = CustomerController;
