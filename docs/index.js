@@ -29,14 +29,14 @@ module.exports = {
   },
   paths: {
     ...userPath,
-    // ...itemsPath,
+    ...itemsPath,
     ...ordersPath,
     ...customerPath
   },
   components: {
     schemas: {
     ...userSchema,
-    // ...itemsSchema,
+    ...itemsSchema,
     ...ordersSchema,
     ...customerSchema
     },

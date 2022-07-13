@@ -10,11 +10,19 @@ module.exports = {
       },
       customer_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Customers',
+          key: 'id'
+        }
       },
       item_id: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Items',
+          key: 'id'
+        }
       },
       qty: {
         allowNull: false,

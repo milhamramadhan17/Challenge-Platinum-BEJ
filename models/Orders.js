@@ -5,17 +5,17 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Orders extends Model {
     static associate(models) {
-      // Orders.belongsTo(models.Items, {foreignKey: 'item_id'})
-      //   Orders.hasOne(models.Items, {
-      //     foreignKey: 'id',
-      //     as        : 'Items'
-      //   });
+      Orders.belongsTo(models.Items, {foreignKey: 'item_id'})
+        Orders.hasOne(models.Items, {
+          foreignKey: 'id',
+          as        : 'Items'
+        });
       
-      // Orders.belongsTo(models.Customers, { foreignKey: 'customer_id'})
-      // Orders.hasOne(models.Customers, {
-      //   foreignKey: 'id',
-      //   as        : 'Customers'
-      // });
+      Orders.belongsTo(models.Customers, { foreignKey: 'customer_id'})
+      Orders.hasOne(models.Customers, {
+        foreignKey: 'id',
+        as        : 'Customers'
+      });
     }
   }
   Orders.init({
