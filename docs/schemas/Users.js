@@ -6,22 +6,19 @@ module.exports = {
             type: "integer",
             format: "int64"
           },
-          username: {
+          name: {
             type: "string"
           },
-          firstName: {
+          EMail: {
             "type": "string"
           },
-          lastName: {
+          Password: {
             "type": "string"
           },
-          email: {
-            "type": "string"
+          Telephone: {
+            "type": "integer"
           },
-          password: {
-            "type": "string"
-          },
-          phone: {
+          Address: {
             "type": "string"
           },
           userStatus: {
@@ -30,8 +27,5 @@ module.exports = {
             description: "User Status"
           }
         },
-        xml: {
-          "name": "User"
-        }
       }
 }
