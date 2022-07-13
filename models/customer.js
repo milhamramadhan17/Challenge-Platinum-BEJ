@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    }
+       Customer.belongsTo(models.user, {
+        foreignKey: 'user_id',
+        as: 'user'
+      });
+    };
   }
   customer.init({
     user_id: DataTypes.INTEGER,
