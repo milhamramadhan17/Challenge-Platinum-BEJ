@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const controller = require('../controller/Customers');
+const controller = require('../controller/Items');
 
+router.post('/customers', controller.addCustomer);
 router.get('/customers', controller.getAllcustomer);
-router.post('/addCustomers', controller.addCustomer);
-router.put('/customers/:id', controller.updateCustomer);
-router.delete('/customers/:id', controller.deleteCustomer);
+router.put('/customers', controller.updateCustomer);
+router.delete('/customers', controller.deleteCustomer);
 
 module.exports = router;
