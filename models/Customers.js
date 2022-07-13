@@ -9,7 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       Customers.hasOne(models.Users, {
         foreignKey: 'id',
         as        : 'Users'
-      });
+      })
+
+      Customers.belongsTo(models.Orders, { foreignKey: 'id'})
+      Customers.hasMany(models.Orders, {
+        foreignKey: 'customer_id',
+        as        : 'Orders'
+      })
     }
   }
   Customers.init({

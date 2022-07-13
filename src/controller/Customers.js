@@ -1,5 +1,4 @@
-const { customer : customers } = require('../models');
-const customers = require('../models/customer');
+const { customer : Customers} = require('../../models');
 const { Op } = require("sequelize");
 
 class CustomerController {
@@ -10,10 +9,10 @@ class CustomerController {
         message: 'parameter name tidak boleh kosong.'
       }
        const newCustomer = {
-        user_id: 18
+        user_id: req.body.user_id
       }
   
-      await customers.create(newCustomer);
+      await Customers.create(newCustomer);
   
       return res.status(201).json({
         message: 'Berhasil menambahkan customer '})
@@ -25,7 +24,9 @@ class CustomerController {
   }
 
   static async getAllcustomer(req, res) {
-    const rows = await customers.findAll({
+    const dataItems = req.query.dataItems
+    var condition = dataOrders ? {dataItems: {[Op.like]: `%${dataItems}%`} } : null;
+    const rows = await Customers.findAll({
       where: condition
   })
   .then(results => {
@@ -41,6 +42,7 @@ class CustomerController {
       data: rows
     })
   }  
+
   static updateCustomer(req, res) {
     const user_id = req.params.id;
 
@@ -54,7 +56,7 @@ class CustomerController {
     try {
       if (!req.body.id) throw { status: 400, message: 'parameter id tidak boleh kosong' };
 
-      await customers.destroy({
+      await Customers.destroy({
         where: { id: req.body.id }
       });
 

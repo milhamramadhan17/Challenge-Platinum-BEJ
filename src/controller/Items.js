@@ -38,7 +38,7 @@ controller.addItem = async (req, res) => {
 
 controller.getAll = async (req, res) => {
   const dataItems = req.query.dataItems
-    var condition = dataOrders ? {dataItems: {[Op.like]: `%${dataItems}%`} } : null;
+    var condition = dataItems ? {dataItems: {[Op.like]: `%${dataItems}%`} } : null;
     try {
         await Items.findAll({
             where: condition
@@ -75,46 +75,59 @@ controller.getByID = async (req, res) => {
     }
 }
 
-controller.updateItem = async (req, res) => {
+controller.updateItems = async (req, res) => {
   try {
-    await Items.update({ 
-      category: req.body.category
-       }, 
-       {
-      where: {
-        id: req.body.id
+      const items = {
+          name        : req.body.name,
+          price       : req.body.price,
+          store_name  : req.body.store_name,
+          category    : req.body.category,
+          brand       : req.body.brand,
       }
-    });
-  
-    return res.status(200).json({
-      message: 'Successfully updating category'
-    })
-  } catch (err) {
-    return res.status(err.status || 500).json({
-        message: err.message || 'Internal server error.',
+       await Items.update(items,{
+           where: {
+               id: req.params.id
+           }
+       });
+       
+       return res.status(203).json(
+           {
+               "message": "Updated Successfully"
+       });
+  } catch (err){
+      res.status(404).send({
+           message:
+           err.message || "There's something wrong"
       })
   }
 }
 
 controller.deleteItem = async (req, res) => {
+  const id = req.params.id;
   try {
-    if (!req.body.id) 
-    throw { status: 400, 
-      message: 'ID cannot be empty' 
-    };
+      await Items.findByPk(id)
+      .then(results => {
+          if(results) {
+              Items.destroy({
+                  where: {
+                      id: id
+                  }
+              })
+              .then((results) => {
+                  res.send("Delete Successfully")
+              })
+          } else {
+              res.send("There's not data")
+          }
+      })
 
-    await Items.destroy({
-      where: { id: req.body.id }
-    });
-
-    return res.status(200).json({
-      message: 'Successfully deleting item ' + req.body.id
-    })
   } catch (err) {
-    return res
-      .status(err.status ||  500)
-      .json({ message: err.message || 'Internal server error' })
+      res.status(400).send({
+          message:
+          err.message || "There is something wrong"
+      })
   }
+  
 }
 
 module.exports = controller;

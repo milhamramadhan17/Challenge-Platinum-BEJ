@@ -1,19 +1,21 @@
-const { users : user } = require('../models');
-const users = require('../models/user');
+const { users : Users } = require('../../models');
+const { Op } = require('sequelize');
 
 exports.register = async (req, res) => {
   try {
     const newUser = {
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      telepon: req.body.telepon,
+      address: req.body.address
     };
 
-    await users.create(newUser);
+    await Users.create(newUser);
   
     return res.status(201).json({
       message: 'Berhasil mendaftarkan user baru.',
-      user_email: newUser.email
+      email: newUser.email
     })
   } catch (err) {
     return res
@@ -24,9 +26,28 @@ exports.register = async (req, res) => {
   }
 }
 
+exports.getAll = async (req, res) => {
+  const dataUsers = req.query.dataUsers
+  var condition = dataUsers ? {dataUsers: {[Op.like]: `%${dataUsers}%`} } : null;
+  try {
+      await Users.findAll({
+          where: condition
+      })
+      .then(results => {
+          res.send(results)
+      })
+  } catch (err) {
+      res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving orders."
+        });
+  }
+}
+
+
 exports.updatePassword = async (req, res) => {
   try {
-    await users.update({ password: req.body.password }, {
+    await Users.update({ password: req.body.password }, {
       where: {
         id: req.body.id
       }
@@ -46,7 +67,7 @@ exports.updatePassword = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    let customer = await user.findOne({
+    let customer = await Users.findOne({
       attributes: ['id', 'name', 'email'],
       where: {
         email: req.body.email,

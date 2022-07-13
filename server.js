@@ -3,7 +3,10 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs');
 const app = Express();
 const port = process.env.PORT || 3000;
-const routerOrders = require('./src/route/orders');
+const routerOrders = require('./src/route/Orders');
+const routerItems = require('./src/route/Items');
+const routerCustomers = require('./src/route/Customers');
+const routerUsers = require('./src/route/Users');
 
 
 app.use(Express.json());
@@ -15,6 +18,9 @@ app.get('/', (req, res) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/order', routerOrders);
+app.use('/api/item', routerItems);
+app.use('/api/user', routerUsers);
+app.use('/api/customer', routerCustomers);
 
 app.listen(port, () => {console.log(`Server is running on port ${port}`);})
 
