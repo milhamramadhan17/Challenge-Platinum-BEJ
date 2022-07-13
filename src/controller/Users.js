@@ -1,7 +1,10 @@
+const db = require('../../models');
 const { users : user } = require('../models');
 const users = require('../models/user');
+const Op = db.sequelize.user;
+const controller = {};
 
-exports.register = async (req, res) => {
+controller.register = async (req, res) => {
   try {
     const newUser = {
       name: req.body.name,
@@ -24,7 +27,7 @@ exports.register = async (req, res) => {
   }
 }
 
-exports.updatePassword = async (req, res) => {
+controller.updatePassword = async (req, res) => {
   try {
     await users.update({ password: req.body.password }, {
       where: {
@@ -44,7 +47,7 @@ exports.updatePassword = async (req, res) => {
   }
 }
 
-exports.login = async (req, res) => {
+controller.login = async (req, res) => {
   try {
     let customer = await user.findOne({
       attributes: ['id', 'name', 'email'],
@@ -73,3 +76,5 @@ exports.login = async (req, res) => {
       })
   }
 }
+
+module.exports = controller;
