@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    }
+      user.hasOne(models.customer, {
+        foreignKey: 'user_id',
+        as: 'user'
+      });
+    };
   }
   user.init({
     name: DataTypes.STRING,
@@ -26,5 +30,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return user;
 };
-
-user.hasOne(customer); 
