@@ -1,12 +1,12 @@
 module.exports = {
-    "/Customer": {
+    '/Customer': {
         post: {
           tags: [
             "customer"
           ],
           summary: "Create customer",
           description: "This can only be done by logged in.",
-          operationId: "createCustomer",
+          operationId: "addCustomer",
           produces: [
             "application/json"
           ],
@@ -28,151 +28,13 @@ module.exports = {
           }
         }
       },
-      "/customer/createWithArray": {
-        post: {
-          tags: [
-            "customer"
-          ],
-          summary: "Creates list of customers with given input array",
-          description: "",
-          operationId: "createCustomersWithArrayInput",
-          produces: [
-            "application/xml",
-            "application/json"
-          ],
-          parameters: [
-            {
-              in: "body",
-              name: "body",
-              description: "List of customer object",
-              required: true,
-              schema: {
-                type: "array",
-                items: {
-                  $ref: "#/definitions/Customer"
-                }
-              }
-            }
-          ],
-          responses: {
-            default: {
-              description: "successful operation"
-            }
-          }
-        }
-      },
-      "/customer/createWithList": {
-        post: {
-          tags: [
-            "customer"
-          ],
-          summary: "Creates list of Customers with given input array",
-          description: "",
-          operationId: "createCustomersWithListInput",
-          produces: [
-           
-            "application/json"
-          ],
-          parameters: [
-            {
-              in: "body",
-              name: "body",
-              description: "List of Customer object",
-              required: true,
-              schema: {
-                type: "array",
-                items: {
-                  $ref: "#/definitions/Customer"
-                }
-              }
-            }
-          ],
-          responses: {
-            default: {
-              description: "successful operation"
-            }
-          }
-        }
-      },
-      "/customer/login": {
         get: {
           tags: [
-            "customer"
+            customer
           ],
-          summary: "Logs Customer into the system",
-          description: "",
-          operationId: "loginCustomer",
-          produces: [
-            "application/json"
-          ],
-          parameters: [
-            {
-              name: "customername",
-              in: "query",
-              description: "The customer name for login",
-              required: true,
-              type: "string"
-            },
-            {
-              name: "password",
-              in: "query",
-              description: "The password for login in clear text",
-              required: true,
-              type: "string"
-            }
-          ],
-          responses: {
-            200: {
-              description: "successful operation",
-              schema: {
-                "type": "string"
-              },
-              headers: {
-                "X-Rate-Limit": {
-                  type: "integer",
-                  format: "int32",
-                  description: "calls per hour allowed by the user"
-                },
-                "X-Expires-After": {
-                  type: "string",
-                  format: "date-time",
-                  description: "date in UTC when token expires"
-                }
-              }
-            },
-            400: {
-              description: "Invalid Customername/password supplied"
-            }
-          }
-        }
-      },
-      "/customer/logout": {
-        get: {
-          tags: [
-            "customer"
-          ],
-          summary: "Logs out current logged in Customer session",
-          description: "",
-          operationId: "logoutCustomer",
-          produces: [
-            "application/json"
-          ],
-          parameters: [],
-          responses: {
-            default: {
-              description: "successful operation"
-            }
-          }
-        }
-      },
-      "/customer/{customername}": {
-        get: {
-          tags: [
-            "customer"
-          ],
-          summary: "Get customer by Customer name",
-          description: "",
-          operationId: "getCustomerByName",
+          summary: "Find all customer",
+          description: "This can only be done by the logged in customer.",
+          operationId: "getAllcustomer",
           produces: [
             "application/json"
           ],
@@ -180,20 +42,23 @@ module.exports = {
             {
               name: "customername",
               in: "path",
-              description: "The name that needs to be fetched. Use customer1 for testing. ",
+              description: "name that need to be get customer",
               required: true,
               type: "string"
-            }
-          ],
-          responses: {
-            200: {
-              description: "successful operation",
+            },
+            {
+              in: "body",
+              name: "body",
+              description: "Get customer object",
+              required: true,
               schema: {
                 $ref: "#/definitions/Customer"
               }
-            },
+            }
+          ],
+          responses: {
             400: {
-              description: "Invalid username supplied"
+              description: "Invalid Customer supplied"
             },
             404: {
               description: "Customer not found"
@@ -201,11 +66,15 @@ module.exports = {
           }
         },
         put: {
-          tags: ["customer"],
+          tags: [
+            customer
+          ],
           summary: "Updated customer",
           description: "This can only be done by the logged in customer.",
           operationId: "updateCustomer",
-          produces: ["application/json"],
+          produces: [
+            "application/json"
+          ],
           parameters: [
             {
               name: "customername",
@@ -234,11 +103,15 @@ module.exports = {
           }
         },
         delete: {
-          tags: ["customer"],
+          tags: [
+            "customer"
+          ],
           summary: "Delete Customer",
           description: "This can only be done by the logged in customer.",
           operationId: "deleteCustomer",
-          produces: ["application/json"],
+          produces: [
+            "application/json"
+          ],
           parameters: [
             {
               name: "customername",
@@ -258,4 +131,3 @@ module.exports = {
           }
         }
       }
-}
