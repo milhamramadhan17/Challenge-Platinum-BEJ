@@ -9,10 +9,7 @@ class CustomerController {
         status: 400,
         message: 'parameter name tidak boleh kosong.'
       }
-       const newCustomer = {
-        user_id: 18
-      }
-  
+      
       await customers.create(newCustomer);
   
       return res.status(201).json({
