@@ -1,5 +1,5 @@
 module.exports = {
-    "/user": {
+    "/api/user/register": {
         post: {
           tags: [
             "user"
@@ -17,7 +17,7 @@ module.exports = {
               description: "Created user object",
               required: true,
               schema: {
-                $ref: "#/definitions/User"
+                $ref: "#/components/schemas/Users"
               }
             }
           ],
@@ -28,13 +28,14 @@ module.exports = {
           }
         }
       },
+      "/api/user/login": {
         post: {
         tags: [
           "user"
         ],
-        summary: "Create user",
+        summary: "User Login",
         description: "This can only be done by logged in user.",
-        operationId: "register",
+        operationId: "login",
         produces: [
           "application/json"
         ],
@@ -45,7 +46,7 @@ module.exports = {
             description: "Created user object",
             required: true,
             schema: {
-              $ref: "#/definitions/User"
+              $ref: "#/components/schemas/Users"
             }
           }
         ],
@@ -55,6 +56,42 @@ module.exports = {
           }
         }
       },
+     
+        get: {
+          tags: ["user"],
+          summary: "Find all User",
+          description: "This can only be done by the logged in User.",
+          operationId: "getAll",
+          produces: [
+            "application/json"
+          ],
+          parameters: [
+            {
+              name: "username",
+              in: "path",
+              description: "name that need to be get User",
+              required: true,
+              type: "string"
+            },
+            {
+              in: "body",
+              name: "body",
+              description: "Get User object",
+              required: true,
+              schema: {
+                $ref: "#/components/schemas/Users"
+              }
+            }
+          ],
+          responses: {
+            400: {
+              description: "Invalid User supplied"
+            },
+            404: {
+              description: "User not found"
+            }
+          }
+        },
       put: {
         tags: ["user"],
         summary: "Updated Password",
@@ -77,7 +114,7 @@ module.exports = {
             description: "Updated user password",
             required: true,
             schema: {
-              $ref: "#/definitions/Customer"
+              $ref: "#/components/schemas/Users"
             }
           }
         ],
@@ -90,4 +127,5 @@ module.exports = {
           }
         }
       }
-    }
+    },
+  }
