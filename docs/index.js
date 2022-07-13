@@ -7,6 +7,7 @@ const ordersPath = require('./paths/Orders');
 const customerSchema = require('./schemas/Customers');
 const customerPath = require('./paths/Customers');
 
+
 module.exports = {
   openapi: '3.0.0',
   info: {

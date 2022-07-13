@@ -1,6 +1,6 @@
 const db = require('../../models')
 const Orders = db.Orders;
-// const Items = db.Items;
+const Items = db.Items;
 const Op = db.Sequelize.Op;
 const controller = {};
 
@@ -24,16 +24,16 @@ controller.getAll = async (req, res) => {
 
 controller.addOrder = async (req, res) => {
     try {
-        // const orderItem = await Items.findOne({
-        //     where: {
-        //          id: req.body.item_id
-        //     }
-        // })
+        const orderItem = await Items.findOne({
+            where: {
+                 id: req.body.item_id
+            }
+        })
         const order = {
             customer_id   : req.body.customer_id,
             item_id       : req.body.item_id,
             qty           : req.body.qty,
-            amount        : req.body.qty, //* orderItem.dataValues.price,
+            amount        : req.body.qty * orderItem.dataValues.price,
             status        : req.body.status,
             payment_method: req.body.payment_method,
         }
@@ -73,16 +73,16 @@ controller.getOrderById = async (req, res) => {
 
 controller.updateOrder = async (req, res) => {
     try {
-        // const orderItem = await Items.findOne({
-        //     where: {
-        //          id: req.body.item_id
-        //     }
-        // })
+        const orderItem = await Items.findOne({
+            where: {
+                 id: req.body.item_id
+            }
+        })
         const order = {
             customer_id   : req.body.customer_id,
             item_id       : req.body.item_id,
             qty           : req.body.qty,
-            amount        : req.body.qty, // * orderItem.dataValues.price,
+            amount        : req.body.qty * orderItem.dataValues.price,
             status        : req.body.status,
             payment_method: req.body.payment_method,
         }

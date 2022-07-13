@@ -14,17 +14,23 @@ module.exports = {
             customer_id: {
                 type: 'integer',
                 format: 'int64',
+                minimum: 1
             },
             item_id: {
                 type: 'integer',
                 format: 'int64',
+                minimum: 1
             },
             qty: {
                 type: 'integer',
                 format: 'int64',
+                minimum: 1
             },
             amount: {
                 type: 'integer',
+                format: 'int64',
+                minimum: 1000
+
             },
             status: {
                 type: 'string',

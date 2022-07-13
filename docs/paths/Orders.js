@@ -20,13 +20,12 @@ module.exports = {
                 }
             ],
             responses: {
-                201: {
+                200: {
                     description: 'Success',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Orders'
                             }
                         }
                     }
@@ -182,7 +181,7 @@ module.exports = {
             produces: ['application/json'],
             parameters: [
                 {
-                    name: 'customer_id',
+                    name: 'id',
                     in: 'path',
                     description: 'ID of order that needs to be updated',
                     required: true,
