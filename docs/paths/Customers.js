@@ -1,5 +1,5 @@
 module.exports = {
-    '/Customer': {
+    '/customer': {
         post: {
           tags: [
             "customer"
@@ -29,16 +29,10 @@ module.exports = {
         }
       },
         get: {
-<<<<<<< HEAD
-          tags: [
-            "customer"
-          ],
-=======
           tags: ["customer"],
->>>>>>> e3e2d93ea753b7d941eb71d76696f91fa0700d74
           summary: "Find all customer",
           description: "This can only be done by the logged in customer.",
-          operationId: "getAllcustomer",
+          operationId: "getAll",
           produces: [
             "application/json"
           ],
