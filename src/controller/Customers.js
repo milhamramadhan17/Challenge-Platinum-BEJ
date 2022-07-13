@@ -1,5 +1,5 @@
 const db = require('../../models')
-const Customers = db.Customers;
+const Customers = db.Customer;
 const Op = db.Sequelize.Op;
 const controller = {};
 
