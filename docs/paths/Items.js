@@ -62,6 +62,12 @@ post: {
         "201":{
         description: "Item added successfully",
         },
+        "400":{
+            description: "Name cannot be empty",
+            },
+        "400":{
+            description: "Price cannot be empty",
+            },
         "500":{
         description: "Internal server error",
         },
@@ -73,9 +79,7 @@ post: {
             ]
         }
     ]
-    }
-}
-}
+    }}}
 },
 {
 get: {
@@ -110,9 +114,7 @@ get: {
             ]
         }
     ]
-    }
-}
-}
+    }}}
 },
 {
     '/items/{id}': {
@@ -152,7 +154,7 @@ get: {
       "404":{
         description: "Item with ID cannot be found",
       "500":{
-        description: "Internal server error",
+        description: "Error retrieving item with ID",
       },
       security: [
         {
@@ -162,10 +164,8 @@ get: {
             ]
         }
     ]
-    }
-}
-}}
-}
+    }}
+}}}
 },
 {
 put: {
@@ -189,9 +189,7 @@ put: {
 
     ],
     requestBody: {
-        name: 'category',
-        in: 'body',
-        description: 'Category of an item that needs to be updated',
+        description: 'Object of an item that needs to be updated',
         required: true,
         content: {
                 schema: {
@@ -201,10 +199,10 @@ put: {
         }
     },
     responses: {
-        "200":{
-            description: "Successfully updating category",
-          "500":{
-            description: "Internal server error",
+        "203":{
+            description: "Updated Successfully",
+          "404":{
+            description: "There's something wrong",
             }
         }
     },
@@ -229,7 +227,7 @@ delete: {
         {
             name: 'id',
             in: 'path',
-            description: 'ID of pet that needs to be deleted',
+            description: 'ID of item that needs to be deleted',
             required: true,
             schema : {
                 type: 'integer',
@@ -239,10 +237,10 @@ delete: {
     
     ],
     responses: {
-        "200":{
-            description: "Successfully deleting item",
-            "500":{
-            description: "Internal server error",
+            "200":{
+            description: "Deleted successfully",
+            "400":{
+            description: "There's something wrong",
             }
         }
     },

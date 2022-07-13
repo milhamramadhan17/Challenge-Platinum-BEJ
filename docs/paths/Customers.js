@@ -1,5 +1,5 @@
 module.exports = {
-    '/Customer': {
+    '/customer': {
         post: {
           tags: [
             "customer"
@@ -32,7 +32,7 @@ module.exports = {
           tags: ["customer"],
           summary: "Find all customer",
           description: "This can only be done by the logged in customer.",
-          operationId: "getAllcustomer",
+          operationId: "getAll",
           produces: [
             "application/json"
           ],
