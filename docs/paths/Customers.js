@@ -1,5 +1,5 @@
 module.exports = {
-    '/customer': {
+    '/api/customer/addCustomer': {
         post: {
           tags: [
             "customer"
@@ -17,7 +17,7 @@ module.exports = {
               description: "Created object",
               required: true,
               schema: {
-                $ref: "#/definitions/Customer"
+                $ref: "#/components/schemas/Customers"
               }
             }
           ],
@@ -28,6 +28,7 @@ module.exports = {
           }
         }
       },
+      '/api/customer/customers': {
         get: {
           tags: ["customer"],
           summary: "Find all customer",
@@ -50,7 +51,7 @@ module.exports = {
               description: "Get customer object",
               required: true,
               schema: {
-                $ref: "#/definitions/Customer"
+                $ref: "#/components/schemas/Customers"
               }
             }
           ],
@@ -63,6 +64,7 @@ module.exports = {
             }
           }
         },
+        
         put: {
           tags: ["customer"],
           summary: "Updated customer",
@@ -85,7 +87,7 @@ module.exports = {
               description: "Updated customer object",
               required: true,
               schema: {
-                $ref: "#/definitions/Customer"
+                $ref: "#/components/schemas/Customers"
               }
             }
           ],
@@ -98,6 +100,7 @@ module.exports = {
             }
           }
         },
+        
         delete: {
           tags: [
             "customer"
@@ -126,4 +129,5 @@ module.exports = {
             }
           }
         }
-      }
+      },
+    }
