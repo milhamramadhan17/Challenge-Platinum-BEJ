@@ -30,7 +30,7 @@ module.exports = {
       },
         get: {
           tags: [
-            customer
+            "customer"
           ],
           summary: "Find all customer",
           description: "This can only be done by the logged in customer.",
@@ -67,7 +67,7 @@ module.exports = {
         },
         put: {
           tags: [
-            customer
+            "customer"
           ],
           summary: "Updated customer",
           description: "This can only be done by the logged in customer.",

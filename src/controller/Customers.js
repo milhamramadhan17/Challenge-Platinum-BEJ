@@ -1,23 +1,13 @@
 const db = require('../../models')
-const Customers = db.Customer;
+const Customers = db.Customers;
 const Op = db.Sequelize.Op;
 const controller = {};
 
 
 controller.addCustomer = async (req, res) => {
   try {
-      if (!req.body.name) throw {
-          status: 400,
-          message: 'Name cannot be empty'
-        }
-  
-        if (!req.body.price) throw {
-          status: 400,
-          message: 'Price cannot be empty'
-        }
-
       const customer = {
-          name       : req.body.name,
+          user_id       : req.body.user_id,
       }
 
       await Customers.create(customer)
@@ -34,6 +24,8 @@ controller.addCustomer = async (req, res) => {
 }
 
 controller.getAll = async (req, res) => {
+  const dataCustomer = req.query.dataCustomer;
+  const condition = dataCustomer ? { dataCustomer: { [Op.like]: `%${req.query.dataCustomer}%` } } : null;
   try {
       await Customers.findAll({
           where: condition
@@ -52,7 +44,7 @@ controller.getAll = async (req, res) => {
 controller.updateCustomer = async (req, res) => {
 try {
   await Customers.update({ 
-    category: req.body.category
+    user_id: req.body.user_id
      }, 
      {
     where: {
@@ -61,7 +53,7 @@ try {
   });
 
   return res.status(200).json({
-    message: 'Successfully updating category'
+    message: 'Successfully updating user_id'
   })
 } catch (err) {
   return res.status(err.status || 500).json({
