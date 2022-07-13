@@ -88,7 +88,7 @@ get: {
     ]
 }}},
 
-    '/api/order/items/{id}': {
+    '/api/item/items/{id}': {
 get: {
     tags: ['items'],
     summary: "Find item by ID",
