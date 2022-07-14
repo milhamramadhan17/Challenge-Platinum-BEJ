@@ -22,9 +22,30 @@ module.exports = {
             }
           ],
           responses: {
-            default: {
-              description: "successful operation"
-            }
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Users'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:Users",
+                  "read:Users" 
+              ]
+          }
+      ]
           }
         }
       },
@@ -51,12 +72,35 @@ module.exports = {
           }
         ],
         responses: {
-          default: {
-            description: "successful operation"
-          }
+          200: {
+            description: 'Success',
+            content: {
+                'application/json': {
+                    schema: {
+                        $ref: '#/components/schemas/Users'
+                    }
+                }
+            }
+        },
+        401: {
+            description: 'Unauthorized',
+        },
+        500: {
+            description: 'Internal server error',
+        },
+        security: [
+        {
+            binglestore_auth: [
+                "write:Users",
+                "read:Users" 
+            ]
         }
-      },
+    ]
+        }
+      }
+    },
      
+    "/api/user/findAlluser": {
         get: {
           tags: ["user"],
           summary: "Find all User",
@@ -84,14 +128,35 @@ module.exports = {
             }
           ],
           responses: {
-            400: {
-              description: "Invalid User supplied"
-            },
-            404: {
-              description: "User not found"
-            }
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Users'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:Users",
+                  "read:Users" 
+              ]
           }
-        },
+      ]
+          }
+        }
+      },
+        
+      "/api/user/updatePassword": {
       put: {
         tags: ["user"],
         summary: "Updated Password",
@@ -119,12 +184,30 @@ module.exports = {
           }
         ],
         responses: {
-          400: {
-            description: "Invalid password supplied"
-          },
-          404: {
-            description: "User password not found"
-          }
+          200: {
+            description: 'Success',
+            content: {
+                'application/json': {
+                    schema: {
+                        $ref: '#/components/schemas/Users'
+                    }
+                }
+            }
+        },
+        401: {
+            description: 'Unauthorized',
+        },
+        500: {
+            description: 'Internal server error',
+        },
+        security: [
+        {
+            binglestore_auth: [
+                "write:Users",
+                "read:Users" 
+            ]
+        }
+    ]
         }
       }
     },
