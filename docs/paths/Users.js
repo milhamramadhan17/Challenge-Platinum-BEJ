@@ -109,24 +109,7 @@ module.exports = {
           produces: [
             "application/json"
           ],
-          parameters: [
-            {
-              name: "username",
-              in: "path",
-              description: "name that need to be get User",
-              required: true,
-              type: "string"
-            },
-            {
-              in: "body",
-              name: "body",
-              description: "Get User object",
-              required: true,
-              schema: {
-                $ref: "#/components/schemas/Users"
-              }
-            }
-          ],
+          parameters: [],
           responses: {
             200: {
               description: 'Success',
