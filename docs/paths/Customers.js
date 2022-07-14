@@ -22,13 +22,34 @@ module.exports = {
             }
           ],
           responses: {
-            default: {
-              description: "successful operation"
-            }
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]
           }
         }
       },
-      '/api/customer/customers': {
+      '/api/customer/findCustomers': {
         get: {
           tags: ["customer"],
           summary: "Find all customer",
@@ -56,15 +77,33 @@ module.exports = {
             }
           ],
           responses: {
-            400: {
-              description: "Invalid Customer supplied"
-            },
-            404: {
-              description: "Customer not found"
-            }
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
           }
-        },
-        
+      ]}
+        }
+      },
+      '/api/customer/updateCustomers': {
         put: {
           tags: ["customer"],
           summary: "Updated customer",
@@ -92,15 +131,34 @@ module.exports = {
             }
           ],
           responses: {
-            400: {
-              description: "Invalid Customer supplied"
-            },
-            404: {
-              description: "Customer not found"
-            }
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
           }
-        },
-        
+      ]
+          }
+        }
+      },
+      '/api/customer/deleteCustomers': {
         delete: {
           tags: [
             "customer"
@@ -121,12 +179,30 @@ module.exports = {
             }
           ],
           responses: {
-            400: {
-              description: "Invalid customername supplied"
-            },
-            404: {
-              description: "Customer not found"
-            }
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]
           }
         }
       },
