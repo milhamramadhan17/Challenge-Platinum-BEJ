@@ -49,7 +49,7 @@ module.exports = {
           }
         }
       },
-      '/api/customer/findCustomers': {
+      '/api/customer/Customers': {
         get: {
           tags: ["customer"],
           summary: "Find all customer",
@@ -59,6 +59,54 @@ module.exports = {
             "application/json"
           ],
           parameters: [],
+          responses: {
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]}
+        }
+      },
+      '/api/customer/Customers/{id}': {
+        get: {
+          tags: ["customer"],
+          summary: "Find customer by id",
+          description: "This can only be done by the logged in customer.",
+          operationId: "getByID",
+          produces: [
+            "application/json"
+          ],
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              description: "The ID of customer that needs to be showed",
+              required: true,
+              schema : {
+                  type: 'integer',
+                  format: 'int64',
+              }
+              }
+          ],
           responses: {
             200: {
               description: 'Success',
