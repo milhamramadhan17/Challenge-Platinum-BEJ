@@ -29,27 +29,27 @@ module.exports = {
                       schema: {
                           $ref: '#/components/schemas/Customers'
                       }
-                    }
                   }
               }
           },
           401: {
-            description: 'Unauthorized',
+              description: 'Unauthorized',
           },
           500: {
-            description: 'Internal server error',
+              description: 'Internal server error',
           },
           security: [
-            {
-                binglestore_auth: [
-                    'write:Customers',
-                    'read:Customers'
-                ]
-            }
-          ]
-        },
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]
+          }
+        }
       },
-      '/api/customer/customers': {
+      '/api/customer/Customers': {
         get: {
           tags: ["customer"],
           summary: "Find all customer",
@@ -67,26 +67,74 @@ module.exports = {
                       schema: {
                           $ref: '#/components/schemas/Customers'
                       }
-                    }
                   }
-              },
-            401: {
-            description: 'Unauthorized',
-            },
-            500: {
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
               description: 'Internal server error',
-            }
           },
           security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]}
+        }
+      },
+      '/api/customer/Customers/{id}': {
+        get: {
+          tags: ["customer"],
+          summary: "Find customer by id",
+          description: "This can only be done by the logged in customer.",
+          operationId: "getByID",
+          produces: [
+            "application/json"
+          ],
+          parameters: [
             {
-                binglestore_auth: [
-                    'write:Customers',
-                    'read:Customers'
-                ]
-            }
-          ]
-        },
-        
+              name: "id",
+              in: "path",
+              description: "The ID of customer that needs to be showed",
+              required: true,
+              schema : {
+                  type: 'integer',
+                  format: 'int64',
+              }
+              }
+          ],
+          responses: {
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                  }
+              }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
+          },
+          security: [
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]}
+        }
+      },
+      '/api/customer/updateCustomers': {
         put: {
           tags: ["customer"],
           summary: "Updated customer",
@@ -121,26 +169,27 @@ module.exports = {
                       schema: {
                           $ref: '#/components/schemas/Customers'
                       }
-                    }
                   }
-                },
-            401: {
+              }
+          },
+          401: {
               description: 'Unauthorized',
-            },
-            500: {
+          },
+          500: {
               description: 'Internal server error',
-            }
           },
           security: [
-            {
-                binglestore_auth: [
-                    'write:Customers',
-                    'read:Customers'
-                ]
-            }
-          ]
-        },
-        
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]
+          }
+        }
+      },
+      '/api/customer/deleteCustomers': {
         delete: {
           tags: [
             "customer"
@@ -163,30 +212,29 @@ module.exports = {
           responses: {
             200: {
               description: 'Success',
-              schema: {
-                  type: 'object',
-                  properties: {
-                      message: {
-                          type: 'string'
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
                       }
                   }
               }
-          },          
-            400: {
-              description: "Invalid customername supplied"
-            },
-            404: {
-              description: "Customer not found"
-            }
+          },
+          401: {
+              description: 'Unauthorized',
+          },
+          500: {
+              description: 'Internal server error',
           },
           security: [
-            {
-                binglestore_auth: [
-                    'write:Customers',
-                    'read:Customers'
-                ]
-            }
-          ]
+          {
+              binglestore_auth: [
+                  "write:customers",
+                  "read:customers" 
+              ]
+          }
+      ]
+          }
         }
       },
     }
