@@ -42,10 +42,13 @@ module.exports = {
     ...customerSchema
     },
     securitySchemes: {
-      binglestore_auth: {
-        type: "http",
-        scheme: "basic"
-      }
+      security: [
+        {
+            'token': [
+                
+            ],
+        }
+    ]
     }
   },
 

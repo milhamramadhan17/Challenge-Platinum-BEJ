@@ -22,11 +22,32 @@ module.exports = {
             }
           ],
           responses: {
-            default: {
-              description: "successful operation"
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                    }
+                  }
+              }
+          },
+          401: {
+            description: 'Unauthorized',
+          },
+          500: {
+            description: 'Internal server error',
+          },
+          security: [
+            {
+                binglestore_auth: [
+                    'write:Customers',
+                    'read:Customers'
+                ]
             }
-          }
-        }
+          ]
+        },
       },
       '/api/customer/customers': {
         get: {
@@ -37,32 +58,33 @@ module.exports = {
           produces: [
             "application/json"
           ],
-          parameters: [
-            {
-              name: "customername",
-              in: "path",
-              description: "name that need to be get customer",
-              required: true,
-              type: "string"
-            },
-            {
-              in: "body",
-              name: "body",
-              description: "Get customer object",
-              required: true,
-              schema: {
-                $ref: "#/components/schemas/Customers"
-              }
-            }
-          ],
+          parameters: [],
           responses: {
-            400: {
-              description: "Invalid Customer supplied"
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                    }
+                  }
+              },
+            401: {
+            description: 'Unauthorized',
             },
-            404: {
-              description: "Customer not found"
+            500: {
+              description: 'Internal server error',
             }
-          }
+          },
+          security: [
+            {
+                binglestore_auth: [
+                    'write:Customers',
+                    'read:Customers'
+                ]
+            }
+          ]
         },
         
         put: {
@@ -92,13 +114,31 @@ module.exports = {
             }
           ],
           responses: {
-            400: {
-              description: "Invalid Customer supplied"
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Customers'
+                      }
+                    }
+                  }
+                },
+            401: {
+              description: 'Unauthorized',
             },
-            404: {
-              description: "Customer not found"
+            500: {
+              description: 'Internal server error',
             }
-          }
+          },
+          security: [
+            {
+                binglestore_auth: [
+                    'write:Customers',
+                    'read:Customers'
+                ]
+            }
+          ]
         },
         
         delete: {
@@ -113,7 +153,7 @@ module.exports = {
           ],
           parameters: [
             {
-              name: "customername",
+              name: "id",
               in: "path",
               description: "The customer name that needs to be deleted",
               required: true,
@@ -121,13 +161,32 @@ module.exports = {
             }
           ],
           responses: {
+            200: {
+              description: 'Success',
+              schema: {
+                  type: 'object',
+                  properties: {
+                      message: {
+                          type: 'string'
+                      }
+                  }
+              }
+          },          
             400: {
               description: "Invalid customername supplied"
             },
             404: {
               description: "Customer not found"
             }
-          }
+          },
+          security: [
+            {
+                binglestore_auth: [
+                    'write:Customers',
+                    'read:Customers'
+                ]
+            }
+          ]
         }
       },
     }

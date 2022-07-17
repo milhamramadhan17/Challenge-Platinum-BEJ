@@ -39,15 +39,16 @@ post: {
         500: {
             description: 'Internal server error',
         },
-        security: [
+    },
+    security: [
         {
             binglestore_auth: [
                 "write:items",
                 "read:items" 
             ]
         }
-    ]
-    }}
+     ]
+  }
 },
 
  '/api/item/items' : {
@@ -78,15 +79,18 @@ get: {
       500: {
         description: 'Internal server error',
     },
-      security: [
-        {
-            binglestore_auth: [
-                "write:items",
-                "read:items" 
-            ]
-        }
-    ]
-}}},
+    }
+  },
+  security: [
+    {
+        binglestore_auth: [
+            "write:items",
+            "read:items" 
+        ]
+    }
+ ]
+}
+ },
 
     '/api/item/items/{id}': {
 get: {
@@ -128,16 +132,19 @@ get: {
         500: {
             description: 'Internal server error',
         },
-      security: [
-        {
-            binglestore_auth: [
-                "write:items",
-                "read:items" 
-            ]
-        }
-    ]
-    }}
-}},
+    },
+    
+},
+security: [
+    {
+        binglestore_auth: [
+            "write:items",
+            "read:items" 
+        ]
+    }
+ ]
+
+},
 
 
 put: {

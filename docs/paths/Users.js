@@ -22,10 +22,31 @@ module.exports = {
             }
           ],
           responses: {
-            default: {
-              description: "successful operation"
+            200: {
+              description: 'Success',
+              content: {
+                  'application/json': {
+                      schema: {
+                          $ref: '#/components/schemas/Users'
+                      }
+                }
+              }
+            },
+            401: {
+              description: 'Unauthorized',
+            },
+            500: {
+              description: 'Internal server error',
             }
-          }
+          },
+          security: [
+            {
+                binglestore_auth: [
+                    'write:Users',
+                    'read:Users'
+                ]
+            }
+         ]
         }
       },
       "/api/user/login": {
@@ -54,7 +75,15 @@ module.exports = {
           default: {
             description: "successful operation"
           }
-        }
+        },
+        security: [
+          {
+              binglestore_auth: [
+                  'write:Users',
+                  'read:Users'
+              ]
+          }
+       ]
       },
      
         get: {
@@ -90,7 +119,15 @@ module.exports = {
             404: {
               description: "User not found"
             }
-          }
+          },
+          security: [
+            {
+                binglestore_auth: [
+                    'write:Users',
+                    'read:Users'
+                ]
+            }
+         ]
         },
       put: {
         tags: ["user"],
@@ -125,7 +162,15 @@ module.exports = {
           404: {
             description: "User password not found"
           }
-        }
+        },
+        security: [
+          {
+              binglestore_auth: [
+                  'write:Users',
+                  'read:Users'
+              ]
+          }
+       ]
       }
     },
   }

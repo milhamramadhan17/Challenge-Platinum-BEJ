@@ -4,15 +4,14 @@ module.exports = {
     await queryInterface.createTable('Items', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       name: {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       store_name: {
         type: Sequelize.STRING

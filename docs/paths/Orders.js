@@ -24,30 +24,32 @@ module.exports = {
                     description: 'Success',
                     content: {
                         'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/Orders'
+                            example: {
+                                status: '200 || success',
+                                msg: 'Order added successfully',
+                                
                             }
                         }
                     }
                 },
                 401: {
                     description: 'Unauthorized',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '401 || error',
+                                msg: 'Unauthorized access to add order data',
                             }
                         }
                     }
                 },
                 500: {
                     description: 'Internal Server Error',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500 || error',
+                                msg: 'Internal Server Error while adding order data',
                             }
                         }
                     }
@@ -55,10 +57,9 @@ module.exports = {
             },
             security: [
                 {
-                    binglestore_auth: [
-                        'write:orders',
-                        'read:orders'
-                    ]
+                    'token': [
+
+                    ],
                 }
             ]
         }
@@ -76,43 +77,50 @@ module.exports = {
             responses: {
                 200: {
                     description: 'Success',
-                    schema: {
-                        type: 'array',
-                        items: {
-                            $ref: '#/components/schemas/Orders'
+                    content: {
+                        'application/json': {
+                            schema: {
+                                $ref: '#/components/schemas/Orders'
+                            }  
+                        }
+                    }
+                },
+                400: {
+                    description: 'Bad Request',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '400 || error',
+                                msg: 'Bad Request while getting order data',
+                            }
                         }
                     }
                 },
                 401: {
                     description: 'Unauthorized',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '401 || error',
+                                msg: 'Unauthorized access to get order data',
                             }
                         }
                     }
                 },
                 500: {
                     description: 'Internal Server Error',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500 || error',
+                                msg: 'Internal Server Error while getting order data',
                             }
                         }
                     }
                 }
             },
             security: [
-                {
-                    binglestore_auth: [
-                        'write:orders',
-                        'read:orders'
-                    ]
-                }
+                
             ]
         }
     },
@@ -132,8 +140,8 @@ module.exports = {
                     description: 'ID of order that needs to be fetched',
                     required: true,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid',
+                        format: 'uuid',
                     }
                 }
             ],
@@ -151,24 +159,39 @@ module.exports = {
                 400: {
                     description: 'Invalid ID supplied',
                     content: {
-                        schema: {
-                            type: 'object',
-                            properties: {
-                                message: {
-                                    type: 'string'
-                                }
+                        'application/json': {
+                            example: {
+                                status: '400 || error',
+                                msg: 'Invalid ID supplied',
+                            }
+                        }
+                    }
+                },
+                401: {
+                    description: 'Unauthorized',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '401 || error',
+                                msg: 'Unauthorized access to get order data',
+                            }
+                        }
+                    }
+                },
+                500: {
+                    description: 'Internal Server Error',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500 || error',
+                                msg: 'Internal Server Error while getting order data',
                             }
                         }
                     }
                 }
             },
             security: [
-                {
-                    binglestore_auth: [
-                        'write:orders',
-                        'read:orders'
-                    ]
-                }
+                
             ]  
         },
 
@@ -186,8 +209,8 @@ module.exports = {
                     description: 'ID of order that needs to be updated',
                     required: true,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid',
+                        format: 'uuid',
                     }
                 }
 
@@ -196,7 +219,7 @@ module.exports = {
                 description: 'Order object that needs to be updated',
                 required: true,
                 content: {
-                    '*/*': {
+                    'application/json': {
                         schema: {
                             $ref: '#/components/schemas/Orders'
                         }
@@ -204,36 +227,53 @@ module.exports = {
                 }
             },
             responses: {
+                203: {
+                    description: 'Success',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '203 || success',
+                                msg: 'Order updated successfully',
+                            }
+                        }
+                    }
+                },
+                400: {
+                    description: 'Invalid ID supplied',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '400 || error',
+                                msg: 'Invalid ID supplied',
+                            }
+                        }
+                    }
+                },
                 401: {
                     description: 'Unauthorized',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '401 || error',
+                                msg: 'Unauthorized access to update order data',
                             }
                         }
                     }
                 },
                 500: {
                     description: 'Internal Server Error',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500 || error',
+                                msg: 'Internal Server Error while updating order data',
                             }
                         }
                     }
                 }
             },
             security: [
-                {
-                    binglestore_auth: [
-                        'write:orders',
-                        'read:orders'
-                    ]
-                }
+                
             ]
         },
 
@@ -251,57 +291,51 @@ module.exports = {
                     description: 'Order id',
                     required: true,
                     schema: {
-                        type: 'string'
+                        type: 'uuid',
+                        format: 'uuid'
                     }
                 }
             ],
             responses: {
                 200: {
                     description: 'Success',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '200 || success',
+                                msg: 'Order deleted successfully',
                             }
                         }
                     }
                 },
-                401: {
-                    description: 'Unauthorized',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                403: {
+                    description: 'Forbidden',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '403 || error',
+                                msg: 'Forbidden access to delete order data'
                             }
                         }
                     }
                 },
                 500: {
                     description: 'Internal Server Error',
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            message: {
-                                type: 'string'
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500 || error',
+                                msg: 'Internal Server Error while deleting order data',
                             }
                         }
                     }
                 }
             },
             security: [
-                {
-                    binglestore_auth: [
-                        'write:orders',
-                        'read:orders'
-                    ]
-                }
+                
             ]
         }
     },
-
-    
 }
 // Compare this snippet from docs\schemas\Customers.js:
 
