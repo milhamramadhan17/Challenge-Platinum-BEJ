@@ -41,6 +41,26 @@ controller.getAll = async (req, res) => {
   }
 }
 
+controller.getByID = async (req, res) => {
+  const id = req.params.id;
+  try {
+      await Orders.findByPk(id)
+      .then(results => {
+          if (results) {
+              res.send(results);
+          } else {
+              res.status(404).send({
+                  message: `Cannot find Customer with id ${id}.`
+              });
+          };
+      });
+  } catch (error) {
+      res.status(500).send({
+          message: "Error retrieving Customer with id = " + id
+        });
+  }
+}
+
 controller.updateCustomer = async (req, res) => {
 try {
   await Customers.update({ 
