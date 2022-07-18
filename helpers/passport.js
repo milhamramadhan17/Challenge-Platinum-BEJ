@@ -17,7 +17,7 @@ const validateToken = (payload, done) => {
 
 passport.use(new Strategy({
     jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
-    secretOrKey: 'PASSWORD',
+    secretOrKey: 'password',
 }, validateToken));
 
 module.exports = passport;
