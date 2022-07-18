@@ -3,8 +3,7 @@ module.exports = {
         type: "object",
         properties: {
           id: {
-            type: "integer",
-            format: "int64"
+            type: "uuid"
           },
           name: {
             type: "string"
