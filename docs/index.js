@@ -6,6 +6,8 @@ const ordersSchema = require('./schemas/Orders');
 const ordersPath = require('./paths/Orders');
 const customerSchema = require('./schemas/Customers');
 const customerPath = require('./paths/Customers');
+const sellersPath = require('./paths/Sellers');
+const sellerSchema = require('./schemas/Sellers')
 
 
 module.exports = {
@@ -32,7 +34,8 @@ module.exports = {
     ...userPath,
     ...itemsPath,
     ...ordersPath,
-    ...customerPath
+    ...customerPath,
+    ...sellersPath
   },
   components: {
     schemas: {
