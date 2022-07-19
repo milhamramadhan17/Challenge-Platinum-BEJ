@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const controller = require('../controller/Items');
-const { authentication, authorization } = require('../../middleware/auth')
+const { authentication, authorization } = require('../../middleware/auth');
 
 router.post('/items', authentication, authorization.seller, controller.addItem);
 router.get('/items', controller.getAll);
