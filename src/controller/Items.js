@@ -10,7 +10,7 @@ controller.addItem = async (req, res) => {
             message: 'Name cannot be empty'
           }
     
-          if (!req.body.price) throw {
+        if (!req.body.price) throw {
             status: 400,
             message: 'Price cannot be empty'
           }

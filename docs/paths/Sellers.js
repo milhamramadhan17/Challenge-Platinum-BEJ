@@ -21,6 +21,10 @@ module.exports = {
                   password: {
                     type: 'string',
                   },
+                  role:{
+                    type: 'integer',
+                    default: 2
+                  }
                 },
                 required: [
                   'name',
@@ -32,7 +36,7 @@ module.exports = {
           }
         },
         responses: {
-          200: {
+          201: {
             content: {
               'application/json': {
                 example: {
@@ -74,6 +78,10 @@ module.exports = {
                   password: {
                     type: 'string',
                   },
+                  role: {
+                    type: 'integer',
+                    default: 2
+                  }
                 },
                 required: [
                   'email',
@@ -94,12 +102,12 @@ module.exports = {
               }
             }
           },
-          400: {
+          401: {
             content: {
               'application/json': {
                 example: {
-                  status: 404,
-                  message: 'Seller not found',
+                  status: 401,
+                  message: 'Password is incorrect',
                 }
               }
             }
