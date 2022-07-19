@@ -81,7 +81,7 @@ controller.login = async (req, res) => {
             expiresIn: '20s'
         });
 
-        const refreshToken = encode({ name, email, password, role }, {
+        const refreshToken = encode({ name, email, role }, {
             expiresIn: '1d'
         });
 
