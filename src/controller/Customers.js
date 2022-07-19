@@ -1,10 +1,13 @@
 const db = require('../../models')
 const Customers = db.Customers;
 const Op = db.Sequelize.Op;
+const { validateText, hash } = require('../../helpers/bcrypt');
+const { encode } = require('../../helpers/jwt');
 const controller = {};
 
 
-controller.addCustomer = async (req, res) => {
+
+controller.register = async (req, res) => {
   try {
       const customer = {
           user_id       : req.body.user_id,
@@ -41,66 +44,35 @@ controller.getAll = async (req, res) => {
   }
 }
 
-controller.getByID = async (req, res) => {
-  const id = req.params.id;
+controller.login = async (req, res) => {
   try {
-      await Orders.findByPk(id)
-      .then(results => {
-          if (results) {
-              res.send(results);
-          } else {
-              res.status(404).send({
-                  message: `Cannot find Customer with id ${id}.`
-              });
-          };
-      });
-  } catch (error) {
-      res.status(500).send({
-          message: "Error retrieving Customer with id = " + id
-        });
+    let customer = await Customers.findOne({
+      attributes: ['id', 'name', 'email'],
+      where: {
+        email: req.body.email,
+        password: req.body.password
+      }
+    })
+
+    customer = customer?.dataValues;
+
+    if (!customer) throw {
+      status: 400,
+      message: 'Customer not found.'
+    }
+  
+    return res.status(201).json({
+      message: 'Successfully login as customer',
+    })
+    
+  } catch (err) {
+    return res
+      .status(err.status || 500)
+      .json({
+        message: err.message || 'Internal server error.',
+      })
   }
 }
 
-controller.updateCustomer = async (req, res) => {
-try {
-  await Customers.update({ 
-    user_id: req.body.user_id
-     }, 
-     {
-    where: {
-      id: req.body.id
-    }
-  });
-
-  return res.status(200).json({
-    message: 'Successfully updating user_id'
-  })
-} catch (err) {
-  return res.status(err.status || 500).json({
-      message: err.message || 'Internal server error.',
-    })
-}
-}
-
-controller.deleteCustomer = async (req, res) => {
-try {
-  if (!req.body.id) 
-  throw { status: 400, 
-    message: 'ID cannot be empty' 
-  };
-
-  await Customers.destroy({
-    where: { id: req.body.id }
-  });
-
-  return res.status(200).json({
-    message: 'Successfully deleting customer ' + req.body.id
-  })
-} catch (err) {
-  return res
-    .status(err.status ||  500)
-    .json({ message: err.message || 'Internal server error' })
-}
-}
 
 module.exports = controller;
