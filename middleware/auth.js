@@ -27,7 +27,7 @@ module.exports = {
           }
       
           try {
-            req.customer = decode(req.headers.authorization);
+            req.Customers = decode(req.headers.authorization);
           } catch (err) {
             return res.status(401).json({
               status: 400,
