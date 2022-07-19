@@ -2,17 +2,10 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
+    "dot": "^1.1.3",
     "dotenv": "^16.0.1",
+    "env": "^0.0.2",
     "express": "^4.18.1",
-<<<<<<< HEAD
-    "jsonwebtoken": "^8.5.1",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.0",
-    "pg": "^8.7.3",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.21.3",
-    "swagger-ui-express": "^4.5.0",
-=======
     "express-sesssion": "^1.15.5",
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.6.0",
@@ -23,7 +16,6 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.2",
     "swagger-ui-express": "^4.4.0",
->>>>>>> 20275fa53674cb208333da73a77871443b0e5b39
     "uuid": "^8.3.2"
   },
   "name": "challenge-platinum-bej",
