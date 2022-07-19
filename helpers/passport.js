@@ -1,18 +1,11 @@
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
-const { Admins } = require('../models');
+const { Admins } = require('..//models');
 
 const validateToken = (payload, done) => {
     Admins.findByPk(payload.id)
-        .then(admin => {
-            if (admin) {
-                return done(null, admin);
-            }
-            return done(null, false);
-        })
-        .catch(err => {
-            return done(err, false);
-        });
+        .then(admin => done(null, admin))
+        .catch(err => done(err, null));
 
         Sellers.findByPk(payload.id)
         .then(seller => {

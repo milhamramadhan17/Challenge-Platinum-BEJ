@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Customers.init({
-    user_id: DataTypes.INTEGER
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    role: DataTypes.INTEGER,
     }, {
     sequelize,
     modelName: 'Customers',

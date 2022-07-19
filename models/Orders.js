@@ -1,4 +1,5 @@
 'use strict';
+const uuid = require('uuid');
 const {
   Model
 } = require('sequelize');
@@ -11,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Orders.init({
-    customer_id   : DataTypes.INTEGER,
-    item_id       : DataTypes.INTEGER,
+    customer_id   : DataTypes.UUID,
+    item_id       : DataTypes.UUID,
     qty           : DataTypes.INTEGER,
     amount        : DataTypes.INTEGER,
     status        : DataTypes.STRING,
@@ -21,5 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Orders',
   });
+
+  Orders.addHook('beforeCreate', (order) => {
+    order.id = uuid.v4();
+  })
+
   return Orders;
 };

@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       store_name: {
         type: Sequelize.STRING

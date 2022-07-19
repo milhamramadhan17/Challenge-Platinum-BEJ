@@ -6,8 +6,13 @@ const ordersSchema = require('./schemas/Orders');
 const ordersPath = require('./paths/Orders');
 const customerSchema = require('./schemas/Customers');
 const customerPath = require('./paths/Customers');
+
+const adminSchema = require('./schemas/Admins');
+const adminPath = require('./paths/Admins');
+
 const sellersPath = require('./paths/Sellers');
 const sellersSchema = require('./schemas/Sellers')
+
 
 
 module.exports = {
@@ -35,6 +40,7 @@ module.exports = {
     ...itemsPath,
     ...ordersPath,
     ...customerPath,
+    ...adminPath,
     ...sellersPath
   },
   components: {
@@ -43,13 +49,17 @@ module.exports = {
     ...itemsSchema,
     ...ordersSchema,
     ...customerSchema,
+    ...adminSchema,
     ...sellersSchema
     },
     securitySchemes: {
-      binglestore_auth: {
-        type: "http",
-        scheme: "basic"
-      }
+      security: [
+        {
+            'token': [
+                
+            ],
+        }
+    ]
     }
   },
 

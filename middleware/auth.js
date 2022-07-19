@@ -10,7 +10,7 @@ module.exports = {
         }
 
         try {
-            req.admin = decode(req.headers.authorization);
+            req.Admins = decode(req.headers.authorization);
 
         } catch (err) {
             return res.status(401).json({
@@ -22,22 +22,13 @@ module.exports = {
         next();
 },
     authorization: {
-        admin: (req, res, next) => {
-            if (req.admin.role === 1 ) next ();
+        Admins: (req, res, next) => {
+            if (req.Admins.role === 1 ) next ();
 
             return res.status(401).json({
                 status: 401,
-                message: 'Unauthorized' + req.admin.role
-            });
-        }
-    },
-        seller: (req, res, next) => {
-            if (req.seller.role === 2 ) next ();
-
-            return res.status(401).json({
-            status: 401,
-            message: "Unauthorized. You aren't logged in as seller."
+                message: 'Unauthorized' + req.Admins.role
             });
         }
     }
-
+}

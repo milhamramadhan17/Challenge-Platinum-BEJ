@@ -1,8 +1,10 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 const Express = require('express')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs');
 const passport = require('./helpers/passport');
+const session = require('express-session');
 
 const app = Express();
 const port = process.env.PORT || 3000;
@@ -14,6 +16,11 @@ const routerCustomers = require('./src/route/Customers');
 const routerSellers = require('./src/route/Sellers');
 
 
+app.use(session({
+    secret: 'process.env.SESSION_SECRET',
+    resave: false,
+    saveUninitialized: false,
+}))
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true, type: 'application/x-www-form-urlencoded' }));
 
@@ -23,7 +30,12 @@ app.get('/', (req, res) => {
 });
 
 app.use(passport.initialize());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(passport.session());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+        docExpansion: 'none'
+    }
+}));
 
 app.use('/api/order', routerOrders);
 app.use('/api/item', routerItems);
