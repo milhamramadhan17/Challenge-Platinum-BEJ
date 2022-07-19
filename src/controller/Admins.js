@@ -26,28 +26,33 @@ controller.getAll = async (req, res) => {
 controller.register = async (req, res) => {
     const { name, email, password, role } = req.body;
     const hashPassword = hash(password);
-    const checkEmail = await Admins.findOne({
-        where: {
-            email: email
-        }
-    })
-    if (checkEmail) {
-        res.status(401).send({
-            message: 'Email already exists'
+    
+    try{
+        await Admins.findOne({
+            where: {
+                email: email
+            }
         })
-    }
-    Admins.create({
-        name: name,
-        email: email,
-        password: hashPassword,
-        role: role
-    })
-    .then(() => {
-        res.status(201).send({
-            message: 'Register successfully'
-        });
-    })
-    .catch(err => {
+        .then(results => {
+            if(results){
+                return res.status(401).send({
+                    message: 'Email already exists'
+                });
+            } else {
+                Admins.create({
+                    name: name,
+                    email: email,
+                    password: hashPassword,
+                    role: role
+                })
+                .then(results => {
+                    res.status(201).send({
+                        message: 'Register successfully'
+                    });
+                })
+            }
+        })
+    } catch (err) {
         res.status(500).send({
             message:
               err.message || "Internal server error"
