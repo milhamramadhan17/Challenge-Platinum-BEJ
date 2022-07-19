@@ -1,5 +1,3 @@
-const userSchema = require('./schemas/Users');
-const userPath = require('./paths/Users');
 const itemsSchema = require('./schemas/Items');
 const itemsPath = require('./paths/Items');
 const ordersSchema = require('./schemas/Orders');
@@ -31,7 +29,6 @@ module.exports = {
   ],
 
   paths: {
-    ...userPath,
     ...itemsPath,
     ...ordersPath,
     ...customerPath,
@@ -40,7 +37,6 @@ module.exports = {
   },
   components: {
     schemas: {
-    ...userSchema,
     ...itemsSchema,
     ...ordersSchema,
     ...customerSchema,
@@ -51,7 +47,6 @@ module.exports = {
  
     securitySchemes: {
       token: {
-<<<<<<< HEAD
         type: "apiKey",
         description: "JWT Authorization",
         in: "header",
@@ -59,14 +54,4 @@ module.exports = {
       }
     } 
   }
-=======
-        type: 'apiKey',
-        description: 'Login to get token',
-        in: 'header',
-        name: 'authorization'
-      }
-    }
-  },
-
->>>>>>> 498f37775d16eba6b6b882cd4a649c0b7b76bbfe
 }
