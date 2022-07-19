@@ -19,6 +19,23 @@ module.exports = {
             });
         }
 
+        if (!req.headers.authorization) {
+            return res.status(401).json({
+              status: 401,
+              message: 'Unauthorized. Only logged in customer can access this endpoint.'
+            })
+          }
+      
+          try {
+            req.customer = decode(req.headers.authorization);
+          } catch (err) {
+            return res.status(401).json({
+              status: 400,
+              message: 'Token invalid'
+            })
+          }
+      
+
         next();
 },
     authorization: {
@@ -29,6 +46,22 @@ module.exports = {
                 status: 401,
                 message: 'Unauthorized' + req.Admins.role
             });
+        },
+        seller: (req, res, next) => {
+            if (req.user.role === 2) next();
+      
+            return res.status(401).json({
+              status: 401,
+              message: 'Unauthorized. Only seller can access this endpoint.'
+            })
+          },
+          customer: (req, res, next) => {
+            if (req.user.role === 2) next();
+      
+            return res.status(401).json({
+              status: 401,
+              message: 'Unauthorized. Only customer can access this endpoint.'
+            })
+          },
         }
-    }
-}
+        }
