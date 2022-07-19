@@ -56,7 +56,7 @@ controller.login = async (req, res) => {
 
     customer = customer?.dataValues;
 
-    if (!seller) throw {
+    if (!customer) throw {
       status: 400,
       message: 'Customer not found.'
     }
