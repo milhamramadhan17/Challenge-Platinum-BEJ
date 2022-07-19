@@ -7,13 +7,12 @@ const controller = {};
 
 controller.register = async (req, res) => {
     const { name, email, password, role } = req.body;
-    const hashPassword = hash(password);
 
     try {
         await Sellers.create({
             name: name,
             email: email,
-            password: hashPassword,
+            password: password,
             role: 2,
         })
         .then(() => {
