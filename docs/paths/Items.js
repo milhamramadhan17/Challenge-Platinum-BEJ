@@ -1,73 +1,84 @@
 module.exports = {
-    'api/item/addItem': {
+    
+    '/api/item/addItem': {
         post: {
             tags: ['item'],
-            summary: 'Add new item',
-            description: 'Add new item',
-            operationId: 'addItem',
             requestBody: {
                 required: true,
                 content: {
-                    'application/x-www-form-urlencoded':{
-                        schema:{
+                    'application/x-www-form-urlencoded': {
+                        schema: {
                             type: 'object',
                             properties: {
                                 name: {
-                                    type: 'string'
+                                    type: 'string',  
                                 },
                                 price: {
-                                    type: 'number'
+                                    type: 'number',
                                 },
                                 store_name: {
-                                    type: 'string'
+                                    type: 'string',
                                 },
                                 category: {
-                                    type: 'string'
+                                    type: 'string',
                                 },
                                 brand: {
-                                    type: 'string'
-                                },
+                                    type: 'string',
+                                }
                             },
                             required: [
-                                'name',
-                                'price',
-                                'store_name',
-                                'category',
-                                'brand',
-                            ]
-                        }
+                            'name', 
+                            'price', 
+                            'store_name', 
+                            'category', 
+                            'brand'],
+                        },
                     }
                 }
             },
             responses: {
                 201: {
+                    description: 'Success',
                     content: {
                         'application/json': {
                             example: {
-                                status: 201,
+                                status: '201',
                                 message: 'Item added successfully',
+                                
                             }
-
                         }
                     }
                 },
                 401: {
+                    description: 'Unauthorized',
                     content: {
                         'application/json': {
                             example: {
-                                status: 401,
-                                message: 'Unauthorized',
+                                status: '401',
+                                message: 'Unauthorized. Please login as seller',
                             }
-
                         }
                     }
                 },
+                500: {
+                    description: 'Internal Server Error',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500',
+                                message: 'Internal server error',
+                            }
+                        }
+                    }
+                }
             },
             security: [
                 {
-                    token: []
+                    'token': [
+
+                    ],
                 }
-            ],
+            ]
         }
     },
 
