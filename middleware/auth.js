@@ -70,6 +70,14 @@ module.exports = {
                 status: 401,
                 message: 'Unauthorized' + req.Sellers.role
             });
-        }
+        },
+         Customers: (req, res, next) => {
+            if (req.user.role === 3) next();
+      
+            return res.status(401).json({
+              status: 401,
+              message: 'Unauthorized. Only customer can access this endpoint.'
+            });
+          },
       }
     }
