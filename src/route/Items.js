@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require ('../controller/Items');
 
-router.post('/items', controller.addItem);
+router.post('/items', authentication, authorization.seller, controller.addItem);
 router.get('/items', controller.getAll);
 router.get('/items/:id', controller.getByID);
 router.put('/items/:id', controller.updateItems);
