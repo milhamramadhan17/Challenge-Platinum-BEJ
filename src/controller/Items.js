@@ -117,7 +117,7 @@ controller.deleteItem = async (req, res) => {
                   res.send("Delete Successfully")
               })
           } else {
-              res.send("There's not data")
+              res.send("There's no data")
           }
       })
 

@@ -1,12 +1,16 @@
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
-const { Admins } = require('../models');
+const { Admins } = require('..//models');
 
 const validateToken = (payload, done) => {
     Admins.findByPk(payload.id)
-        .then(admin => {
-            if (admin) {
-                return done(null, admin);
+        .then(admin => done(null, admin))
+        .catch(err => done(err, null));
+
+        Sellers.findByPk(payload.id)
+        .then(seller => {
+            if (seller) {
+                return done(null, seller);
             }
             return done(null, false);
         })
@@ -15,9 +19,12 @@ const validateToken = (payload, done) => {
         });
 }
 
+
 passport.use(new Strategy({
     jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
-    secretOrKey: 'password',
+    secretOrKey: 'PASSWORD',
 }, validateToken));
+
+
 
 module.exports = passport;

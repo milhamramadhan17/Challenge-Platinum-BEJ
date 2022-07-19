@@ -3,9 +3,9 @@ const uuid = require('uuid');
 const {
   Model
 } = require('sequelize');
-const {hash} = require('../helpers/bcrypt');
+const {hash, validateText} = require('../helpers/bcrypt');
 module.exports = (sequelize, DataTypes) => {
-  class Admins extends Model {
+  class Sellers extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,24 +15,26 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Admins.init({
+  Sellers.init({
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Admins',
+    modelName: 'Sellers',
   });
 
-  Admins.addHook('beforeCreate', (admin, options) => {
+  Sellers.addHook('beforeCreate', (seller, options) => {
     try {
-      admin.id = uuid.v4();
-      admin.password = hash(admin.password);
-    } catch (err) {
+      seller.id = uuid.v4();
+      seller.password = hash(seller.password);
+    } 
+    catch (err) {
       throw err;
     }
-
-  });
-  return Admins;
+  }
+  );
+  
+  return Sellers;
 };

@@ -1,7 +1,7 @@
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
-const { validateText } = require('../../helpers/bcrypt');
+const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
 
@@ -24,35 +24,30 @@ controller.getAll = async (req, res) => {
 }
 
 controller.register = async (req, res) => {
-    const Admin = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        role: req.body.role,
+    const { name, email, password, role } = req.body;
+    const hashPassword = hash(password);
+    const checkEmail = await Admins.findOne({
+        where: {
+            email: email
+        }
+    })
+    if (checkEmail) {
+        res.status(401).send({
+            message: 'Email already exists'
+        })
     }
-    try {
-        await Admins.findOne({
-            where: {
-                email: Admin.email
-            }
-        })
-        .then(results => {
-            if (results) {
-                res.status(401).send({
-                    status: '401',
-                    message: 'Email already exists'
-                });
-            } else {
-                Admins.create(Admin)
-                .then(() => {
-                    res.status(201).json({
-                        status: 201,
-                        message: 'Admin added successfulld'
-                    })
-                })
-            }
-        })
-    } catch (err) {
+    Admins.create({
+        name: name,
+        email: email,
+        password: hashPassword,
+        role: role
+    })
+    .then(() => {
+        res.status(201).send({
+            message: 'Register successfully'
+        });
+    })
+    .catch(err => {
         res.status(500).send({
             message:
               err.message || "Internal server error"
@@ -61,33 +56,52 @@ controller.register = async (req, res) => {
 }
 
 controller.login = async (req, res) => {
-   Admins.findOne({
-         where: {
-                email: req.body.email
-         }
-    })
-    .then((admin) => {
-        if (!admin) throw {
-            status: 401,
-            message: 'Email not found'
+    try{
+        Admins.findOne({
+            where: {
+                email: req.body.email,
+            }
+        });
+    
+        const isValid = validateText(req.body.password, Admins.dataValues.password);
+        if (!isValid) {
+            return res.status(401).send({
+                message: 'Invalid email or password'
+            });
         }
+        const name = Admins.dataValues.name;
+        const email = Admins.dataValues.email;
+        const role = Admins.dataValues.role;
+        const token = encode({ name, email, role }, {
+            expiresIn: '20s'
+        });
 
-        const valid = validateText(req.body.password, admin.password);
-        if (!valid) throw {
-            status: 401,
-            message: 'Password is incorrect'
-        }
+        const refreshToken = encode({ name, email, password, role }, {
+            expiresIn: '1d'
+        });
+
+        await Admins.update({
+            refreshToken: refreshToken
+        }, {
+            where: {
+                email: email,
+            }
+        });
+        res.json({
+            status: 200,
+            message: 'Login successfully',
+            token: token,
+            refreshToken: refreshToken
+        });
         
-        res.header('Authorization', encode(admin)).json({
-            encode: encode(admin),
-        });
-
-    })
-    .catch((err) => {
-        res.status(err.status).send({
-            message: err.message || "Internal server error"
-        });
-    })
+    }
+    catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Internal server error"
+          });
+    }
 }
+
 
 module.exports = controller;

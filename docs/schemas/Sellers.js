@@ -1,5 +1,5 @@
 module.exports = {
-    Items: {
+    Sellers: {
         type: "object",
         properties: {
           id: {
@@ -8,19 +8,12 @@ module.exports = {
           name: {
             type: "string"
           },
-          price: {
-            type: "integer",
-            format: "int64"
-          },
-          store_name: {
+          email: {
             "type": "string"
           },
-          category: {
+          password: {
             "type": "string"
           },
-          brand: {
-            "type": "string"
-          },
-        }
-    }
+        },
+      }
 }

@@ -1,24 +1,42 @@
+
 module.exports = {
 
     '/api/order/addOrders': {
         post: {
             tags: ['order'],
-            summary: 'Add new order',
-            description: 'Add new order',
-            operationId: 'addOrders',
-            consumes: ['application/json'],
-            produces: ['application/json'],
-            parameters: [
-                {
-                    in: 'body',
-                    name: 'body',
-                    description: 'Order object that needs to be added',
-                    required: true,
-                    schema: {
-                        $ref: '#/components/schemas/Orders'
+            requestBody: {
+                required: true,
+                content: {
+                    'application/x-www-form-urlencoded': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                customerId: {
+                                    type: 'UUID',
+                                    
+                                },
+                                itemId: {
+                                    type: 'UUID',
+                                },
+                                qty: {
+                                    type: 'number',
+                                },
+                                amount: {
+                                    type: 'number',
+                                    autoIncrement: (Item, qty) => {
+                                        return itemId.dataValues.price * qty;
+                                        },
+                                },
+                                status: {
+                                    type: 'string',
+                                }
+
+                            },
+                            required: ['customerId', 'itemId', 'qty', 'amount', 'status'],
+                        },
                     }
                 }
-            ],
+            },
             responses: {
                 200: {
                     description: 'Success',
@@ -26,7 +44,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: '200 || success',
-                                msg: 'Order added successfully',
+                                message: 'Order added successfully',
                                 
                             }
                         }
@@ -38,7 +56,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: '401 || error',
-                                msg: 'Unauthorized access to add order data',
+                                message: 'Unauthorized access to add order data',
                             }
                         }
                     }
@@ -49,7 +67,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: '500 || error',
-                                msg: 'Internal Server Error while adding order data',
+                                message: 'Internal Server Error while adding order data',
                             }
                         }
                     }
