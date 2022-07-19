@@ -53,14 +53,12 @@ module.exports = {
     ...sellersSchema
     },
     securitySchemes: {
-      security: [
-        {
-            'token': [
-                
-            ],
-        }
-    ]
-    }
-  },
-
+      token: {
+        type: "apiKey",
+        description: "JWT Authorization",
+        in: "header",
+        name: "Authorization"
+      }
+    } 
+  }
 }

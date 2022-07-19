@@ -4,7 +4,6 @@ const Op = db.Sequelize.Op;
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
-
 controller.getAll = async (req, res) => {
     const dataAdmin = req.query.dataAdmin;
     const condition = dataAdmin ? { dataAdmin: { [Op.like]: `%${dataAdmin}%` } } : null;
@@ -25,8 +24,6 @@ controller.getAll = async (req, res) => {
 
 controller.register = async (req, res) => {
     const { name, email, password, role } = req.body;
-    const hashPassword = hash(password);
-    
     try{
         await Admins.findOne({
             where: {
@@ -42,7 +39,7 @@ controller.register = async (req, res) => {
                 Admins.create({
                     name: name,
                     email: email,
-                    password: hashPassword,
+                    password: password,
                     role: role
                 })
                 .then(results => {
@@ -61,7 +58,7 @@ controller.register = async (req, res) => {
 }
 
 controller.login = async (req, res) => {
-    const { email, password } = req.body;
+    const {email} = req.body;
     try {
         await Admins.findOne({
             where: {
@@ -69,10 +66,13 @@ controller.login = async (req, res) => {
             }
         })
         .then(results => {
+            console.log(results);
+            console.log(results.dataValues);
             if(results){
-                if(validateText(password, results.password)){
+                if(validateText(req.body.password, results.dataValues.password)){
                     const token = encode({
                         id: results.id,
+                        name: results.name,
                         email: results.email,
                         role: results.role
                     });
@@ -82,11 +82,13 @@ controller.login = async (req, res) => {
                     });
                 } else {
                     res.status(401).send({
+                        status: 401,
                         message: 'Password is incorrect'
                     });
                 }
             } else {
                 res.status(401).send({
+                    status: 401,
                     message: 'Email is incorrect'
                 });
             }

@@ -11,11 +11,11 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                customerId: {
+                                customer_id: {
                                     type: 'UUID',
                                     
                                 },
-                                itemId: {
+                                item_id: {
                                     type: 'UUID',
                                 },
                                 qty: {
@@ -23,8 +23,8 @@ module.exports = {
                                 },
                                 amount: {
                                     type: 'number',
-                                    autoIncrement: (Item, qty) => {
-                                        return itemId.dataValues.price * qty;
+                                    autoIncrement: (qty) => {
+                                        return item_id.dataValues.price * qty;
                                         },
                                 },
                                 status: {
@@ -32,7 +32,7 @@ module.exports = {
                                 }
 
                             },
-                            required: ['customerId', 'itemId', 'qty', 'amount', 'status'],
+                            required: ['customer_id', 'item_id', 'qty', 'amount', 'status'],
                         },
                     }
                 }

@@ -19,8 +19,11 @@ module.exports = {
                                 password: {
                                     type: 'string',
                                 },
+                                role: {
+                                    type: 'integer',
+                                }
                             },
-                            required: ['name', 'email', 'password'],
+                            required: ['name', 'email', 'password', 'role'],
                         },
                     }
                 }
@@ -63,10 +66,66 @@ module.exports = {
         }
     },
 
-
-
-
-
+    '/api/admin/login': {
+        post: {
+            tags: ['Admin'],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/x-www-form-urlencoded': {
+                        schema: {
+                            type: 'object',
+                            properties: {
+                                email: {
+                                    type: 'string',
+                                },
+                                password: {
+                                    type: 'string',
+                                },
+                            },
+                            required: ['email', 'password'],
+                        },
+                    }
+                }
+            },
+            responses: {
+                '200': {
+                    description: 'Login successfully',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '200',
+                                message: 'Login successfully',
+                                token: 'asdbqiwudbuqwdb8129d12dnaksmdni12hdn1928naskjdn8i12dn182n1289n1212kasda'
+                            }
+                        }
+                    }
+                },
+                '401': {
+                    description: 'Email or password is incorrect',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '401',
+                                message: 'Email or password is incorrect',
+                            }
+                        }
+                    }
+                },
+                '500': {
+                    description: 'Internal server error',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500',
+                                message: 'Internal server error',
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
 
     '/api/admin/admins': {
         get: {
