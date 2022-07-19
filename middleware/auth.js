@@ -68,7 +68,7 @@ module.exports = {
 
             return res.status(401).json({
                 status: 401,
-                message: 'Unauthorized' + req.Sellers.role
+                message: 'Unauthorized. Only seller can access this endpoint.'
             });
         },
          Customers: (req, res, next) => {
@@ -81,3 +81,5 @@ module.exports = {
           },
       }
     }
+
+    
