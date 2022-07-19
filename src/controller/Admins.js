@@ -61,52 +61,42 @@ controller.register = async (req, res) => {
 }
 
 controller.login = async (req, res) => {
-    try{
-        Admins.findOne({
+    const { email, password } = req.body;
+    try {
+        await Admins.findOne({
             where: {
-                email: req.body.email,
+                email: email
             }
-        });
-    
-        const isValid = validateText(req.body.password, Admins.dataValues.password);
-        if (!isValid) {
-            return res.status(401).send({
-                message: 'Invalid email or password'
-            });
-        }
-        const name = Admins.dataValues.name;
-        const email = Admins.dataValues.email;
-        const role = Admins.dataValues.role;
-        const token = encode({ name, email, role }, {
-            expiresIn: '20s'
-        });
-
-        const refreshToken = encode({ name, email, role }, {
-            expiresIn: '1d'
-        });
-
-        await Admins.update({
-            refreshToken: refreshToken
-        }, {
-            where: {
-                email: email,
+        })
+        .then(results => {
+            if(results){
+                if(validateText(password, results.password)){
+                    const token = encode({
+                        id: results.id,
+                        email: results.email,
+                        role: results.role
+                    });
+                    res.status(200).send({
+                        message: 'Login successfully',
+                        token: token
+                    });
+                } else {
+                    res.status(401).send({
+                        message: 'Password is incorrect'
+                    });
+                }
+            } else {
+                res.status(401).send({
+                    message: 'Email is incorrect'
+                });
             }
-        });
-        res.json({
-            status: 200,
-            message: 'Login successfully',
-            token: token,
-            refreshToken: refreshToken
-        });
-        
-    }
-    catch(err){
+        })
+    } catch (err) {
         res.status(500).send({
             message:
-              err.message || "Internal server error"
-          });
+                err.message || "Internal server error"
+        });
     }
 }
-
 
 module.exports = controller;
