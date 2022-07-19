@@ -29,6 +29,14 @@ module.exports = {
                 status: 401,
                 message: 'Unauthorized' + req.Admins.role
             });
+        },
+        Sellers: (req, res, next) => {
+            if (req.Sellers.role === 2 ) next ();
+
+            return res.status(401).json({
+                status: 401,
+                message: 'Unauthorized' + req.Sellers.role
+            });
         }
     }
 }
