@@ -1,16 +1,19 @@
 const db = require('../../models')
 const Sellers = db.Sellers;
 const Op = db.Sequelize.Op;
-const { validateText } = require('../../helpers/bcrypt');
+const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
 
 controller.register = async (req, res) => {
+    const { name, email, password, role } = req.body;
+    const hashPassword = hash(password);
+
     try {
         await Sellers.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
+            name: name,
+            email: email,
+            password: hashPassword,
             role: 2,
         })
         .then(() => {
@@ -25,34 +28,37 @@ controller.register = async (req, res) => {
 }
 
 controller.login = async (req, res) => {
+    const { email, password } = req.body;
     try {
-      let seller = await Sellers.findOne({
-        attributes: ['id', 'name', 'email'],
-        where: {
-          email: req.body.email,
-          password: req.body.password
-        }
-      })
-  
-      seller = seller?.dataValues;
-  
-      if (!seller) throw {
-        status: 400,
-        message: 'Seller not found.'
-      }
-    
-      return res.status(201).json({
-        message: 'Successfully login as seller',
-      })
-      
-    } catch (err) {
-      return res
-        .status(err.status || 500)
-        .json({
-          message: err.message || 'Internal server error.',
+        await Sellers.findOne({
+            where: {email: email}
         })
-    }
-  }
-  
 
+        .then(results => {
+            if(results){
+                if(validateText(password, results.password)){
+                    const token = encode({
+                        id: results.id,
+                        email: results.email,
+                        role: results.role
+                    });
+                    res.status(200).send({
+                        message: 'Successfully log in as seller',
+                        token: token
+                    });
+                } else {
+                    res.status(401).send({
+                        message: 'Password is incorrect'
+                    });
+                }
+            } 
+        })
+    } catch (err) {
+        res.status(500).send({
+            message:
+                err.message || "Internal server error"
+        });
+    }
+}
+    
 module.exports = controller;
