@@ -23,18 +23,14 @@ module.exports = {
     version: '1.0.0'
   },
 
-  schemes: [ "https", "http" ],
-  securityDefinitions: {
-    usersstore_auth: {
-      type: "basic",
-      authorizationUrl: "http://petstore.swagger.io/oauth/dialog",
-      flow: "implicit",
-      scopes: {
-        'write:pets': "modify pets in your account",
-        'read:pets': "read your pets"
-      }
+  servers: [
+    {
+      url: 'http://localhost:3000',
+      description: 'Swagger Bingle'
     }
-  },
+  ],
+
+
   paths: {
     ...userPath,
     ...itemsPath,
@@ -52,14 +48,15 @@ module.exports = {
     ...adminSchema,
     ...sellersSchema
     },
+  },
+  components: {
     securitySchemes: {
-      security: [
-        {
-            'token': [
-                
-            ],
-        }
-    ]
+      token: {
+        type: 'apiKey',
+        description: 'Login to get token',
+        in: 'header',
+        name: 'authorization'
+      }
     }
   },
 
