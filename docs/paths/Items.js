@@ -262,49 +262,64 @@ module.exports = {
         },
         delete: {
             tags: ['item'],
-            summary: 'Delete an item',
-            description: 'Delete an item',
-            operationId: 'deleteItems',
+            summary: 'Delete item by id',
+            description: 'Delete item by id',
+            operationId: 'delete item',
+            consumes: ['application/json'],
+            produces: ['application/json'],
             parameters: [
                 {
-                    name: 'id',
                     in: 'path',
-                    description: 'ID of an item that needs to be deleted',
+                    name: 'id',
+                    description: 'item id',
                     required: false,
-                    schema : {
-                        type: 'uuid'
+                    schema: {
+                        type: 'uuid',
                     }
                 }
             ],
             responses: {
-                200: {
+                204: {
+                    description: 'Success',
                     content: {
                         'application/json': {
                             example: {
-                                status: 200,
-                                message: 'Deleting item successfully',
+                                status: '204',
+                                msg: 'item deleted successfully',
                             }
-
                         }
                     }
                 },
-                401: {
+                404: {
+                    description: 'Not Found',
                     content: {
                         'application/json': {
                             example: {
-                                status: 401,
-                                message: 'Unauthorized',
+                                status: '404',
+                                msg: 'Cannot find item with id 6f0c8067-c045-4c3c-b10f-fe8e12fb52cd.'
                             }
-
                         }
                     }
                 },
+                500: {
+                    description: 'Internal Server Error',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '500',
+                                msg: 'Internal Server Error while deleting order data',
+                            }
+                        }
+                    }
+                }
             },
             security: [
                 {
-                    token: []
+                    'token': [
+
+                    ],
                 }
-            ],
-        },
+            ]
+        }
     }
 }
