@@ -140,39 +140,48 @@ module.exports = {
       produces: [
         "application/json"
       ],
-      parameters: [],
       responses: {
-        201: {
-          content: {
-            'application/json': {
-              example: {
-                status: 201,
-                message: 'Successfully login as customer',
-              }
+        '200': {
+            description: 'Get all admins',
+            content: {
+                'application/json': {
+                    schema: {
+                        $ref: '#/components/schemas/Admins',
+                    },
+                }
             }
-          }
         },
-        400: {
-          content: {
-            'application/json': {
-              example: {
-                status: 404,
-                message: 'customer not found',
-              }
+        '400': {
+            description: 'Bad request',
+            content: {
+                'application/json': {
+                    example: {
+                        status: '400',
+                        message: 'Bad request 400 - Invalid request body',
+                    }
+                }
             }
-          }
         },
-        500: {
-          content: {
-            'application/json': {
-              example: {
-                status: 500,
-                message: 'Internal server error',
-              }
+        '500': {
+            description: 'Internal server error',
+            content: {
+                'application/json': {
+                    example: {
+                        status: '500',
+                        message: 'Internal server error',
+                    }
+                }
             }
-          }
         }
-      }
+    },
+    security: [
+        {
+            'token': [
+                
+            ],
+        }
+    ]
+     
     }
   },
 
