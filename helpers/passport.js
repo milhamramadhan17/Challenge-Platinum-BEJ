@@ -1,6 +1,7 @@
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const { Admins } = require('..//models');
+const { Sellers } = require('..//models');
 
 const validateToken = (payload, done) => {
     Admins.findByPk(payload.id)
