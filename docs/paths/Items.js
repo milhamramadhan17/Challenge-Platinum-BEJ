@@ -270,10 +270,9 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of an item that needs to be deleted',
-                    required: true,
+                    required: false,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid'
                     }
                 }
             ],
