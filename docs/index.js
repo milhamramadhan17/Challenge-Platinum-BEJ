@@ -51,15 +51,6 @@ module.exports = {
  
     securitySchemes: {
       token: {
-<<<<<<< HEAD
-        type: "apiKey",
-        description: "JWT Authorization",
-        in: "header",
-        name: "Authorization"
-      }
-    } 
-  }
-=======
         type: 'apiKey',
         description: 'Login to get token',
         in: 'header',
@@ -68,5 +59,4 @@ module.exports = {
     }
   },
 
->>>>>>> 498f37775d16eba6b6b882cd4a649c0b7b76bbfe
 }
