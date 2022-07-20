@@ -9,11 +9,6 @@ controller.addItem = async (req, res) => {
             status: 400,
             message: 'Name cannot be empty'
           }
-    
-        if (!req.body.price) throw {
-            status: 400,
-            message: 'Price cannot be empty'
-          }
 
         const item = {
             name       : req.body.name,
