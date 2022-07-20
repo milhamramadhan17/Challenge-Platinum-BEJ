@@ -5,6 +5,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs');
 const passport = require('./helpers/passport');
 const session = require('express-session');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const app = Express();
 const port = process.env.PORT || 3000;
@@ -16,6 +18,9 @@ const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
 
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 app.use(session({
     secret: 'process.env.SESSION_SECRET',
     resave: false,

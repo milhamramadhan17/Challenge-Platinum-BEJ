@@ -1,10 +1,9 @@
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
-const { validateText, hash } = require('../../helpers/bcrypt');
+const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
-
 controller.getAll = async (req, res) => {
     const dataAdmin = req.query.dataAdmin;
     const condition = dataAdmin ? { dataAdmin: { [Op.like]: `%${dataAdmin}%` } } : null;
@@ -25,8 +24,6 @@ controller.getAll = async (req, res) => {
 
 controller.register = async (req, res) => {
     const { name, email, password, role } = req.body;
-    const hashPassword = hash(password);
-    
     try{
         await Admins.findOne({
             where: {
@@ -42,7 +39,7 @@ controller.register = async (req, res) => {
                 Admins.create({
                     name: name,
                     email: email,
-                    password: hashPassword,
+                    password: password,
                     role: role
                 })
                 .then(results => {
@@ -70,7 +67,7 @@ controller.login = async (req, res) => {
         })
         .then(results => {
             if(results){
-                if(validateText(password, results.password)){
+                if(validateText(password, results.dataValues.password)){
                     const token = encode({
                         id: results.id,
                         email: results.email,
@@ -98,5 +95,6 @@ controller.login = async (req, res) => {
         });
     }
 }
+
 
 module.exports = controller;

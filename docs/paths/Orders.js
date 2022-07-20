@@ -11,28 +11,25 @@ module.exports = {
                         schema: {
                             type: 'object',
                             properties: {
-                                customerId: {
+                                customer_id: {
                                     type: 'UUID',
                                     
                                 },
-                                itemId: {
+                                item_id: {
                                     type: 'UUID',
                                 },
                                 qty: {
                                     type: 'number',
                                 },
-                                amount: {
-                                    type: 'number',
-                                    autoIncrement: (Item, qty) => {
-                                        return itemId.dataValues.price * qty;
-                                        },
-                                },
                                 status: {
                                     type: 'string',
+                                },
+                                payment_method: {
+                                    type: 'string'
                                 }
 
                             },
-                            required: ['customerId', 'itemId', 'qty', 'amount', 'status'],
+                            required: ['customer_id', 'item_id', 'qty', 'status', 'payment_method'],
                         },
                     }
                 }
@@ -156,10 +153,9 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of order that needs to be fetched',
-                    required: true,
+                    required: false,
                     schema : {
                         type: 'uuid',
-                        format: 'uuid',
                     }
                 }
             ],
@@ -174,13 +170,12 @@ module.exports = {
                         }
                     }
                 },
-                400: {
-                    description: 'Invalid ID supplied',
+                200: {
+                    description: 'success',
                     content: {
                         'application/json': {
                             example: {
-                                status: '400 || error',
-                                msg: 'Invalid ID supplied',
+                                $ref: '#/components/schemas/Orders'
                             }
                         }
                     }
@@ -190,8 +185,19 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '401 || error',
+                                status: '401',
                                 msg: 'Unauthorized access to get order data',
+                            }
+                        }
+                    }
+                },
+                404: {
+                    description: 'Not Found',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '404',
+                                "message": "Cannot find Order with id 6f0c8067-c045-4c3c-b10f-fe8e12fb52cd."
                             }
                         }
                     }
@@ -201,7 +207,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '500 || error',
+                                status: '500',
                                 msg: 'Internal Server Error while getting order data',
                             }
                         }
@@ -217,7 +223,7 @@ module.exports = {
             tags: ['order'],
             summary: 'Update order by id',
             description: 'Update order by id',
-            operationId: 'updateOrder',
+            operationId: 'updateOrderById',
             consumes: ['application/json'],
             produces: ['application/json'],
             parameters: [
@@ -225,21 +231,37 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of order that needs to be updated',
-                    required: true,
+                    required: false,
                     schema : {
                         type: 'uuid',
-                        format: 'uuid',
                     }
                 }
-
             ],
             requestBody: {
-                description: 'Order object that needs to be updated',
                 required: true,
                 content: {
-                    'application/json': {
+                    'application/x-www-form-urlencoded': {
                         schema: {
-                            $ref: '#/components/schemas/Orders'
+                            type: 'object',
+                            properties: {
+                                customer_id: {
+                                    type: 'UUID',
+                                },
+                                item_id: {
+                                    type: 'UUID',
+                                },
+                                qty: {
+                                    type: 'number',
+                                },
+                                status: {
+                                    type: 'string',
+                                },
+                                payment_method: {
+                                    type: 'string'
+                                }
+                            },
+                            required: ['customer_id', 'item_id', 'qty', 'status', 'payment_method'],
+                            
                         }
                     }
                 }
@@ -250,19 +272,19 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '203 || success',
+                                status: '203',
                                 msg: 'Order updated successfully',
                             }
                         }
                     }
                 },
-                400: {
-                    description: 'Invalid ID supplied',
+                404: {
+                    description: 'Not Found',
                     content: {
                         'application/json': {
                             example: {
-                                status: '400 || error',
-                                msg: 'Invalid ID supplied',
+                                status: '404',
+                                message: "Cannot find Order with id 6f0c8067-c045-4c3c-b10f-fe8e12fb52cd."
                             }
                         }
                     }
@@ -272,7 +294,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '401 || error',
+                                status: '401',
                                 msg: 'Unauthorized access to update order data',
                             }
                         }
@@ -283,7 +305,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '500 || error',
+                                status: '500',
                                 msg: 'Internal Server Error while updating order data',
                             }
                         }
@@ -307,32 +329,31 @@ module.exports = {
                     in: 'path',
                     name: 'id',
                     description: 'Order id',
-                    required: true,
+                    required: false,
                     schema: {
                         type: 'uuid',
-                        format: 'uuid'
                     }
                 }
             ],
             responses: {
-                200: {
+                204: {
                     description: 'Success',
                     content: {
                         'application/json': {
                             example: {
-                                status: '200 || success',
+                                status: '204',
                                 msg: 'Order deleted successfully',
                             }
                         }
                     }
                 },
-                403: {
-                    description: 'Forbidden',
+                404: {
+                    description: 'Not Found',
                     content: {
                         'application/json': {
                             example: {
-                                status: '403 || error',
-                                msg: 'Forbidden access to delete order data'
+                                status: '404',
+                                msg: 'Cannot find Order with id 6f0c8067-c045-4c3c-b10f-fe8e12fb52cd.'
                             }
                         }
                     }
@@ -342,7 +363,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '500 || error',
+                                status: '500',
                                 msg: 'Internal Server Error while deleting order data',
                             }
                         }

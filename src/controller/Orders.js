@@ -116,10 +116,16 @@ controller.deleteOrder = async (req, res) => {
                     }
                 })
                 .then((results) => {
-                    res.send("Delete Successfully")
+                    res.send({
+                        status: 204,
+                        msg: "Deleted Successfully"
+                    });
                 })
             } else {
-                res.send("There's not data")
+                res.status(404).send({
+                    status: 404,
+                    msg: "Cannot find Order with id"
+                });
             }
         })
 

@@ -2,12 +2,12 @@ const router = require('express').Router();
 const controller = require('../controller/Customers');
 const { authentication, authorization } = require('../../middleware/auth');
 
-router.post('/api/customer/register', controller.register);
-router.post('/api/customer/login', controller.login);
+router.post('/register', controller.register);
+router.post('/login', controller.login);
 
 
 
-//router.get('/customer', authentication, authorization.Customers, controller.getAll);
+router.get('/customer', authentication, authorization.Customers, controller.getAll);
 
 
 module.exports = router;
