@@ -92,11 +92,11 @@ module.exports = {
           },
         },
         responses: {
-          201: {
+          200: {
             content: {
               'application/json': {
                 example: {
-                  status: 201,
+                  status: 200,
                   message: 'Successfully login as seller',
                 }
               }
