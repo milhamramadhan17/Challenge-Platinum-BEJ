@@ -1,7 +1,7 @@
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
-const { validateText, hash } = require('../../helpers/bcrypt');
+const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
 controller.getAll = async (req, res) => {
@@ -58,7 +58,7 @@ controller.register = async (req, res) => {
 }
 
 controller.login = async (req, res) => {
-    const {email} = req.body;
+    const { email, password } = req.body;
     try {
         await Admins.findOne({
             where: {
@@ -66,13 +66,10 @@ controller.login = async (req, res) => {
             }
         })
         .then(results => {
-            console.log(results);
-            console.log(results.dataValues);
             if(results){
-                if(validateText(req.body.password, results.dataValues.password)){
+                if(validateText(password, results.dataValues.password)){
                     const token = encode({
                         id: results.id,
-                        name: results.name,
                         email: results.email,
                         role: results.role
                     });
@@ -82,13 +79,11 @@ controller.login = async (req, res) => {
                     });
                 } else {
                     res.status(401).send({
-                        status: 401,
                         message: 'Password is incorrect'
                     });
                 }
             } else {
                 res.status(401).send({
-                    status: 401,
                     message: 'Email is incorrect'
                 });
             }
@@ -100,5 +95,6 @@ controller.login = async (req, res) => {
         });
     }
 }
+
 
 module.exports = controller;
