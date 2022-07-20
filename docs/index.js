@@ -1,5 +1,3 @@
-const userSchema = require('./schemas/Users');
-const userPath = require('./paths/Users');
 const itemsSchema = require('./schemas/Items');
 const itemsPath = require('./paths/Items');
 const ordersSchema = require('./schemas/Orders');
@@ -31,7 +29,6 @@ module.exports = {
   ],
 
   paths: {
-    ...userPath,
     ...itemsPath,
     ...ordersPath,
     ...customerPath,
@@ -40,7 +37,6 @@ module.exports = {
   },
   components: {
     schemas: {
-    ...userSchema,
     ...itemsSchema,
     ...ordersSchema,
     ...customerSchema,
