@@ -163,8 +163,14 @@ module.exports = {
                         }
                     }
                 }
-            }
+            },
+            security: [
+                {
+                    'token': [
+                        
+                    ],
+                }
+            ]
         }
     }
-
 }
