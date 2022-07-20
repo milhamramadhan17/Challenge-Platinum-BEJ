@@ -135,7 +135,11 @@ module.exports = {
                 }
             },
             security: [
-                
+                {
+                    'token': [
+
+                    ],
+                }
             ]
         }
     },
@@ -215,8 +219,12 @@ module.exports = {
                 }
             },
             security: [
-                
-            ]  
+                {
+                    'token': [
+
+                    ],
+                }
+            ] 
         },
 
         put: {
@@ -313,7 +321,11 @@ module.exports = {
                 }
             },
             security: [
-                
+                {
+                    'token': [
+
+                    ],
+                }
             ]
         },
 
@@ -371,7 +383,11 @@ module.exports = {
                 }
             },
             security: [
-                
+                {
+                    'token': [
+
+                    ],
+                }
             ]
         }
     },
