@@ -7,22 +7,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
-      // // customer_id: {
-      // //   type: Sequelize.UUID,
-      // //   allowNull: false,
-      // //   references: {
-      // //     model: 'Customers',
-      // //     key: 'id'
-      // //   }
-      // },
-      // item_id: {
-      //   type: Sequelize.UUID,
-      //   allowNull: false,
-      //   references: {
-      //     model: 'Items',
-      //     key: 'id'
-      //   }
-      // },
+      customer_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Customers',
+          key: 'id'
+        }
+      },
+      item_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Items',
+          key: 'id'
+        }
+      },
       qty: {
         allowNull: false,
         type: Sequelize.INTEGER
