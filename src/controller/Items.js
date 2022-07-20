@@ -25,9 +25,10 @@ controller.addItem = async (req, res) => {
     } 
 
     catch (err) {
-      return res
-        .status(err.status || 500)
-        .json({ message: err.message || 'Internal server error' })
+        res.status(500).send({
+            message:
+            err.message || "Internal server error"
+        })
     }
 }
 
@@ -122,7 +123,6 @@ controller.deleteItem = async (req, res) => {
           err.message || "There is something wrong"
       })
   }
-  
 }
 
 module.exports = controller;

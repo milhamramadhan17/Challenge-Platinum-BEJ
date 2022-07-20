@@ -56,34 +56,27 @@ module.exports = {
 },
     authorization: {
         Admins: (req, res, next) => {
-            if (req.Admins.role === 1 ) next ();
-
-            return res.status(401).json({
-                status: 401,
-                message: 'Unauthorized' + req.Admins.role
-            });
+            if (req.Admins.role === 1) return next();
+            return next({
+              error: 'Unauthorized. Only admin can access this endpoint.',
+              authType: 'admin',
+            })
         },
         Sellers: (req, res, next) => {
-            if (req.Sellers.role === 2 ) next ();
-
-            return res.status(401).json({
-                status: 401,
-                message: 'Unauthorized. Only seller can access this endpoint.'
-            });
+          if (req.Sellers.role === 2) return next();
+          return next({
+            error: 'Unauthorized. Only admin can access this endpoint.',
+            authType: 'admin',
+          })
         },
-         Customers: (req, res, next) => {
-            if (req.user.role === 3) next();
-      
-            return res.status(401).json({
-              status: 401,
-              message: 'Unauthorized. Only customer can access this endpoint.'
-            });
-          },
+        Customers: (req, res, next) => {
+        if (req.Customers.role === 3) return next();
+        return next({
+          error: 'Unauthorized. Only admin can access this endpoint.',
+          authType: 'admin',
+          })
+        },
       }
     }
 
-<<<<<<< HEAD
     
-=======
-    
->>>>>>> c74cb9dd47dfebc7b837ba4160cb51d930d6f52f
