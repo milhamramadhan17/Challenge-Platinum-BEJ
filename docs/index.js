@@ -30,7 +30,6 @@ module.exports = {
     }
   ],
 
-
   paths: {
     ...userPath,
     ...itemsPath,
@@ -48,8 +47,8 @@ module.exports = {
     ...adminSchema,
     ...sellersSchema
     },
-  },
-  components: {
+  
+ 
     securitySchemes: {
       token: {
         type: 'apiKey',

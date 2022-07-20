@@ -49,6 +49,18 @@ module.exports = {
                         }
                     }
                 },
+                400: {
+                    description: 'Name is empty',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '201',
+                                message: 'Name cannot be empty',
+                                
+                            }
+                        }
+                    }
+                },
                 401: {
                     description: 'Unauthorized',
                     content: {
