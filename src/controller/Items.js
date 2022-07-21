@@ -25,9 +25,10 @@ controller.addItem = async (req, res) => {
     } 
 
     catch (err) {
-      return res
-        .status(err.status || 500)
-        .json({ message: err.message || 'Internal server error' })
+        res.status(500).send({
+            message:
+            err.message || "Internal server error"
+        })
     }
 }
 
@@ -98,31 +99,37 @@ controller.updateItems = async (req, res) => {
 }
 
 controller.deleteItem = async (req, res) => {
-  const id = req.params.id;
-  try {
-      await Items.findByPk(id)
-      .then(results => {
-          if(results) {
-              Items.destroy({
-                  where: {
-                      id: id
-                  }
-              })
-              .then((results) => {
-                  res.send("Delete Successfully")
-              })
-          } else {
-              res.send("There's no data")
-          }
-      })
+    const id = req.params.id;
+    try {
+        await Items.findByPk(id)
+        .then(results => {
+            if(results) {
+                Items.destroy({
+                    where: {
+                        id: id
+                    }
+                })
+                .then((results) => {
+                    res.send({
+                        status: 204,
+                        msg: "Deleted Successfully"
+                    });
+                })
+            } else {
+                res.status(404).send({
+                    status: 404,
+                    msg: "Cannot find Item with id"
+                });
+            }
+        })
 
-  } catch (err) {
-      res.status(400).send({
-          message:
-          err.message || "There is something wrong"
-      })
-  }
-  
+    } catch (err) {
+        res.status(400).send({
+            message:
+            err.message || "There is something wrong"
+        })
+    }
+    
 }
 
 module.exports = controller;

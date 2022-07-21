@@ -135,7 +135,11 @@ module.exports = {
                 }
             },
             security: [
-                
+                {
+                    'token': [
+
+                    ],
+                }
             ]
         }
     },
@@ -215,8 +219,12 @@ module.exports = {
                 }
             },
             security: [
-                
-            ]  
+                {
+                    'token': [
+
+                    ],
+                }
+            ] 
         },
 
         put: {
@@ -313,7 +321,11 @@ module.exports = {
                 }
             },
             security: [
-                
+                {
+                    'token': [
+
+                    ],
+                }
             ]
         },
 
@@ -371,12 +383,15 @@ module.exports = {
                 }
             },
             security: [
-                
+                {
+                    'token': [
+
+                    ],
+                }
             ]
         }
     },
 }
-// Compare this snippet from docs\schemas\Customers.js:
 
 
             
