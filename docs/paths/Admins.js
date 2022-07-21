@@ -18,12 +18,9 @@ module.exports = {
                                 },
                                 password: {
                                     type: 'string',
-                                },
-                                role: {
-                                    type: 'integer',
                                 }
                             },
-                            required: ['name', 'email', 'password', 'role'],
+                            required: ['name', 'email', 'password'],
                         },
                     }
                 }

@@ -14,11 +14,10 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "password-hash": "^1.2.2",
-    "passwort": "^1.0.4",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.21.2",
-    "swagger-ui-express": "^4.4.0",
+    "sequelize": "^6.21.3",
+    "swagger-ui-express": "^4.5.0",
     "uuid": "^8.3.2"
   },
   "name": "challenge-platinum-bej",
