@@ -20,16 +20,12 @@ module.exports = {
                 },
                 password: {
                   type: 'string',
-                },
-                role: {
-                  type: 'integer',
-              }
+                }
               },
               required: [
                 'name',
                 'email',
-                'password',
-                'role'
+                'password'
               ]
             }
           }
@@ -137,9 +133,6 @@ module.exports = {
       summary: "Find all customer",
       description: "This can only be done by the logged in customer.",
       operationId: "getAll",
-      produces: [
-        "application/json"
-      ],
       responses: {
         '200': {
             description: 'Get all admins',
