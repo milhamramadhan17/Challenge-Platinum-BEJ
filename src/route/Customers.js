@@ -7,7 +7,7 @@ router.post('/login', controller.login);
 
 
 
-router.get('/customer', authentication, authorization.Customers, controller.getAll);
+router.get('/customers', authentication, authorization.Customers, controller.getAll);
 
 
 module.exports = router;
