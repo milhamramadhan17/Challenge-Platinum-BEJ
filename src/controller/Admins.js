@@ -29,12 +29,10 @@ controller.register = async (req, res, next) => {
         .then(results => {
             if(results) throw {error: 'Email is already exist'} 
             else {
-                console.log(req.filePath, "<<<<<<<<<<<<<<<<<<<<<<<<")
                 const filePath = './files/' + req.filePath;
                 return upload(filePath)
                 .then((url) => {
                    fs.unlinkSync(filePath);
-
                     return Admins.create({
                         name: name,
                         email: email,

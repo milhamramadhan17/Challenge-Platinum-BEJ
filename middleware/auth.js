@@ -77,6 +77,7 @@ module.exports = {
             return next({
               error: 'Unauthorized',
               authType: 'admin',
+              body: JSON.stringify(req.Admins)
             })
         },
 
