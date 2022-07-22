@@ -1,6 +1,8 @@
+const fs = require('fs');
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
+const { upload } = require('../../helpers/upload');
 const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
@@ -27,18 +29,27 @@ controller.register = async (req, res, next) => {
         .then(results => {
             if(results) throw {error: 'Email is already exist'} 
             else {
-                Admins.create({
-                    name: name,
-                    email: email,
-                    password: password,
-                    role: 1
+                console.log(req.filePath, "<<<<<<<<<<<<<<<<<<<<<<<<")
+                const filePath = './files/' + req.filePath;
+                return upload(filePath)
+                .then((url) => {
+                   fs.unlinkSync(filePath);
+
+                    return Admins.create({
+                        name: name,
+                        email: email,
+                        password: password,
+                        role: 1,
+                        profile: url
+                    })
+                    .then(() => {
+                        res.status(201).send({
+                            status: 201,
+                            message: 'Register successfully'
+                        });
+                    })
                 })
-                .then(() => {
-                    res.status(201).send({
-                        status: 201,
-                        message: 'Register successfully'
-                    });
-                })
+                
             }
         })
 

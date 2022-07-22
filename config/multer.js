@@ -12,7 +12,7 @@ const fileFilter = (req, file, next) => {
 
 const storage = multer.diskStorage({
   //  folder tempat menyimpan hasil generated file
-  destination: (req, file, next) => next(null, './files'),
+  destination: (next) => next(null, './files'),
 
   //  nama file
   filename: function (req, file, next) {
@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
       const MM = current.getMonth() + 1 > 9 ? current.getMonth() + 1 : `0${current.getMonth() + 1}`;
       const YY = current.getFullYear();
   
-      const filename = `${req.user.id} - ${YY}${MM}${DD}${hh}${mm}${ss}${ms}.${fileFormat}`;
+      const filename = `${req.Admins.id} - ${YY}${MM}${DD}${hh}${mm}${ss}${ms}.${fileFormat}`;
       req.filePath = filename;
 
       next(null, filename);
@@ -44,5 +44,6 @@ module.exports = multer({
   fileFilter,
   limits: {
     fileSize: 500_000,
-  }
+    fieldSize: 500_000
+    }
 });

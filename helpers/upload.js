@@ -1,15 +1,18 @@
-const cloudinary = require('../config/cloudinary.config');
+const cloudinary = require('../config/cloudinary.config')
 
-const upload = async (file) => {
-    const result = await cloudinary.uploader.upload(file, {
-        type: 'image',
-        use_filename: true,
-        unique_filename: true,
-        overwrite: true,
-    });
-    return result;
+const upload = async (file, options) => {
+    try {
+        const result = await cloudinary.uploader.upload(file, {
+            use_filename: true,
+            unique_filename: true,
+            overwrite: true,
+            ...options
+        });
 
-    console.log(result);
+        return result.url;
+    } catch (err) {
+        throw err;
+    }
 }
 
 module.exports = upload;
