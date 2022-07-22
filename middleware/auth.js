@@ -52,28 +52,47 @@ module.exports = {
             });
           }
 
+          if (!req.headers.authorization) {
+            return res.status(401).json({
+              status: 401,
+              message: 'Unauthorized. Try log in as admin.'
+            });
+          }
+
+          try {
+            req.Admins = decode(req.headers.authorization);
+          }
+          catch (err) {
+            return res.status(401).json({
+              status: 400,
+              message: 'Token invalid'
+            });
+          }
+
         next();
 },
     authorization: {
         Admins: (req, res, next) => {
             if (req.Admins.role === 1) return next();
             return next({
-              error: 'Unauthorized. Only admin can access this endpoint.',
+              error: 'Unauthorized',
               authType: 'admin',
             })
         },
+
         Sellers: (req, res, next) => {
           if (req.Sellers.role === 2) return next();
           return next({
-            error: 'Unauthorized. Only admin can access this endpoint.',
-            authType: 'admin',
+            error: 'Unauthorized',
+            authType: 'seller',
           })
         },
+
         Customers: (req, res, next) => {
         if (req.Customers.role === 3) return next();
         return next({
-          error: 'Unauthorized. Only admin can access this endpoint.',
-          authType: 'admin',
+          error: 'Unauthorized',
+          authType: 'customer',
           })
         },
       }

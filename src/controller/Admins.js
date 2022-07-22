@@ -4,62 +4,49 @@ const Op = db.Sequelize.Op;
 const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
-controller.getAll = async (req, res) => {
+
+controller.getAll = async (req, res,) => {
     const dataAdmin = req.query.dataAdmin;
     const condition = dataAdmin ? { dataAdmin: { [Op.like]: `%${dataAdmin}%` } } : null;
-    try {
         await Admins.findAll({
             where: condition
         })
         .then(results => {
             res.send(results)
         })
-    } catch (err) {
-        res.status(500).send({
-            message:
-              err.message || "Internal server error"
-          });
-    }
+        
 }
 
-controller.register = async (req, res) => {
-    const { name, email, password, role } = req.body;
-    try{
+controller.register = async (req, res, next) => {
+    const { name, email, password} = req.body;
         await Admins.findOne({
             where: {
                 email: email
             }
         })
         .then(results => {
-            if(results){
-                return res.status(401).send({
-                    message: 'Email already exists'
-                });
-            } else {
+            if(results) throw {error: 'Email is already exist'} 
+            else {
                 Admins.create({
                     name: name,
                     email: email,
                     password: password,
                     role: 1
                 })
-                .then(results => {
+                .then(() => {
                     res.status(201).send({
+                        status: 201,
                         message: 'Register successfully'
                     });
                 })
             }
         })
-    } catch (err) {
-        res.status(500).send({
-            message:
-              err.message || "Internal server error"
-          });
-    }
+
+    .catch (err => next(err));
 }
 
-controller.login = async (req, res) => {
+controller.login = async (req, res, next) => {
     const { email, password } = req.body;
-    try {
         await Admins.findOne({
             where: {
                 email: email
@@ -78,23 +65,12 @@ controller.login = async (req, res) => {
                         message: 'Login successfully',
                         token: token
                     });
-                } else {
-                    res.status(401).send({
-                        message: 'Password is incorrect'
-                    });
-                }
+                } else {throw {error: 'password is incorrect'}}
             } else {
-                res.status(401).send({
-                    message: 'Email is incorrect'
-                });
+                throw {error: 'Email is incorrect'}
             }
         })
-    } catch (err) {
-        res.status(500).send({
-            message:
-                err.message || "Internal server error"
-        });
-    }
+    .catch (err => next(err));
 }
 
 

@@ -16,6 +16,7 @@ const routerItems = require('./src/route/Items');
 const routerCustomers = require('./src/route/Customers');
 const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
+const errorHandler = require('./middleware/errHandler');
 
 
 app.use(bodyParser.json());
@@ -47,5 +48,8 @@ app.use('/api/item', routerItems);
 app.use('/api/admin', routerAdmin);
 app.use('/api/customer', routerCustomers);
 app.use('/api/seller', routerSellers);
+
+// err handler middleware
+app.use(errorHandler);
 
 app.listen(port, () => {console.log(`Server is running on port ${port}`);})

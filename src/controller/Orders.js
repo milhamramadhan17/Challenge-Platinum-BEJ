@@ -15,10 +15,7 @@ controller.getAll = async (req, res) => {
             res.send(results)
         })
     } catch (err) {
-        res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving orders."
-          });
+        next(err)
     }
 }
 

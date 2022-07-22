@@ -35,13 +35,13 @@ module.exports = {
                 }
             },
             responses: {
-                200: {
+                201: {
                     description: 'Success',
                     content: {
                         'application/json': {
                             example: {
-                                status: '200 || success',
-                                message: 'Order added successfully',
+                                status: '201',
+                                message: 'Added order is successfully',
                                 
                             }
                         }
@@ -280,8 +280,8 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '203',
-                                msg: 'Order updated successfully',
+                                status : '203',
+                                message: 'Order updated successfully',
                             }
                         }
                     }
