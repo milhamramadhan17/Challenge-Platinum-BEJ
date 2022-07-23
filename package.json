@@ -28,7 +28,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node nodemon server.js",
+    "start": "npx nodemon server.js",
     "run-migrate": "npx sequelize-cli db:migrate"
   },
   "repository": {

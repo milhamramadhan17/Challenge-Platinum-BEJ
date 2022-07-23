@@ -1,6 +1,7 @@
-const cloudinary = require('../config/cloudinary.config')
+const cloudinary = require('../config/cloudinary.config');
+const fs = require('fs');
 
-const upload = async (file, options) => {
+async function upload(file, options = { }){
     try {
         const result = await cloudinary.uploader.upload(file, {
             use_filename: true,
@@ -8,6 +9,7 @@ const upload = async (file, options) => {
             overwrite: true,
             ...options
         });
+        fs.unlinkSync(file);
 
         return result.url;
     } catch (err) {
@@ -15,4 +17,4 @@ const upload = async (file, options) => {
     }
 }
 
-module.exports = upload;
+module.exports = {upload};

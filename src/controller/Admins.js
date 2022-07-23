@@ -32,8 +32,7 @@ controller.register = async (req, res, next) => {
                 const filePath = './files/' + req.filePath;
                 return upload(filePath)
                 .then((url) => {
-                   fs.unlinkSync(filePath);
-                    return Admins.create({
+                   return Admins.create({
                         name: name,
                         email: email,
                         password: password,
