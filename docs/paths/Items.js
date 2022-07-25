@@ -35,7 +35,8 @@ module.exports = {
                             'price', 
                             'store_name', 
                             'category', 
-                            'brand'],
+                            'brand',
+                            'photo'],
                         },
                     }
                 }

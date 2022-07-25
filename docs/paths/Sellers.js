@@ -43,6 +43,7 @@ module.exports = {
                 example: {
                   status: 201,
                   message: 'Seller successfully registered',
+                  token: 'eyJhbGciOiJIUzI1NiIsInR5cNmw'
                 }
               }
             }

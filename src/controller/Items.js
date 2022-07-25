@@ -1,35 +1,44 @@
 const db = require('../../models')
+const { upload } = require('../../helpers/upload')
+const fs = require('fs')
 const Items = db.Items;
 const Op = db.Sequelize.Op;
 const controller = {};
 
-controller.addItem = async (req, res) => {
+
+controller.addItem = async (req, res, next) => {
     try {
-        if (!req.body.name) throw {
-            err: 'Name cannot be empty'
-          }
 
-        const item = {
-            name       : req.body.name,
-            price      : req.body.price,
-            store_name : req.body.store_name,
-            category   : req.body.category,
-            brand      : req.body.brand,
-        }
+      for (let i = 0; i < req.files.length; i++) {
+        const uploadRes = await upload(req.files[i].path);
 
-        await Items.create(item)
-        .then(() => {
-            res.status(201).send({
-                status  : 201,
-                message : "Item added successfully"
-            });
+        await Image.create({
+          url: uploadRes.secure_url,
+          item_id: newItemID,
+          asset_id: uploadRes.asset_id,
+          public_id: uploadRes.public_id
         })
-    } 
-
-    catch (err) {
-        next(err);
       }
+
+      await Items.create({
+        name: req.body.name,
+        price: req.body.price,
+        store_name: req.store_name.id,
+        category: req.body.category,
+        brand: req.body.brand,
+        image: ''
+      })
+
+      return res.status(201).json({
+        status: 201,
+        message: 'Berhasil membuat item',
+      })
+    } catch (err) {
+      next(err);
     }
+  }
+
+    
 
 controller.getAll = async (req, res) => {
   const dataItems = req.query.dataItems
@@ -42,10 +51,12 @@ controller.getAll = async (req, res) => {
             res.send(results)
         })
     } catch (err) {
-        next(err);
-      }
+        res.status(500).send({
+            message:
+              err.message || "Internal server error"
+          });
     }
-
+}
 
 controller.getByID = async (req, res) => {
   const id = req.params.id;
@@ -61,11 +72,12 @@ controller.getByID = async (req, res) => {
                 });
             };
         });
-    } catch (err) {
-        next(err);
-      }
+    } catch (error) {
+        res.status(500).send({
+            message: "Error retrieving Item with id = " + id
+          });
     }
-
+}
 
 controller.updateItems = async (req, res) => {
   try {
@@ -84,8 +96,7 @@ controller.updateItems = async (req, res) => {
        
        return res.status(203).json(
            {
-            status : 203,
-            message: "Updated Successfully"
+               "message": "Updated Successfully"
        });
   } catch (err){
       res.status(404).send({
@@ -109,13 +120,13 @@ controller.deleteItem = async (req, res) => {
                 .then((results) => {
                     res.send({
                         status: 204,
-                        msg: "item deleted successfully"
+                        msg: "Deleted Successfully"
                     });
                 })
             } else {
                 res.status(404).send({
                     status: 404,
-                    msg: "Cannot find item with id 6f0c8067-c045-4c3c-b10f-fe8e12fb52cd."
+                    msg: "Cannot find Item with id"
                 });
             }
         })
