@@ -6,8 +6,7 @@ const controller = {};
 controller.addItem = async (req, res) => {
     try {
         if (!req.body.name) throw {
-            status: 400,
-            message: 'Name cannot be empty'
+            err: 'Name cannot be empty'
           }
 
         const item = {
@@ -20,17 +19,17 @@ controller.addItem = async (req, res) => {
 
         await Items.create(item)
         .then(() => {
-            res.status(201).send("Item added successfully")
+            res.status(201).send({
+                status  : 201,
+                message : "Item added successfully"
+            });
         })
     } 
 
     catch (err) {
-        res.status(500).send({
-            message:
-            err.message || "Internal server error"
-        })
+        next(err);
+      }
     }
-}
 
 controller.getAll = async (req, res) => {
   const dataItems = req.query.dataItems
@@ -43,12 +42,10 @@ controller.getAll = async (req, res) => {
             res.send(results)
         })
     } catch (err) {
-        res.status(500).send({
-            message:
-              err.message || "Internal server error"
-          });
+        next(err);
+      }
     }
-}
+
 
 controller.getByID = async (req, res) => {
   const id = req.params.id;
@@ -64,12 +61,11 @@ controller.getByID = async (req, res) => {
                 });
             };
         });
-    } catch (error) {
-        res.status(500).send({
-            message: "Error retrieving Item with id = " + id
-          });
+    } catch (err) {
+        next(err);
+      }
     }
-}
+
 
 controller.updateItems = async (req, res) => {
   try {
@@ -88,7 +84,8 @@ controller.updateItems = async (req, res) => {
        
        return res.status(203).json(
            {
-               "message": "Updated Successfully"
+            status : 203,
+            message: "Updated Successfully"
        });
   } catch (err){
       res.status(404).send({
@@ -112,13 +109,13 @@ controller.deleteItem = async (req, res) => {
                 .then((results) => {
                     res.send({
                         status: 204,
-                        msg: "Deleted Successfully"
+                        msg: "item deleted successfully"
                     });
                 })
             } else {
                 res.status(404).send({
                     status: 404,
-                    msg: "Cannot find Item with id"
+                    msg: "Cannot find item with id 6f0c8067-c045-4c3c-b10f-fe8e12fb52cd."
                 });
             }
         })
