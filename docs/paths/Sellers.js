@@ -137,8 +137,8 @@ module.exports = {
       get: {
           tags: ['seller'],
           responses: {
-              '200': {
-                  description: 'Get all sellers',
+              200: {
+                  description: 'Success',
                   content: {
                       'application/json': {
                           schema: {
@@ -147,7 +147,7 @@ module.exports = {
                       }
                   }
               },
-              '400': {
+              400: {
                   description: 'Bad request',
                   content: {
                       'application/json': {
@@ -158,7 +158,7 @@ module.exports = {
                       }
                   }
               },
-              '500': {
+              500: {
                   description: 'Internal server error',
                   content: {
                       'application/json': {
