@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "postgres",
-<<<<<<< HEAD
-    "password": "Elephant1618",
-=======
     "password": "Password",
->>>>>>> 47ef2031f6a0837fbaf036b089868ea7d97ed469
     "database": "bingles",
     "host": "localhost",
     "dialect": "postgres"
