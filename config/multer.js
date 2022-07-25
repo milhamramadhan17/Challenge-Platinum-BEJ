@@ -43,7 +43,6 @@ module.exports = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 500_000,
-    fieldSize: 500_000
+    fileSize: 500_000
     }
 });
