@@ -6,8 +6,7 @@ const swaggerDocument = require('./docs');
 const passport = require('./helpers/passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
-
+const morgan = require('./middleware/morgan');
 const app = Express();
 const port = process.env.PORT || 3000;
 
@@ -21,7 +20,7 @@ const errorHandler = require('./middleware/errHandler');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+app.use(morgan);
 app.use(session({
     secret: 'process.env.SESSION_SECRET',
     resave: false,

@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const controller = require('../controller/Customers');
+const multer = require('../../config/multer');
 const { authentication, authorization } = require('../../middleware/auth');
 
-router.post('/register', controller.register);
+router.post('/register', multer.single('photo'), controller.register);
 router.post('/login', controller.login);
 
 

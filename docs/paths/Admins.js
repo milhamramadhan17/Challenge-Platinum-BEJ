@@ -6,7 +6,7 @@ module.exports = {
             requestBody: {
                 required: true,
                 content: {
-                    'application/x-www-form-urlencoded': {
+                    'multipart/form-data': {
                         schema: {
                             type: 'object',
                             properties: {
@@ -18,9 +18,13 @@ module.exports = {
                                 },
                                 password: {
                                     type: 'string',
+                                },
+                                profile: {
+                                    type: 'string',
+                                    format: 'binary',
                                 }
                             },
-                            required: ['name', 'email', 'password'],
+                            required: ['name', 'email', 'password', 'profile'],
                         },
                     }
                 }
