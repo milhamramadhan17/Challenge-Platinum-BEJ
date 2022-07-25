@@ -1,9 +1,5 @@
 function errorHandler (err, req, res, next) {
-<<<<<<< HEAD
-    console.log (err)
-=======
-  console.log(err);
->>>>>>> 47ef2031f6a0837fbaf036b089868ea7d97ed469
+    console.log (err);
     let message = 'Internal server error';
     let status = 500;
 
@@ -43,8 +39,6 @@ function errorHandler (err, req, res, next) {
         else if (err.authType === "seller") message= "Unauthorized. Only seller can access this endpoint.";
         else if (err.authType === "customer") message= "Unauthorized. Only customer can access this endpoint.";
     }
-
-<<<<<<< HEAD
     else if (err.error === 'column "photo" of relation "Items" does not exist') {
         status = 400;
         message = 'There is no column "photo" in table "Items"';
@@ -69,7 +63,6 @@ function errorHandler (err, req, res, next) {
         status = 413;
         message = "File is too large";
     }
-=======
     else if (err.message === 'Unsupport file format') {
         status = 400;
         message = `Unsupport file format. Can only accept ${err.support} format.`;
@@ -134,7 +127,6 @@ function errorHandler (err, req, res, next) {
         status = 400;
         message = `field is not defined.`;
       }
->>>>>>> 47ef2031f6a0837fbaf036b089868ea7d97ed469
 
 
     return res.status(status).json({
