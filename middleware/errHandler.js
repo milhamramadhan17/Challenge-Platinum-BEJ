@@ -1,5 +1,5 @@
 function errorHandler (err, req, res, next) {
-  console.log(err);
+    console.log (err)
     let message = 'Internal server error';
     let status = 500;
 
@@ -39,7 +39,30 @@ function errorHandler (err, req, res, next) {
         else if (err.authType === "seller") message= "Unauthorized. Only seller can access this endpoint.";
         else if (err.authType === "customer") message= "Unauthorized. Only customer can access this endpoint.";
     }
+    else if (err.error === 'column "photo" of relation "Items" does not exist') {
+        status = 400;
+        message = 'There is no column "photo" in table "Items"';
+    }
 
+    else if (err.error === "Email already exists") {
+        status = 400;
+        message = "Email already exists";
+    }
+
+    else if (err.error === "Bad Request") {
+        status = 400;
+        message = "Bad request 400 - Invalid request body";
+    }
+
+    else if (err.error === "Name cannot be empty") {
+        status = 400;
+        message = "Name cannot be empty";
+    }
+
+    else if (err.error === "request entity too large") {
+        status = 413;
+        message = "File is too large";
+    }
     else if (err.message === 'Unsupport file format') {
         status = 400;
         message = `Unsupport file format. Can only accept ${err.support} format.`;

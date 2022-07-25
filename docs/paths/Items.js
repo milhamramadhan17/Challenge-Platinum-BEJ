@@ -24,14 +24,19 @@ module.exports = {
                                 },
                                 brand: {
                                     type: 'string',
-                                }
+                                },
+                                photo: {
+                                    type: 'string',
+                                    format: 'binary'
+                                },
                             },
                             required: [
                             'name', 
                             'price', 
                             'store_name', 
                             'category', 
-                            'brand'],
+                            'brand',
+                            'photo'],
                         },
                     }
                 }
@@ -54,7 +59,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '201',
+                                status: '400',
                                 message: 'Name cannot be empty',
                                 
                             }
@@ -94,7 +99,7 @@ module.exports = {
         }
     },
 
-    'api/item/items': {
+    '/api/item/items': {
         get: {
             tags: ['item'],
             summary: 'Get all items',
@@ -131,7 +136,7 @@ module.exports = {
             ],
         }
     },
-    'api/item/items/{id}': {
+    '/api/item/items/{id}': {
         get: {
             tags: ['item'],
             summary: 'Get item by id',
@@ -290,6 +295,16 @@ module.exports = {
                         }
                     }
                 },
+                400: {
+                    description: 'Not Found',
+                    content: {
+                        'application/json': {
+                            example: {
+                                msg: 'There is something wrong.'
+                            }
+                        }
+                    }
+                },
                 404: {
                     description: 'Not Found',
                     content: {
@@ -301,17 +316,6 @@ module.exports = {
                         }
                     }
                 },
-                500: {
-                    description: 'Internal Server Error',
-                    content: {
-                        'application/json': {
-                            example: {
-                                status: '500',
-                                msg: 'Internal Server Error while deleting order data',
-                            }
-                        }
-                    }
-                }
             },
             security: [
                 {

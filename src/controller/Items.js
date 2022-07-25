@@ -1,36 +1,44 @@
 const db = require('../../models')
+const { upload } = require('../../helpers/upload')
+const fs = require('fs')
 const Items = db.Items;
 const Op = db.Sequelize.Op;
 const controller = {};
 
-controller.addItem = async (req, res) => {
+
+controller.addItem = async (req, res, next) => {
     try {
-        if (!req.body.name) throw {
-            status: 400,
-            message: 'Name cannot be empty'
-          }
 
-        const item = {
-            name       : req.body.name,
-            price      : req.body.price,
-            store_name : req.body.store_name,
-            category   : req.body.category,
-            brand      : req.body.brand,
-        }
+      for (let i = 0; i < req.files.length; i++) {
+        const uploadRes = await upload(req.files[i].path);
 
-        await Items.create(item)
-        .then(() => {
-            res.status(201).send("Item added successfully")
+        await Image.create({
+          url: uploadRes.secure_url,
+          item_id: newItemID,
+          asset_id: uploadRes.asset_id,
+          public_id: uploadRes.public_id
         })
-    } 
+      }
 
-    catch (err) {
-        res.status(500).send({
-            message:
-            err.message || "Internal server error"
-        })
+      await Items.create({
+        name: req.body.name,
+        price: req.body.price,
+        store_name: req.store_name.id,
+        category: req.body.category,
+        brand: req.body.brand,
+        image: ''
+      })
+
+      return res.status(201).json({
+        status: 201,
+        message: 'Berhasil membuat item',
+      })
+    } catch (err) {
+      next(err);
     }
-}
+  }
+
+    
 
 controller.getAll = async (req, res) => {
   const dataItems = req.query.dataItems

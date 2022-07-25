@@ -8,7 +8,7 @@ module.exports = {
         requestBody: {
           required: true,
           content: {
-            'application/x-www-form-urlencoded': {
+            'multipart/form-data': {
               schema: {
                 type: 'object',
                 properties: {
@@ -21,15 +21,16 @@ module.exports = {
                   password: {
                     type: 'string',
                   },
-                  role:{
-                    type: 'integer',
-                    default: 2
+                  photo: {
+                    type: 'string',
+                    format: 'binary',
                   }
                 },
                 required: [
                   'name',
                   'email',
-                  'password'
+                  'password',
+                  'photo'
                 ]
               }
             }
@@ -42,6 +43,17 @@ module.exports = {
                 example: {
                   status: 201,
                   message: 'Seller successfully registered',
+                  token: 'eyJhbGciOiJIUzI1NiIsInR5cNmw'
+                }
+              }
+            }
+          },
+          401: {
+            content: {
+              'application/json': {
+                example: {
+                  status: 401,
+                  message: 'Email already exists.',
                 }
               }
             }
@@ -78,10 +90,6 @@ module.exports = {
                   password: {
                     type: 'string',
                   },
-                  role: {
-                    type: 'integer',
-                    default: 2
-                  }
                 },
                 required: [
                   'email',
@@ -124,5 +132,52 @@ module.exports = {
           }
         }
       }
-    }
+    },
+    '/api/seller/sellers': {
+      get: {
+          tags: ['seller'],
+          responses: {
+              '200': {
+                  description: 'Get all sellers',
+                  content: {
+                      'application/json': {
+                          schema: {
+                              $ref: '#/components/schemas/Sellers',
+                          },
+                      }
+                  }
+              },
+              '400': {
+                  description: 'Bad request',
+                  content: {
+                      'application/json': {
+                          example: {
+                              status: '400',
+                              message: 'Bad request 400 - Invalid request body',
+                          }
+                      }
+                  }
+              },
+              '500': {
+                  description: 'Internal server error',
+                  content: {
+                      'application/json': {
+                          example: {
+                              status: '500',
+                              message: 'Internal server error',
+                          }
+                      }
+                  }
+              }
+          },
+          security: [
+              {
+                  'token': [
+                      
+                  ],
+              }
+          ]
+      }
   }
+  }
+  
