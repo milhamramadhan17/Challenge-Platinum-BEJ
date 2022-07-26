@@ -43,7 +43,6 @@ module.exports = {
                 example: {
                   status: 201,
                   message: 'Seller successfully registered',
-                  token: 'eyJhbGciOiJIUzI1NiIsInR5cNmw'
                 }
               }
             }
@@ -106,6 +105,7 @@ module.exports = {
                 example: {
                   status: 200,
                   message: 'Successfully login as seller',
+                  token: 'eyJhbGciOiJIUzI1NiIsInR5cNmw'
                 }
               }
             }
@@ -116,6 +116,16 @@ module.exports = {
                 example: {
                   status: 401,
                   message: 'Password is incorrect',
+                }
+              }
+            }
+          },
+          401: {
+            content: {
+              'application/json': {
+                example: {
+                  status: 401,
+                  message: 'Email is incorrect, please try again',
                 }
               }
             }
@@ -147,23 +157,23 @@ module.exports = {
                       }
                   }
               },
-              400: {
-                  description: 'Bad request',
-                  content: {
-                      'application/json': {
-                          example: {
-                              status: '400',
-                              message: 'Bad request 400 - Invalid request body',
-                          }
-                      }
-                  }
-              },
+              401: {
+                description: 'Unauthorized',
+                content: {
+                    'application/json': {
+                        example: {
+                            status: 401,
+                            message: "Unauthorized. Only admin can access this endpoint",
+                        }
+                    }
+                }
+            },
               500: {
                   description: 'Internal server error',
                   content: {
                       'application/json': {
                           example: {
-                              status: '500',
+                              status: 500,
                               message: 'Internal server error',
                           }
                       }

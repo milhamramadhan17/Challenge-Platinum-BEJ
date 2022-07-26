@@ -60,6 +60,9 @@ controller.login = async (req, res, next) => {
                     });
                 } else {throw {error: 'Password is incorrect'}}
             } 
+            else {
+                throw {error: 'Email is incorrect'}
+            }
         })
     .catch (err => next(err));
 }
