@@ -170,17 +170,7 @@ module.exports = {
                         'application/json': {
                             schema: {
                                 $ref: '#/components/schemas/Orders'
-                            }
-                        }
-                    }
-                },
-                200: {
-                    description: 'success',
-                    content: {
-                        'application/json': {
-                            example: {
-                                $ref: '#/components/schemas/Orders'
-                            }
+                            }  
                         }
                     }
                 },
