@@ -55,12 +55,12 @@ module.exports = {
                     }
                 },
                 400: {
-                    description: 'Name is empty',
+                    description: 'Item already exists',
                     content: {
                         'application/json': {
                             example: {
                                 status: '400',
-                                message: 'Name cannot be empty',
+                                message: 'item already exists',
                                 
                             }
                         }
@@ -107,13 +107,12 @@ module.exports = {
             operationId: 'getAll',
             responses: {
                 200: {
+                    description: 'Success',
                     content: {
                         'application/json': {
-                            example: {
-                                status: 200,
-                                message: 'Getting all items successfully',
-                            }
-
+                            schema: {
+                                $ref: '#/components/schemas/Items'
+                            }  
                         }
                     }
                 },
@@ -147,22 +146,20 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of an item that needs to be fetched',
-                    required: true,
+                    required: false,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid',
                     }
                 }
             ],
             responses: {
                 200: {
+                    description: 'Success',
                     content: {
                         'application/json': {
-                            example: {
-                                status: 200,
-                                message: 'Getting item successfully',
-                            }
-
+                            schema: {
+                                $ref: '#/components/schemas/Items'
+                            }  
                         }
                     }
                 },
@@ -172,6 +169,17 @@ module.exports = {
                             example: {
                                 status: 401,
                                 message: 'Unauthorized',
+                            }
+
+                        }
+                    }
+                },
+                404: {
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: 404,
+                                message: "Item with id cannot be found.",
                             }
 
                         }
@@ -194,10 +202,9 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of an item that needs to be updated',
-                    required: true,
+                    required: false,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid',
                     }
                 }
             ],
@@ -236,12 +243,11 @@ module.exports = {
                 }
             },
             responses: {
-                200: {
+                203: {
                     content: {
                         'application/json': {
                             example: {
-                                status: 200,
-                                message: 'Updating item successfully',
+                                message: "Updated Successfully"
                             }
 
                         }
@@ -290,17 +296,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: '204',
-                                msg: 'item deleted successfully',
-                            }
-                        }
-                    }
-                },
-                400: {
-                    description: 'Not Found',
-                    content: {
-                        'application/json': {
-                            example: {
-                                msg: 'There is something wrong.'
+                                msg: 'Deleted Successfully',
                             }
                         }
                     }
