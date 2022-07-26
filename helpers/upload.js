@@ -3,7 +3,7 @@ const fs = require('fs');
 
 async function upload(file, options = { }){
     try {
-        const result = await cloudinary.uploader.upload(file, {
+        const res = await cloudinary.uploader.upload(file, {
             use_filename: true,
             unique_filename: true,
             overwrite: true,
@@ -11,10 +11,20 @@ async function upload(file, options = { }){
         });
         fs.unlinkSync(file);
 
-        return result.url;
+        return res;
     } catch (err) {
         throw err;
     }
 }
 
-module.exports = {upload};
+const destroy = async (publicID) => {
+    try {
+      const res = await cloudinary.uploader.destroy(publicID);
+  
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  }
+  
+module.exports = {upload, destroy};

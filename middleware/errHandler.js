@@ -144,6 +144,16 @@ function errorHandler (err, req, res, next) {
         status = 404;
         message = `Cannot find item with id`;
       }
+      
+      else if (err.error === "Password is incorrect") {
+        status = 401;
+        message = "Password is incorrect";
+    }
+
+      else if (err.error === "Email already exists.") {
+      status = 400;
+      message = "Email already exists";
+  }
 
 
 

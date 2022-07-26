@@ -1,43 +1,44 @@
 const db = require('../../models')
-const { upload } = require('../../helpers/upload')
-const fs = require('fs');
+const { upload, destroy } = require('../../helpers/upload');
+const uuid = require('uuid').v4;
 const Items = db.Items;
+const Image = db.Image;
 const Op = db.Sequelize.Op;
 const controller = {};
 
 controller.addItem =  async (req, res, next) => {
-    const { name, price, store_name, category, brand, photo } = req.body;
-    await Items.findOne({
-        where: {
-        name: name}
-    })
-    .then(results => {
-        if(results) throw {error: 'item already exists.'} 
-        else {
-            const filePath = './files/' + req.filePath;
-            return upload(filePath)
-            .then((url) => {
-               return Items.create({
-                name: req.body.name,
-                price: req.body.price,
-                store_name: req.body.store_name,
-                category: req.body.category,
-                brand: req.body.brand,
-                photo: url
-                })
-                .then(() => {
-                    res.status(201).send({
-                        status: 201,
-                        message: 'Item added successfully'
-                    });
-                })
-            })
-            
-        }
-    })
-.catch (err => next(err));
-}
+    try {
+      const newItemID = uuid();
+
+      for (let i = 0; i < req.files.length; i++) {
+        const uploadRes = await upload(req.files[i].path);
+
+        await Image.create({
+          url: uploadRes.url,
+          item_id: newItemID,
+          asset_id: uploadRes.asset_id,
+          public_id: uploadRes.public_id
+        })
+    }
+
+      await Items.create({
+        id: newItemID,
+        name: req.body.name,
+        price: req.body.price,
+        store_name: req.body.store_name,
+        category: req.body.category,
+        brand: req.body.brand,
+        photo: ''
+      })
     
+      return res.status(201).json({
+        status: 201,
+        message: 'Item added successfully',
+      })
+    } catch (err) {
+      next(err);
+    }
+  }
 
 controller.getAll = async (req, res, next) => {
   const dataItems = req.query.dataItems
@@ -60,12 +61,12 @@ controller.getByID = async (req, res, next) => {
         await Items.findByPk(id)
         .then(results => {
             if (results) {
-                res.status(200).send(results);
+                res.send(results);
             } 
             else {
                 res.status(404).send({
                     status : 404,
-                    message: `Item with id ${id} cannot be found.`
+                    message: `Item with id cannot be found.`
                 });
             };
         });
@@ -121,6 +122,7 @@ controller.deleteItem = async (req, res, next) => {
     } catch (err) {
         next(err);   
 } 
-}
+  }
+
 
 module.exports = controller;
