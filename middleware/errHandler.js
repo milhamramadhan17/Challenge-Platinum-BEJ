@@ -1,11 +1,5 @@
 function errorHandler (err, req, res, next) {
-<<<<<<< HEAD
     console.log (err.message)
-=======
-
-    console.log (err.message)
-
->>>>>>> feec0087494bcba83c7c44dc10b3b05da9b07c4f
     let message = 'Internal server error';
     let status = 500;
 
@@ -48,11 +42,6 @@ function errorHandler (err, req, res, next) {
     else if (err.error === 'column "photo" of relation "Items" does not exist') {
         status = 400;
         message = 'There is no column "photo" in table "Items"';
-    }
-
-    else if (err.error === "Email already exists") {
-        status = 400;
-        message = "Email already exists";
     }
 
     else if (err.error === "Bad Request") {
@@ -148,16 +137,6 @@ function errorHandler (err, req, res, next) {
         status = 404;
         message = `Cannot find item with id`;
       }
-      
-      else if (err.error === "Password is incorrect") {
-        status = 401;
-        message = "Password is incorrect";
-    }
-
-      else if (err.error === "Email already exists.") {
-      status = 400;
-      message = "Email already exists";
-  }
 
 
 
