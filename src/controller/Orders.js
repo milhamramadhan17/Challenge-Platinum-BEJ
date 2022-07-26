@@ -37,7 +37,10 @@ controller.addOrder = async (req, res) => {
     
         await Orders.create(order)
         .then(() => {
-            res.status(201).send("Added order is successfully")
+            res.status(201).send({
+                status: "201",
+                message: "Added order is successfully"
+            })
         })
 
     } catch (err) {
