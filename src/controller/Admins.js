@@ -41,7 +41,7 @@ controller.register = async (req, res, next) => {
                     })
                     .then(() => {
                         res.status(201).send({
-                            status: 201,
+                            status: "201",
                             message: 'Register successfully'
                         });
                     })

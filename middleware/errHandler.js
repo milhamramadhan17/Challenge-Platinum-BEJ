@@ -1,9 +1,5 @@
 function errorHandler (err, req, res, next) {
-<<<<<<< HEAD
     console.log (err.message)
-=======
-    console.log (err, '<<<<<< ERROR');
->>>>>>> 4cf1f30a64ff6a0f9aa9cbea5f584836d6579180
     let message = 'Internal server error';
     let status = 500;
 
@@ -39,7 +35,7 @@ function errorHandler (err, req, res, next) {
 
     else if (err.error === "Unauthorized") {
         status = 401;
-        if (err.authType === "admin") message= "Unauthorized. Only customer can access this endpoint.";
+        if (err.authType === "admin") message= "Unauthorized. Only admin can access this endpoint.";
         else if (err.authType === "seller") message= "Unauthorized. Only seller can access this endpoint.";
         else if (err.authType === "customer") message= "Unauthorized. Only customer can access this endpoint.";
     }

@@ -52,8 +52,6 @@ controller.login = async (req, res, next) => {
             }
         })
         .then(results => {
-            console.log(results);
-            console.log(results.dataValues);
             if(results){
                 if(validateText(req.body.password, results.dataValues.password)){
                     const token = encode({

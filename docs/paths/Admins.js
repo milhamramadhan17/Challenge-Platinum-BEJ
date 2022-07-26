@@ -95,7 +95,6 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '200',
                                 message: 'Login successfully',
                                 token: 'asdbqiwudbuqwdb8129d12dnaksmdni12hdn1928naskjdn8i12dn182n1289n1212kasda'
                             }

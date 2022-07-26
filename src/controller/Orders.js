@@ -124,7 +124,7 @@ controller.deleteOrder = async (req, res) => {
             } else {
                 res.status(404).send({
                     status: 404,
-                    msg: "Cannot find Order with id"
+                    msg: "Cannot find Order with id " + id
                 });
             }
         })
