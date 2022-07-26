@@ -62,14 +62,11 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(200).send({
+                    res.status(201).send({
                         message: 'Login successfully',
                         token: token
                     });
-                    res.status(200).send({
-                        message: 'Login successfully',
-                        token: token
-                    });
+                
                 } else {throw {error: 'password is incorrect'}}
             } else {
                 throw {error: 'Email is incorrect'}
