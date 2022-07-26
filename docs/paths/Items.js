@@ -146,10 +146,9 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of an item that needs to be fetched',
-                    required: true,
+                    required: false,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid',
                     }
                 }
             ],
@@ -203,10 +202,9 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of an item that needs to be updated',
-                    required: true,
+                    required: false,
                     schema : {
-                        type: 'integer',
-                        format: 'int64'
+                        type: 'uuid',
                     }
                 }
             ],
