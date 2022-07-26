@@ -1,5 +1,9 @@
 function errorHandler (err, req, res, next) {
+<<<<<<< HEAD
     console.log (err.message)
+=======
+    console.log (err, '<<<<<< ERROR');
+>>>>>>> 4cf1f30a64ff6a0f9aa9cbea5f584836d6579180
     let message = 'Internal server error';
     let status = 500;
 
@@ -52,11 +56,6 @@ function errorHandler (err, req, res, next) {
     else if (err.error === "Bad Request") {
         status = 400;
         message = "Bad request 400 - Invalid request body";
-    }
-
-    else if (err.error === "Name cannot be empty") {
-        status = 400;
-        message = "Name cannot be empty";
     }
 
     else if (err.error === "request entity too large") {
@@ -127,6 +126,28 @@ function errorHandler (err, req, res, next) {
         status = 400;
         message = `field is not defined.`;
       }
+
+      else if (err.error === 'Item cannot be found') {
+        status = 404;
+        message = `Item with id ${id} cannot be found.`;
+      }
+
+      else if (err.error === 'Error retrieving item with id') {
+        status = 500;
+        message = "Error retrieving Item.";
+      }
+
+      else if (err.error === 'Item already exists.') {
+        status = 400;
+        message = `Item already exists.`;
+      }
+
+      else if (err.error === 'Cannot find item with id') {
+        status = 404;
+        message = `Cannot find item with id`;
+      }
+
+
 
 
     return res.status(status).json({
