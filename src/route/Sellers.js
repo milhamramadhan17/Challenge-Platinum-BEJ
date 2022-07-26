@@ -5,6 +5,6 @@ const { authentication, authorization } = require('../../middleware/auth');
 
 router.post('/register', multer.single('photo'), controller.register);
 router.post('/login', controller.login);
-router.get('/sellers', authentication, authorization.Sellers, controller.getAll)
+router.get('/sellers', authentication, authorization.Admins, controller.getAll)
 
 module.exports = router;
