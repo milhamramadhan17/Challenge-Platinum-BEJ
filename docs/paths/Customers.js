@@ -42,7 +42,7 @@ module.exports = {
             'application/json': {
               example: {
                 status: 201,
-                message: 'Customer successfully registered',
+                message: 'Register successfully',
               }
             }
           }
@@ -51,8 +51,8 @@ module.exports = {
           content: {
             'application/json': {
               example: {
-                status: 404,
-                message: 'customer not found',
+                status: 400,
+                message: 'Email is already exist',
               }
             }
           }
@@ -99,12 +99,12 @@ module.exports = {
         },
       },
       responses: {
-        201: {
+        200: {
           content: {
             'application/json': {
               example: {
                 status: 201,
-                message: 'Successfully login as customer',
+                message: 'Login successfully',
               }
             }
           }
@@ -113,8 +113,8 @@ module.exports = {
           content: {
             'application/json': {
               example: {
-                status: 404,
-                message: 'customer not found',
+                status: 401,
+                message: 'password is incorrect, please try again',
               }
             }
           }

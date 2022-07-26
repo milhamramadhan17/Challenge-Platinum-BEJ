@@ -5,7 +5,7 @@ const multer = require('../../config/multer');
 
 router.use(authentication)
 
-router.post('/addItem', authorization.Sellers, multer.single('photo'), controller.addItem);
+router.post('/addItem', authorization.Sellers, multer.array('photo'), controller.addItem);
 router.get('/items', authorization.Sellers, controller.getAll);
 router.get('/items/:id', authorization.Sellers, controller.getByID);
 router.put('/items/:id', authorization.Sellers, controller.updateItems);

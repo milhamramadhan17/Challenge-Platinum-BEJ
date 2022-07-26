@@ -26,10 +26,13 @@ module.exports = {
                                     type: 'string',
                                 },
                                 photo: {
-                                    type: 'string',
-                                    format: 'binary'
+                                    type: 'array',
+                                    items: {
+                                      type: 'string',
+                                      format: 'binary'
+                                    }
+                                  }
                                 },
-                            },
                             required: [
                             'name', 
                             'price', 
@@ -77,6 +80,17 @@ module.exports = {
                         }
                     }
                 },
+                401: {
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: 401,
+                                message: 'No token provided',
+                            }
+
+                        }
+                    }
+                },
                 500: {
                     description: 'Internal Server Error',
                     content: {
@@ -121,7 +135,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: 401,
-                                message: 'Unauthorized',
+                                message: 'No token provided',
                             }
 
                         }
@@ -168,7 +182,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: 401,
-                                message: 'Unauthorized',
+                                message: 'No token provided',
                             }
 
                         }
@@ -192,6 +206,7 @@ module.exports = {
                 }
             ],
         },
+        
         put: {
             tags: ['item'],
             summary: 'Update an item',
@@ -258,7 +273,7 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: 401,
-                                message: 'Unauthorized',
+                                message: 'No token provided',
                             }
 
                         }
@@ -298,6 +313,17 @@ module.exports = {
                                 status: '204',
                                 msg: 'Deleted Successfully',
                             }
+                        }
+                    }
+                },
+                401: {
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: 401,
+                                message: 'No token provided',
+                            }
+
                         }
                     }
                 },
