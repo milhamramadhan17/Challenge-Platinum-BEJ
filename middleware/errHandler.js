@@ -39,6 +39,7 @@ function errorHandler (err, req, res, next) {
         else if (err.authType === "seller") message= "Unauthorized. Only seller can access this endpoint.";
         else if (err.authType === "customer") message= "Unauthorized. Only customer can access this endpoint.";
     }
+
     else if (err.error === 'column "photo" of relation "Items" does not exist') {
         status = 400;
         message = 'There is no column "photo" in table "Items"';
@@ -123,10 +124,11 @@ function errorHandler (err, req, res, next) {
         message = `Item with id ${id} cannot be found.`;
       }
 
-      else if (err.error === 'Error retrieving item with id') {
+      else if (err.error === "Error retrieving") {
         status = 500;
-        message = "Error retrieving Item.";
-      }
+        if (err.authType === "order") message= "Error retrieving Order with id = " + id;
+        else if (err.authType === "item") message= "Error retrieving Item with id = " + id;
+    }
 
       else if (err.error === 'Item already exists.') {
         status = 400;
@@ -135,7 +137,17 @@ function errorHandler (err, req, res, next) {
 
       else if (err.error === 'Cannot find item with id') {
         status = 404;
-        message = `Cannot find item with id`;
+        message = `Cannot find item with id ${id}.`;
+      }
+
+      else if (err.error === 'Cannot find Order with id') {
+        status = 404;
+        message = `Cannot find Order with id ${id}.`;
+      }
+
+      else if (err.error === "Cannot find Order with customer_id ") {
+        status = 404;
+        message = `Cannot find Order with customer_id ${customer_id}`;
       }
 
 
