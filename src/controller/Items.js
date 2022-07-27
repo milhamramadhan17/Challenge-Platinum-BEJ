@@ -1,5 +1,5 @@
 const db = require('../../models')
-const { upload, destroy } = require('../../helpers/upload');
+const { upload2, destroy } = require('../../helpers/upload');
 const uuid = require('uuid').v4;
 const Items = db.Items;
 const Image = db.Image;
@@ -11,7 +11,7 @@ controller.addItem =  async (req, res, next) => {
       const newItemID = uuid();
 
       for (let i = 0; i < req.files.length; i++) {
-        const uploadRes = await upload(req.files[i].path);
+        const uploadRes = await upload2(req.files[i].path);
 
         await Image.create({
           url: uploadRes.url,

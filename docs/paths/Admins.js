@@ -102,12 +102,23 @@ module.exports = {
                     }
                 },
                 '401': {
-                    description: 'Email or password is incorrect',
+                    description: 'password is incorrect',
                     content: {
                         'application/json': {
                             example: {
-                                status: '401',
-                                message: 'Email or password is incorrect',
+                                status: 401,
+                                message: 'password is incorrect, please try again',
+                            }
+                        }
+                    }
+                },
+                '401': {
+                    description: 'Email is incorrect',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: 401,
+                                message: 'Email is incorrect, please try again',
                             }
                         }
                     }
@@ -141,13 +152,13 @@ module.exports = {
                         }
                     }
                 },
-                '400': {
-                    description: 'Bad request',
+                '401': {
+                    description: 'Unauthorized',
                     content: {
                         'application/json': {
                             example: {
-                                status: '400',
-                                message: 'Bad request 400 - Invalid request body',
+                                status: 401,
+                                message: 'no token provided',
                             }
                         }
                     }
