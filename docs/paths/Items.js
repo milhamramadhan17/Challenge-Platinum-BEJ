@@ -211,7 +211,7 @@ module.exports = {
             tags: ['item'],
             summary: 'Update an item',
             description: 'Update an item',
-            operationId: 'getByID',
+            operationId: 'updateItems',
             parameters: [
                 {
                     name: 'id',
