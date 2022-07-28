@@ -30,7 +30,7 @@ controller.register = async (req, res, next) => {
                     photo: url
                 })
                 .then(() => {
-                    res.status(201).send({
+                    res.status(200).send({
                         status: 201,
                         message: 'Register successfully'
                     });
