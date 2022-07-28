@@ -50,7 +50,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '201',
+                                status: 201,
                                 message: 'Item added successfully',
                                 
                             }
@@ -62,7 +62,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '400',
+                                status: 400,
                                 message: 'item already exists',
                                 
                             }
@@ -74,7 +74,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '401',
+                                status: 401,
                                 message: 'Unauthorized. Please login as seller',
                             }
                         }
@@ -96,7 +96,7 @@ module.exports = {
                     content: {
                         'application/json': {
                             example: {
-                                status: '500',
+                                status: 500,
                                 message: 'Internal server error',
                             }
                         }
@@ -211,7 +211,7 @@ module.exports = {
             tags: ['item'],
             summary: 'Update an item',
             description: 'Update an item',
-            operationId: 'getByID',
+            operationId: 'updateItems',
             parameters: [
                 {
                     name: 'id',
