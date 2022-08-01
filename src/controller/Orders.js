@@ -4,6 +4,25 @@ const Items = db.Items;
 const Op = db.Sequelize.Op;
 const controller = {};
 
+
+controller.getOrderByCustomerId = async (req, res, next) => {
+    const customer_id = req.query.customer_id;
+    try {
+        await Orders.findAll({
+            where: {
+                customer_id: customer_id
+            }
+        })
+        .then(results => {
+            if (results) {
+                res.send(results);
+            } else {throw {error: `Cannot find Order with customer_id`}};
+        });
+    } catch (err) {
+        next(err);
+    }
+},
+
 controller.getAll = async (req, res) => {
     const dataOrders = req.query.dataOrders
     var condition = dataOrders ? {dataOrders: {[Op.like]: `%${dataOrders}%`} } : null;
@@ -19,13 +38,14 @@ controller.getAll = async (req, res) => {
     }
 }
 
-controller.addOrder = async (req, res) => {
+controller.addOrder = async (req, res, next) => {
     try {
         const orderItem = await Items.findOne({
             where: {
                  id: req.body.item_id
             }
         })
+
         const order = {
             customer_id   : req.body.customer_id,
             item_id       : req.body.item_id,
@@ -44,34 +64,25 @@ controller.addOrder = async (req, res) => {
         })
 
     } catch (err) {
-        res.status(500).send({
-            message:
-            err.message || "There are'nt data in database"
-        })
+        next(err)
     }
 }
 
-controller.getOrderById = async (req, res) => {
+controller.getOrderById = async (req, res, next) => {
     const id = req.params.id;
     try {
         await Orders.findByPk(id)
         .then(results => {
             if (results) {
                 res.send(results);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find Order with id ${id}.`
-                });
-            };
+            } else {throw {error: `Cannot find Order with id`}};
         });
-    } catch (error) {
-        res.status(500).send({
-            message: "Error retrieving Order with id = " + id
-          });
+    } catch (err) {
+        next(err)
     }
 }
 
-controller.updateOrder = async (req, res) => {
+controller.updateOrder = async (req, res, next) => {
     try {
         const orderItem = await Items.findOne({
             where: {
@@ -93,18 +104,14 @@ controller.updateOrder = async (req, res) => {
          });
          
          return res.status(203).json(
-             {
-                 "message": "Updated Successfully"
-         });
-    } catch (err){
-        res.status(404).send({
-             message:
-             err.message || "There's something wrong"
-        })
-    }
+            {
+                status: "203",                
+                message: "Updated Successfully"
+            });
+    } catch (err){next(err)}
  }
 
-controller.deleteOrder = async (req, res) => {
+controller.deleteOrder = async (req, res, next) => {
     const id = req.params.id;
     try {
         await Orders.findByPk(id)
@@ -115,26 +122,16 @@ controller.deleteOrder = async (req, res) => {
                         id: id
                     }
                 })
-                .then((results) => {
+                .then(() => {
                     res.send({
                         status: 204,
-                        msg: "Deleted Successfully"
+                        message: "Deleted Successfully"
                     });
                 })
-            } else {
-                res.status(404).send({
-                    status: 404,
-                    msg: "Cannot find Order with id"
-                });
-            }
+            } else {throw {error: "Cannot find Order with id"}}
         })
 
-    } catch (err) {
-        res.status(400).send({
-            message:
-            err.message || "There is something wrong"
-        })
-    }
+    } catch (err) {next(err)}
     
 }
 

@@ -2,7 +2,7 @@ const fs = require('fs');
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
-const { upload } = require('../../helpers/upload');
+const { upload1 } = require('../../helpers/upload');
 const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
@@ -30,7 +30,7 @@ controller.register = async (req, res, next) => {
             if(results) throw {error: 'Email is already exist'} 
             else {
                 const filePath = './files/' + req.filePath;
-                return upload(filePath)
+                return upload1(filePath)
                 .then((url) => {
                    return Admins.create({
                         name: name,
@@ -41,7 +41,7 @@ controller.register = async (req, res, next) => {
                     })
                     .then(() => {
                         res.status(201).send({
-                            status: 201,
+                            status: "201",
                             message: 'Register successfully'
                         });
                     })

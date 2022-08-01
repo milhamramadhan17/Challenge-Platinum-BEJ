@@ -2,7 +2,7 @@ const db = require('../../models');
 const fs = require('fs');
 const Sellers = db.Sellers;
 const Op = db.Sequelize.Op;
-const { upload } = require('../../helpers/upload');
+const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
 const controller = {};
@@ -17,7 +17,7 @@ controller.register = async (req, res, next) => {
         if(results) throw {error: 'Email already exists.'} 
         else {
             const filePath = './files/' + req.filePath;
-            return upload(filePath)
+            return upload1(filePath)
             .then((url) => {
                return Sellers.create({
                     name: name,
@@ -60,6 +60,9 @@ controller.login = async (req, res, next) => {
                     });
                 } else {throw {error: 'Password is incorrect'}}
             } 
+            else {
+                throw {error: 'Email is incorrect'}
+            }
         })
     .catch (err => next(err));
 }
