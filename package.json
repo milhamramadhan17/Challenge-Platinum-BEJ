@@ -32,8 +32,12 @@
   "description": "",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "16.15.0",
+    "npm": "8.5.5"
+  },
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "start": "npx nodemon server.js",
     "run-migrate": "npx sequelize-cli db:migrate"
   },

@@ -8,7 +8,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('./middleware/morgan');
 const app = Express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 const routerOrders = require('./src/route/Orders');
 const routerItems = require('./src/route/Items');
