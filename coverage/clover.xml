@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1659399630632" clover="3.2.0">
-  <project timestamp="1659399630632" name="All files">
+<coverage generated="1659407429722" clover="3.2.0">
+  <project timestamp="1659407429722" name="All files">
     <metrics statements="3079" coveredstatements="2224" conditionals="23" coveredconditionals="21" methods="54" coveredmethods="15" elements="3156" coveredelements="2260" complexity="0" loc="3079" ncloc="3079" packages="10" files="39" classes="39"/>
     <package name="Challenge-Platinum-BEJ">
       <metrics statements="57" coveredstatements="55" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
-      <file name="server.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\server.js">
+      <file name="server.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\server.js">
         <metrics statements="57" coveredstatements="55" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -67,7 +67,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.config">
       <metrics statements="57" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="cloudinary.config.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\config\cloudinary.config.js">
+      <file name="cloudinary.config.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\config\cloudinary.config.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -79,7 +79,7 @@
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="multer.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\config\multer.js">
+      <file name="multer.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\config\multer.js">
         <metrics statements="48" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -133,7 +133,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.docs">
       <metrics statements="58" coveredstatements="58" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\index.js">
+      <file name="index.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\index.js">
         <metrics statements="58" coveredstatements="58" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -197,7 +197,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.docs.paths">
       <metrics statements="1459" coveredstatements="1459" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Admins.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\paths\Admins.js">
+      <file name="Admins.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\paths\Admins.js">
         <metrics statements="187" coveredstatements="187" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -387,7 +387,7 @@
         <line num="186" count="1" type="stmt"/>
         <line num="187" count="1" type="stmt"/>
       </file>
-      <file name="Customers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\paths\Customers.js">
+      <file name="Customers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\paths\Customers.js">
         <metrics statements="186" coveredstatements="186" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -576,7 +576,7 @@
         <line num="185" count="1" type="stmt"/>
         <line num="186" count="1" type="stmt"/>
       </file>
-      <file name="Items.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\paths\Items.js">
+      <file name="Items.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\paths\Items.js">
         <metrics statements="351" coveredstatements="351" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -930,7 +930,7 @@
         <line num="350" count="1" type="stmt"/>
         <line num="351" count="1" type="stmt"/>
       </file>
-      <file name="Orders.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\paths\Orders.js">
+      <file name="Orders.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\paths\Orders.js">
         <metrics statements="543" coveredstatements="543" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1476,7 +1476,7 @@
         <line num="542" count="1" type="stmt"/>
         <line num="543" count="1" type="stmt"/>
       </file>
-      <file name="Sellers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\paths\Sellers.js">
+      <file name="Sellers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\paths\Sellers.js">
         <metrics statements="192" coveredstatements="192" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1674,7 +1674,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.docs.schemas">
       <metrics statements="153" coveredstatements="153" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Admins.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\schemas\Admins.js">
+      <file name="Admins.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\schemas\Admins.js">
         <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1701,7 +1701,7 @@
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
       </file>
-      <file name="Customers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\schemas\Customers.js">
+      <file name="Customers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\schemas\Customers.js">
         <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1728,7 +1728,7 @@
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
       </file>
-      <file name="Items.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\schemas\Items.js">
+      <file name="Items.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\schemas\Items.js">
         <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1757,7 +1757,7 @@
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
       </file>
-      <file name="Orders.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\schemas\Orders.js">
+      <file name="Orders.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\schemas\Orders.js">
         <metrics statements="60" coveredstatements="60" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1820,7 +1820,7 @@
         <line num="59" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
       </file>
-      <file name="Sellers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\docs\schemas\Sellers.js">
+      <file name="Sellers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\docs\schemas\Sellers.js">
         <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1845,7 +1845,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.helpers">
       <metrics statements="107" coveredstatements="52" conditionals="3" coveredconditionals="3" methods="8" coveredmethods="3"/>
-      <file name="bcrypt.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\helpers\bcrypt.js">
+      <file name="bcrypt.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\helpers\bcrypt.js">
         <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1863,7 +1863,7 @@
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
       </file>
-      <file name="jwt.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\helpers\jwt.js">
+      <file name="jwt.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\helpers\jwt.js">
         <metrics statements="15" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1881,7 +1881,7 @@
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
       </file>
-      <file name="passport.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\helpers\passport.js">
+      <file name="passport.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\helpers\passport.js">
         <metrics statements="31" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1915,7 +1915,7 @@
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
       </file>
-      <file name="upload.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\helpers\upload.js">
+      <file name="upload.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\helpers\upload.js">
         <metrics statements="46" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -1967,7 +1967,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.middleware">
       <metrics statements="349" coveredstatements="43" conditionals="1" coveredconditionals="1" methods="11" coveredmethods="0"/>
-      <file name="auth.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\middleware\auth.js">
+      <file name="auth.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\middleware\auth.js">
         <metrics statements="100" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2070,7 +2070,7 @@
         <line num="99" count="1" type="stmt"/>
         <line num="100" count="1" type="stmt"/>
       </file>
-      <file name="errHandler.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\middleware\errHandler.js">
+      <file name="errHandler.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\middleware\errHandler.js">
         <metrics statements="164" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -2237,7 +2237,7 @@
         <line num="163" count="1" type="stmt"/>
         <line num="164" count="1" type="stmt"/>
       </file>
-      <file name="morgan.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\middleware\morgan.js">
+      <file name="morgan.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\middleware\morgan.js">
         <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2254,7 +2254,7 @@
         <line num="13" count="7" type="stmt"/>
         <line num="14" count="7" type="stmt"/>
       </file>
-      <file name="validator.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\middleware\validator.js">
+      <file name="validator.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\middleware\validator.js">
         <metrics statements="71" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2331,7 +2331,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.models">
       <metrics statements="249" coveredstatements="217" conditionals="18" coveredconditionals="16" methods="12" coveredmethods="12"/>
-      <file name="Customers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\Customers.js">
+      <file name="Customers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\Customers.js">
         <metrics statements="36" coveredstatements="29" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2370,7 +2370,7 @@
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
       </file>
-      <file name="Items.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\Items.js">
+      <file name="Items.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\Items.js">
         <metrics statements="29" coveredstatements="29" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2402,7 +2402,7 @@
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="Orders.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\Orders.js">
+      <file name="Orders.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\Orders.js">
         <metrics statements="31" coveredstatements="29" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2436,7 +2436,7 @@
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
       </file>
-      <file name="Sellers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\Sellers.js">
+      <file name="Sellers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\Sellers.js">
         <metrics statements="41" coveredstatements="33" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2480,7 +2480,7 @@
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
       </file>
-      <file name="admins.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\admins.js">
+      <file name="admins.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\admins.js">
         <metrics statements="39" coveredstatements="31" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2522,7 +2522,7 @@
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
       </file>
-      <file name="image.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\image.js">
+      <file name="image.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\image.js">
         <metrics statements="36" coveredstatements="30" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2561,7 +2561,7 @@
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
       </file>
-      <file name="index.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\models\index.js">
+      <file name="index.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\models\index.js">
         <metrics statements="37" coveredstatements="36" conditionals="6" coveredconditionals="4" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2604,7 +2604,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.src.controller">
       <metrics statements="526" coveredstatements="95" conditionals="0" coveredconditionals="0" methods="20" coveredmethods="0"/>
-      <file name="Admins.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\controller\Admins.js">
+      <file name="Admins.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\controller\Admins.js">
         <metrics statements="85" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2692,7 +2692,7 @@
         <line num="84" count="1" type="stmt"/>
         <line num="85" count="1" type="stmt"/>
       </file>
-      <file name="Customers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\controller\Customers.js">
+      <file name="Customers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\controller\Customers.js">
         <metrics statements="92" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2787,7 +2787,7 @@
         <line num="91" count="1" type="stmt"/>
         <line num="92" count="1" type="stmt"/>
       </file>
-      <file name="Items.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\controller\Items.js">
+      <file name="Items.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\controller\Items.js">
         <metrics statements="128" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -2918,7 +2918,7 @@
         <line num="127" count="1" type="stmt"/>
         <line num="128" count="1" type="stmt"/>
       </file>
-      <file name="Orders.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\controller\Orders.js">
+      <file name="Orders.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\controller\Orders.js">
         <metrics statements="138" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3059,7 +3059,7 @@
         <line num="137" count="1" type="stmt"/>
         <line num="138" count="1" type="stmt"/>
       </file>
-      <file name="Sellers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\controller\Sellers.js">
+      <file name="Sellers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\controller\Sellers.js">
         <metrics statements="83" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3148,7 +3148,7 @@
     </package>
     <package name="Challenge-Platinum-BEJ.src.route">
       <metrics statements="64" coveredstatements="64" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Admins.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\route\Admins.js">
+      <file name="Admins.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\route\Admins.js">
         <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3162,7 +3162,7 @@
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
       </file>
-      <file name="Customers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\route\Customers.js">
+      <file name="Customers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\route\Customers.js">
         <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3180,7 +3180,7 @@
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
       </file>
-      <file name="Items.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\route\Items.js">
+      <file name="Items.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\route\Items.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3197,7 +3197,7 @@
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
       </file>
-      <file name="Orders.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\route\Orders.js">
+      <file name="Orders.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\route\Orders.js">
         <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -3214,7 +3214,7 @@
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
       </file>
-      <file name="Sellers.js" path="D:\Binar Challenge\kelompok\Challenge-Platinum-BEJ\src\route\Sellers.js">
+      <file name="Sellers.js" path="C:\Users\Asus\Challenge-Platinum-BEJ\src\route\Sellers.js">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
