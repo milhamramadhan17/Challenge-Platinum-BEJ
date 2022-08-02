@@ -11,19 +11,12 @@ const testCustomer = {
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
-afterAll(() => {
-  User.destroy({
-    where: {
-      email: testCustomer.email
-    }
-  })
-});
 
 describe('Customers Endpoints', () => {
   it('POST /api/customer/register with valid values, response should be 201', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
-      .send(testUser)
+      .post('/Customers')
+      .send(testCustomer)
       .set('Accept', 'application/json');
 
     expect(res.status).toBe(201);
@@ -32,7 +25,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/register without password, response should be 400', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/Customers')
       .send({ name: 'Test invalid', email: 'test@invalid.com' })
       .set('Accept', 'application/json');
 
@@ -42,7 +35,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/register without email, response should be 400', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/Customers')
       .send({ name: 'Test invalid', pass: 'pass' })
       .set('Accept', 'application/json');
 
@@ -52,7 +45,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
     const res = await request(app)
-      .post('/api/customer/login')
+      .post('/Customers')
       .set('Accept', 'application/json')
       .send({
         email: testCustomer.email,
@@ -65,7 +58,7 @@ describe('Customers Endpoints', () => {
     validToken = res.body.token;
   })
 
-  it('GET /Customers with valid token, response should be 200.', async () => {
+  it('GET /customers with valid token, response should be 200.', async () => {
     const response = await request(app)
       .get('/Customers')
       .set('Accept', 'application/json')
@@ -75,7 +68,7 @@ describe('Customers Endpoints', () => {
     expect(response.body).toHaveProperty('list');
   })
 
-  it('GET /Customers without token, response should be 401.', async () => {
+  it('GET /customers without token, response should be 401.', async () => {
     const response = await request(app)
       .get('/Customers')
       .set('Accept', 'application/json');
@@ -84,7 +77,7 @@ describe('Customers Endpoints', () => {
     expect(typeof response.body.message).toMatch('string');
   })
 
-  it('GET /Customers with invalid token, response should be 400.', async () => {
+  it('GET /customers with invalid token, response should be 400.', async () => {
     const response = await request(app)
       .get('/Customers')
       .set('authorization', invalidToken)

@@ -25,6 +25,7 @@
     "sequelize": "^6.21.3",
     "supertest": "^6.2.4",
     "swagger-ui-express": "^4.5.0",
+    "ts-node": "^10.9.1",
     "uuid": "^8.3.2"
   },
   "name": "challenge-platinum-bej",
@@ -32,7 +33,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit --coverage --detectOpenHandles",
     "start": "npx nodemon server.js",
     "run-migrate": "npx sequelize-cli db:migrate"
   },
