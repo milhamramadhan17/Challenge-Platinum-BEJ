@@ -1,12 +1,21 @@
 const app = require('../server');
 const request = require('supertest');
-const { Customers } = require('../models/Customers');
+const {Customers} = require('../models/Customers');
+
 
 const testCustomer = {
   name: 'Tester',
   email: 'test@mail.com',
   password: 'TestPassword'
 }
+
+afterAll(() => {
+  Customers.destroy({
+    where: {
+      email: testCustomer.email
+    }
+  })
+ });
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
@@ -15,37 +24,37 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 describe('Customers Endpoints', () => {
   it('POST /api/customer/register with valid values, response should be 201', async () => {
     const res = await request(app)
-      .post('/Customers')
+      .post('/register')
       .send(testCustomer)
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(201);
     expect(typeof res.body.message).toMatch('string');
   })
 
-  it('POST /api/customer/register without password, response should be 400', async () => {
+  it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
-      .post('/Customers')
+      .post('/register')
       .send({ name: 'Test invalid', email: 'test@invalid.com' })
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(400);
-    expect(typeof res.body.message).toMatch('string');
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
   })
 
-  it('POST /api/customer/register without email, response should be 400', async () => {
+  it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
-      .post('/Customers')
-      .send({ name: 'Test invalid', pass: 'pass' })
-      .set('Accept', 'application/json');
+      .post('/register')
+      .send({ name: 'Test invalid', password: 'pass' })
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(400);
-    expect(typeof res.body.message).toMatch('string');
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
   })
 
   it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
     const res = await request(app)
-      .post('/Customers')
+      .post('/api/customer/login')
       .set('Accept', 'application/json')
       .send({
         email: testCustomer.email,
@@ -58,9 +67,9 @@ describe('Customers Endpoints', () => {
     validToken = res.body.token;
   })
 
-  it('GET /customers with valid token, response should be 200.', async () => {
+  it('GET /api/customer/customers with valid token, response should be 200.', async () => {
     const response = await request(app)
-      .get('/Customers')
+      .get('/api/customer/customers')
       .set('Accept', 'application/json')
       .set('authorization', validToken);
 
@@ -68,23 +77,23 @@ describe('Customers Endpoints', () => {
     expect(response.body).toHaveProperty('list');
   })
 
-  it('GET /customers without token, response should be 401.', async () => {
+  it('GET /api/customer/customers without token, response should be 401.', async () => {
     const response = await request(app)
-      .get('/Customers')
+      .get('/api/customer/customers')
       .set('Accept', 'application/json');
 
     expect(response.status).toEqual(401);
     expect(typeof response.body.message).toMatch('string');
   })
 
-  it('GET /customers with invalid token, response should be 400.', async () => {
+  it('GET /api/customer/customers with invalid token, response should be 401.', async () => {
     const response = await request(app)
-      .get('/Customers')
+      .get('/api/customer/customers')
       .set('authorization', invalidToken)
       .set('Accept', 'application/json');
 
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(401);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toBe('Token invalid. Try to logout and login again.');
+    expect(response.body.message).toBe('Invalid token');
   })
 })

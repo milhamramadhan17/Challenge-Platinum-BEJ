@@ -11,17 +11,26 @@ const testSeller = {
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
+afterAll(() => {
+  Sellers.destroy({
+    where: {
+      email: testCustomer.email
+    }
+  })
+ });
+
 
 describe('Sellers Endpoints', () => {
   it('POST /api/seller/register with valid values, response should be 201', async () => {
     const res = await request(app)
       .post('/api/seller/register')
       .send(testSeller)
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/x-www-form-urlencoded');
       
       expect(res.status).toBe(201);
       expect(typeof res.body.message).toMatch('string');
   })
+
 
   it('POST /api/seller/login with valid email and pass, response should be 200', async () => {
     const res = await request(app)
@@ -57,14 +66,14 @@ describe('Sellers Endpoints', () => {
       expect(typeof response.body.message).toMatch('string');
     })
 
-  it('GET /api/seller/sellers with invalid token, response should be 400.', async () => {
+  it('GET /api/seller/sellers with invalid token, response should be 401.', async () => {
     const response = await request(app)
       .get('/api/seller/sellers')
       .set('authorization', invalidToken)
       .set('Accept', 'application/json');
 
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(401);
       expect(response.body).toHaveProperty('message');
-      expect(response.body.message).toBe('Token invalid. Try to logout and login again.');
+      expect(response.body.message).toBe('Invalid token');
     })
 })
