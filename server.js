@@ -1,14 +1,15 @@
 const dotenv = require('dotenv');
 dotenv.config();
-const Express = require('express')
+const Express = require('express');
+const app = Express();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs');
 const passport = require('./helpers/passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('./middleware/morgan');
-const app = Express();
-const port = process.env.PORT || 3000;
+
+const port = 3000;
 
 const routerOrders = require('./src/route/Orders');
 const routerItems = require('./src/route/Items');
@@ -51,4 +52,6 @@ app.use('/api/seller', routerSellers);
 // err handler middleware
 app.use(errorHandler);
 
-app.listen(port, () => {console.log(`Server is running on port ${port}`);})
+app.listen(port, () => {console.log(`Server is running on port`, port);});
+
+module.exports = app;
