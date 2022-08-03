@@ -38,9 +38,9 @@ describe('Sellers Endpoints', () => {
       validToken = res.body.token;
     })
 
-  it('GET /api/sellers with valid token, response should be 200.', async () => {
+  it('GET /api/seller/sellers with valid token, response should be 200.', async () => {
     const response = await request(app)
-      .get('/api/sellers')
+      .get('/api/seller/sellers')
       .set('authorization', validToken)
       .set('Accept', 'application/json')
 
@@ -48,18 +48,18 @@ describe('Sellers Endpoints', () => {
       expect(response.body).toHaveProperty('list');
     })
 
-  it('GET /api/sellers without token, response should be 401.', async () => {
+  it('GET /api/seller/sellers without token, response should be 401.', async () => {
     const response = await request(app)
-      .get('/api/sellers')
+      .get('/api/seller/sellers')
       .set('Accept', 'application/json');
 
       expect(response.status).toEqual(401);
       expect(typeof response.body.message).toMatch('string');
     })
 
-  it('GET /api/sellers with invalid token, response should be 400.', async () => {
+  it('GET /api/seller/sellers with invalid token, response should be 400.', async () => {
     const response = await request(app)
-      .get('/api/sellers')
+      .get('/api/seller/sellers')
       .set('authorization', invalidToken)
       .set('Accept', 'application/json');
 
