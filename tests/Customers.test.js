@@ -9,16 +9,16 @@ const testCustomer = {
   password: 'TestPassword'
 }
 
-afterAll(() => {
-  Customers.destroy({
-    where: {
-      email: testCustomer.email
-    }
-  })
- });
-
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
+
+// afterAll(() => {
+//   Customers.destroy({
+//     where: {
+//       email: testCustomer.email
+//     }
+//   })
+//  });
 
 
 describe('Customers Endpoints', () => {
