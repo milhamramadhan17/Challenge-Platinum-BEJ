@@ -5,7 +5,7 @@ function errorHandler (err, req, res, next) {
 
     if (err.name === 'ValidationError') {
         message = err.message;
-        status = 401;
+        status = 400;
     }
 
     else if (err.error === "Email is already exist") {

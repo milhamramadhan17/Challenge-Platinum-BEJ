@@ -10,7 +10,7 @@ const testCustomer = {
 }
 
 afterAll(() => {
-  Customers.describe({
+  Customers.destroy({
     where: {
       email: testCustomer.email
     }
@@ -24,32 +24,32 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 describe('Customers Endpoints', () => {
   it('POST /api/customer/register with valid values, response should be 201', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/register')
       .send(testCustomer)
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(201);
     expect(typeof res.body.message).toMatch('string');
   })
 
-  it('POST /api/customer/register without password, response should be 400', async () => {
+  it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/register')
       .send({ name: 'Test invalid', email: 'test@invalid.com' })
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(400);
-    expect(typeof res.body.message).toMatch('string');
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
   })
 
-  it('POST /api/customer/register without email, response should be 400', async () => {
+  it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
-      .send({ name: 'Test invalid', pass: 'pass' })
-      .set('Accept', 'application/json');
+      .post('/register')
+      .send({ name: 'Test invalid', password: 'pass' })
+      .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(400);
-    expect(typeof res.body.message).toMatch('string');
+    expect(res.status).toBe(404);
+    expect(typeof res.body.message).toMatch('undefined');
   })
 
   it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
