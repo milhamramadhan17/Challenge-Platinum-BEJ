@@ -1,11 +1,11 @@
 function errorHandler (err, req, res, next) {
-    console.log (err.message)
+    console.log (err.message);
     let message = 'Internal server error';
     let status = 500;
 
     if (err.name === 'ValidationError') {
         message = err.message;
-        status = 400;
+        status = 401;
     }
 
     else if (err.error === "Email is already exist") {

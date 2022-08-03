@@ -1,13 +1,21 @@
 const app = require('../server');
 const request = require('supertest');
+const {Customers} = require('../models/Customers');
 
 
 const testCustomer = {
   name: 'Tester',
   email: 'test@mail.com',
-  password: 'TestPassword',
-  photo: 'ppp'
+  password: 'TestPassword'
 }
+
+afterAll(() => {
+  Customers.describe({
+    where: {
+      email: testCustomer.email
+    }
+  })
+ });
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
@@ -86,6 +94,6 @@ describe('Customers Endpoints', () => {
 
     expect(response.status).toEqual(401);
     expect(response.body).toHaveProperty('message');
-    expect(response.body.message).toBe('Token invalid. Try to logout and login again.');
+    expect(response.body.message).toBe('Invalid token');
   })
 })
