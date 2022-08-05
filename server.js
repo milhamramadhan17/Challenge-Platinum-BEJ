@@ -9,7 +9,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('./middleware/morgan');
 
-const port = 3000;
+const port = require('../Challenge-Platinum-BEJ/config/config.json');
 
 const routerOrders = require('./src/route/Orders');
 const routerItems = require('./src/route/Items');
