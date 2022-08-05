@@ -17,6 +17,8 @@ const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
 const errorHandler = require('./middleware/errHandler');
 
+const Port = 3000;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

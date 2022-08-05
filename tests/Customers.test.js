@@ -26,7 +26,13 @@ describe('Customers Endpoints', () => {
   it('POST /api/customer/register with valid values, response should be 201', async () => {
     const res = await request(app)
       .post('/register')
-      .send(testCustomer)
+      .send({ 
+        name: testCustomer.name,
+        email: testCustomer.email,
+        password: testCustomer.password,
+        role: 3,
+        photo: testCustomer.photo
+       })
       .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(201);
@@ -55,7 +61,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
     const res = await request(app)
-      .post('/api/customer/login')
+      .post('/login')
       .set('Accept', 'application/json')
       .send({
         email: testCustomer.email,
