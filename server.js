@@ -9,7 +9,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('./middleware/morgan');
 
-const port = require('../Challenge-Platinum-BEJ/config/config.json');
+const Port = require('../Challenge-Platinum-BEJ/config/config.json');
 
 const routerOrders = require('./src/route/Orders');
 const routerItems = require('./src/route/Items');
@@ -52,6 +52,6 @@ app.use('/api/seller', routerSellers);
 // err handler middleware
 app.use(errorHandler);
 
-app.listen(port, () => {console.log(`Server is running on port`, port);});
+app.listen(Port, () => {console.log(`Server is running on port`, Port);});
 
 module.exports = app;
