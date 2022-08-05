@@ -6,7 +6,8 @@ const {Customers} = require('../models/Customers');
 const testCustomer = {
   name: 'Tester',
   email: 'test@mail.com',
-  password: 'TestPassword'
+  password: 'TestPassword',
+  photo: 'url'
 }
 
 let validToken = '';
