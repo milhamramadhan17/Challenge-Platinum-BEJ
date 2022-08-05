@@ -11,7 +11,9 @@ module.exports = {
   // bail: 0,
 
   // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "C:\\Users\\Komunal\\AppData\\Local\\Temp\\jest",
+
+  // cacheDirectory: "C:\\Users\\mohra\\AppData\\Local\\Temp\\jest",
+
 
   // Automatically clear mock calls, instances, contexts and results before every test
   // clearMocks: false,
@@ -41,10 +43,16 @@ module.exports = {
     "global": {
       "branches": 50,
       "functions": 50,
-      "lines": 50,
-     
+      "lines": 50
     }
   },
+    
+  // coverageReporters: [
+  //   "json",
+  //   "text",
+  //   "lcov",
+  //   "clover"
+  // ],
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
