@@ -3,7 +3,7 @@ const request = require('supertest');
 const {Customers} = require('../models/Customers');
 
 
-const testCustomer = {
+const testCustomer =  {
   name: 'Tester',
   email: 'test@mail.com',
   password: 'TestPassword',
@@ -25,13 +25,9 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 describe('Customers Endpoints', () => {
   it('POST /api/customer/register with valid values, response should be 201', async () => {
     const res = await request(app)
-      .post('/register')
+      .post('/api/customer/register')
       .send({ 
-        name: testCustomer.name,
-        email: testCustomer.email,
-        password: testCustomer.password,
-        role: 3,
-        photo: testCustomer.photo
+        testCustomer
        })
       .set('Accept', 'application/x-www-form-urlencoded');
 
@@ -41,7 +37,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
-      .post('/register')
+      .post('/api/customer/register')
       .send({ name: 'Test invalid', email: 'test@invalid.com' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
@@ -51,7 +47,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
-      .post('/register')
+      .post('/api/customer/register')
       .send({ name: 'Test invalid', password: 'pass' })
       .set('Accept', 'application/x-www-form-urlencoded');
 
@@ -61,7 +57,7 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
     const res = await request(app)
-      .post('/login')
+      .post('/api/customer/login')
       .set('Accept', 'application/json')
       .send({
         email: testCustomer.email,
