@@ -1,5 +1,8 @@
 const jwt = require('../helpers/jwt');
 const bcrypt = require('../helpers/bcrypt');
+const passport = require('../helpers/passport');
+const upload = require('../helpers/upload');
+
 
 describe('bcrypt.js', () => {
   test('Bcrypt, invalid password as param. Bcrypt should return false.', () => {
@@ -30,5 +33,11 @@ describe('bcrypt.js', () => {
 describe('jwt.js', () => {
   test('Decode using invalid secret-key. Should throw Error.', () => {
     expect(() => jwt.decode('dsadabwhebfhb')).toThrow();
+  })
+})
+
+describe('passport.js', () => {
+  test('Authorization test', () => {
+    expect(passport).toBeTruthy();
   })
 })
