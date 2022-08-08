@@ -34,10 +34,30 @@ describe('jwt.js', () => {
   test('Decode using invalid secret-key. Should throw Error.', () => {
     expect(() => jwt.decode('dsadabwhebfhb')).toThrow();
   })
+
+  test('Decode using valid secret-key', () => {
+    const hashedText = bcrypt.hash('Password');
+
+    expect(jwt).toBeTruthy();
+  })
 })
 
 describe('passport.js', () => {
   test('Authorization test', () => {
     expect(passport).toBeTruthy();
+  })
+})
+
+describe('upload.js', () => {
+  test('Upload test', () => {
+    expect(upload).toBeTruthy();
+  })
+
+  test('Test for photo profile', () => {
+    expect(upload.upload1).toBeTruthy();
+  })
+
+  test('Test for image', () => {
+    expect(upload.upload2).toBeTruthy();
   })
 })

@@ -3,8 +3,6 @@ const request = require('supertest');
 const {Customers} = require('../models/Customers');
 
 
-
-
 const testCustomer =  {
   name: 'Tester',
   email: 'test',
