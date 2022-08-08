@@ -140,11 +140,11 @@ module.exports = {
       operationId: "getAll",
       responses: {
         '200': {
-            description: 'Get all admins',
+            description: 'Get all customer',
             content: {
                 'application/json': {
                     schema: {
-                        $ref: '#/components/schemas/Admins',
+                        $ref: '#/components/schemas/Customers',
                     },
                 }
             }

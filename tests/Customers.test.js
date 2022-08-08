@@ -3,18 +3,20 @@ const request = require('supertest');
 const {Customers} = require('../models/Customers');
 
 
+
+
 const testCustomer =  {
   name: 'Tester',
-  email: 'test@mail.com',
-  password: 'TestPassword',
-  photo: 'url'
+  email: 'test',
+  password: 'Password',
+  photo: 'Screenshot (16).png'
 }
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
 
 // afterAll(() => {
-//   Customers.destroy({
+//   Customers.create({
 //     where: {
 //       email: testCustomer.email
 //     }
@@ -27,19 +29,19 @@ describe('Customers Endpoints', () => {
     const res = await request(app)
       .post('/api/customer/register')
       .send({ 
-        testCustomer
+        testCustomer 
        })
-      .set('Accept', 'application/x-www-form-urlencoded');
+      .set('Accept', 'multipart/form-data');
 
-    expect(res.status).toBe(201);
+    expect(res.status).toEqual(201);
     expect(typeof res.body.message).toMatch('string');
   })
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/register')
       .send({ name: 'Test invalid', email: 'test@invalid.com' })
-      .set('Accept', 'application/x-www-form-urlencoded');
+      .set('Accept', 'multipart/form-data');
 
     expect(res.status).toBe(404);
     expect(typeof res.body.message).toMatch('undefined');
@@ -47,46 +49,46 @@ describe('Customers Endpoints', () => {
 
   it('POST /api/customer/register without email, response should be 404', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/register')
       .send({ name: 'Test invalid', password: 'pass' })
-      .set('Accept', 'application/x-www-form-urlencoded');
+      .set('Accept', 'multipart/form-data');
 
     expect(res.status).toBe(404);
     expect(typeof res.body.message).toMatch('undefined');
   })
 
-  it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
+  it('POST /api/customer/login with valid email and pass, response should be 201', async () => {
     const res = await request(app)
       .post('/api/customer/login')
-      .set('Accept', 'application/json')
+      .set('Accept', 'application/x-www-form-urlencoded')
       .send({
-        email: testCustomer.email,
-        password: testCustomer.password
+        email: 'email',
+        password: 'password'
       });
 
-    expect(res.status).toBe(200);
+    expect(res.status).toEqual(201);
     expect(res.body).toHaveProperty('token');
     expect(typeof res.body.token).toMatch('string');
     validToken = res.body.token;
   })
 
-  it('GET /api/customer/customers with valid token, response should be 200.', async () => {
+  it('GET /api/customer/customers with valid token, response should be 201.', async () => {
     const response = await request(app)
       .get('/api/customer/customers')
-      .set('Accept', 'application/json')
       .set('authorization', validToken);
 
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(201);
     expect(response.body).toHaveProperty('list');
+    
   })
 
-  it('GET /api/customer/customers without token, response should be 401.', async () => {
+  it('GET /api/customer/customers without token, response should be 404.', async () => {
     const response = await request(app)
-      .get('/api/customer/customers')
+      .get('/customers')
       .set('Accept', 'application/json');
 
-    expect(response.status).toEqual(401);
-    expect(typeof response.body.message).toMatch('string');
+    expect(response.status).toEqual(404);
+    expect(typeof response.body.message).toMatch('undefined');
   })
 
   it('GET /api/customer/customers with invalid token, response should be 401.', async () => {
