@@ -4,9 +4,8 @@ const Customers = db.Customers;
 const Op = db.Sequelize.Op;
 const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
-const { encode } = require('../../helpers/jwt');
+const { url } = require('../../config/cloudinary.config');
 const controller = {};
-
 
 controller.register = async (req, res, next) => {
     const { name, email, password, role } = req.body;
