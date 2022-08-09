@@ -7,7 +7,7 @@ const testCustomer =  {
   name: 'Tester',
   email: 'test',
   password: 'Password',
-  photo: 'Screenshot (16).png'
+  photo: 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png'
 }
 
 let validToken = '';
