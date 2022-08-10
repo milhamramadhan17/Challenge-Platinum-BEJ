@@ -1,6 +1,7 @@
 const app = require('../server');
 const request = require('supertest');
 const {Customers} = require('../models/Customers');
+const { authentication, authorization } = require('../middleware/auth');
 
 
 const testCustomer =  {
@@ -82,7 +83,7 @@ describe('Customers Endpoints', () => {
       .post('/api/customer/login')
       .set('Accept', 'application/x-www-form-urlencoded')
       .send({
-        email: 'email',
+        email: 'Tester',
         password: 'password'
       });
 
@@ -94,12 +95,13 @@ describe('Customers Endpoints', () => {
 
   it('GET /api/customer/customers with valid token, response should be 201.', async () => {
     const response = await request(app)
-      .get('/api/customer/customers')
-      .set('authorization', validToken);
+    .get('/api/customer/customers')
+      .set('authorization.Admins', validToken)
+      .set('Accept', 'application/json');
 
     expect(response.status).toEqual(201);
-    expect(response.body).toHaveProperty('list');
-    
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toBe('valid token');
   })
 
   it('GET /api/customer/customers without token, response should be 404.', async () => {

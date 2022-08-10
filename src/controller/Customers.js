@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { url } = require('../../config/cloudinary.config');
+const { encode } = require('../../helpers/jwt');
 const controller = {};
 
 controller.register = async (req, res, next) => {
