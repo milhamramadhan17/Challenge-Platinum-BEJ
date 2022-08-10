@@ -21,6 +21,13 @@ controller.getAll = async (req, res,) => {
 
 controller.register = async (req, res, next) => {
     const { name, email, password} = req.body;
+        if (!password) {
+            res.status(400).send({
+                status: "400",
+                message: 'Password is empty'
+            });
+        }
+        
         await Admins.findOne({
             where: {
                 email: email
