@@ -1,6 +1,6 @@
-const app = require('../server');
+const app = require('../../server');
 const request = require('supertest');
-const {Customers} = require('../models/Customers');
+const {Customers} = require('../../models/Customers');
 
 
 const testCustomer = {
