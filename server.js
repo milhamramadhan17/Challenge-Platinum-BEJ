@@ -9,8 +9,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('./middleware/morgan');
 
-const port = 3000;
-
 const routerOrders = require('./src/route/Orders');
 const routerItems = require('./src/route/Items');
 const routerCustomers = require('./src/route/Customers');
@@ -52,6 +50,9 @@ app.use('/api/seller', routerSellers);
 // err handler middleware
 app.use(errorHandler);
 
-app.listen(port, () => {console.log(`Server is running on port`, port);});
-
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(process.env.PORT, () => {
+      console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
+    })
+  }
 module.exports = app;
