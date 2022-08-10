@@ -25,7 +25,7 @@ module.exports = {
                                 brand: {
                                     type: 'string',
                                 },
-                                photo: {
+                                image: {
                                     type: 'array',
                                     items: {
                                       type: 'string',
@@ -124,8 +124,27 @@ module.exports = {
                     description: 'Success',
                     content: {
                         'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/Items'
+                            example: {
+                                "id": "djsnns",
+                                "name": "item's name",
+                                "price": "100",
+                                "store_name": "store",
+                                "category": "category",
+                                "brand": "item's brand",
+                                "photo": "item's photo",
+                                "createdAt": "",
+                                "updatedAt": "",
+                                "Image": [
+                                    {
+                                    "id": "image's id",
+                                    "url": "image's url",
+                                    "item_id": "djsnn",
+                                    "public_id": "2022nd",
+                                    "asset_id": "hahbsnan",
+                                    "createdAt": "",
+                                    "updatedAt": ""
+                                    }
+                                ]
                             }  
                         }
                     }
@@ -171,8 +190,26 @@ module.exports = {
                     description: 'Success',
                     content: {
                         'application/json': {
-                            schema: {
-                                $ref: '#/components/schemas/Items'
+                            example: {
+                                "id": "djsnns",
+                                "name": "item's name",
+                                "price": "100",
+                                "store_name": "store",
+                                "category": "category",
+                                "brand": "item's brand",
+                                "createdAt": "",
+                                "updatedAt": "",
+                                "Image": [
+                                    {
+                                    "id": "image's id",
+                                    "url": "image's url",
+                                    "item_id": "djsnn",
+                                    "public_id": "2022nd",
+                                    "asset_id": "hahbsnan",
+                                    "createdAt": "",
+                                    "updatedAt": ""
+                                    }
+                                ]
                             }  
                         }
                     }

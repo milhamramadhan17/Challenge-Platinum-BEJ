@@ -41,11 +41,13 @@ controller.addItem =  async (req, res, next) => {
   }
 
 controller.getAll = async (req, res, next) => {
-  const dataItems = req.query.dataItems
-    var condition = dataItems ? {dataItems: {[Op.like]: `%${dataItems}%`} } : null;
     try {
         await Items.findAll({
-            where: condition
+            include: [
+                {
+                      model: Image, as: "Image"
+                }
+             ]
         })
         .then(results => {
             res.send(results)
@@ -58,7 +60,13 @@ controller.getAll = async (req, res, next) => {
 controller.getByID = async (req, res, next) => {
   const id = req.params.id;
     try {
-        await Items.findByPk(id)
+        await Items.findByPk(id, {
+            include: [
+              {
+                model: Image, as: "Image"
+              },
+            ],
+          })
         .then(results => {
             if (results) {
                 res.send(results);
