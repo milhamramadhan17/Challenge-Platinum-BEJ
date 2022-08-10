@@ -23,17 +23,39 @@ let invalidToken = 'Invalid-token-for-negative-cases';
 
 
 describe('Customers Endpoints', () => {
-  it('POST /api/customer/register with valid values, response should be 201', async () => {
+  it('POST /api/customer/register with valid email and pass, response should be 201', async () => {
+    const url = 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png';
     const res = await request(app)
       .post('/api/customer/register')
-      .send({ 
-        testCustomer 
-       })
-      .set('Accept', 'multipart/form-data');
+      .set('Accept', 'multipart/form-data')
+      .send({
+        name: 'Tester',
+        email: 'test',
+        password: 'password',
+        photo: url
+      });
 
     expect(res.status).toEqual(201);
-    expect(typeof res.body.message).toMatch('string');
+    expect(typeof res.body.token).toMatch('string');
   })
+  
+  
+  // it('POST /api/customer/register with valid values, response should be 201', async () => {
+  //   const url = 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png';
+  //   const res = await request(app)
+  //     .post('/api/customer/register')
+  //     .send({ 
+  //       name: 'Tester',
+  //       email: 'test',
+  //       password: 'password',
+  //       role: 3,
+  //       photo: url
+  //      })
+  //     .set('Accept', 'multipart/form-data');
+
+  //   expect(res.status).toEqual(201);
+  //   expect(typeof res.body.message).toMatch('string');
+  // })
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
