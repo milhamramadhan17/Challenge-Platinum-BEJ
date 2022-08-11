@@ -2,6 +2,7 @@ const fs = require('fs');
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
+const { sendMail } = require('../../helpers/nodemailer');
 const { upload1 } = require('../../helpers/upload');
 const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
@@ -67,6 +68,8 @@ controller.login = async (req, res, next) => {
                 email: email
             }
         })
+
+
         .then(results => {
             console.log(results)
             if(results){
@@ -76,9 +79,16 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(200).send({
-                        message: 'Login successfully',
-                        token: token
+                    const dataEmail = {
+                        from: 'Admin',
+                        to: results.email,
+                        subject: 'Login Successfully',
+                        text: 'Token: ' + token
+                    }
+                    sendMail(dataEmail)
+                    return res.status(200).send({
+                        status: true,
+                        message: 'Login successfully, token ada di gmail',
                     });
                 } else {throw {error: 'password is incorrect'}}
             } else {
