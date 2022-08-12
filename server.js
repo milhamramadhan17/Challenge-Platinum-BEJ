@@ -53,7 +53,7 @@ app.use(errorHandler);
 
 if (process.env.NODE_ENV !== 'test') {
     app.listen(process.env.PORT_SECRET, () => {
-      console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT_SECRET);
+      console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
     })
   }
 module.exports = app;
