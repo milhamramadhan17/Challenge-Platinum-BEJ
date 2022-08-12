@@ -1,5 +1,7 @@
 require('dotenv').config();
-const express = require('express');
+const Express = require('express');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 
 
 const routerOrders = require('./src/route/Orders');
@@ -9,8 +11,8 @@ const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
 const errorHandler = require('./middleware/errHandler');
 
-const app = express();
-const server = require('http').Server(app);
+const app = Express();
+const server = createServer(app);
 const io = new Server(server);
 
 const chatHandler = require('./socket/chat');
@@ -32,6 +34,7 @@ const passport = require('./helpers/passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('./middleware/morgan');
+
 
 
 app.use(bodyParser.json());
