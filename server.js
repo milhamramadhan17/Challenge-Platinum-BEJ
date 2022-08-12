@@ -2,6 +2,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 const Express = require('express');
 const app = Express();
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer);
+
+io.on("connection", (socket) => {
+    console.log("a user connected"); 
+    });
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs');
 const passport = require('./helpers/passport');
@@ -51,7 +58,7 @@ app.use('/api/seller', routerSellers);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(process.env.PORT, () => {
+    io.listen(process.env.PORT, () => {
       console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
     })
   }
