@@ -17,6 +17,7 @@ const routerSellers = require('./src/route/Sellers');
 const errorHandler = require('./middleware/errHandler');
 
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan);
@@ -51,8 +52,8 @@ app.use('/api/seller', routerSellers);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(process.env.PORT, () => {
-      console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
+    app.listen(process.env.PORT_SECRET, () => {
+      console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT_SECRET);
     })
   }
 module.exports = app;
