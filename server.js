@@ -1,22 +1,6 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const Express = require('express');
-const app = Express();
+require('dotenv').config();
+const express = require('express');
 
-
-const httpServer = require("http").createServer(app);
-const io = require("socket.io")(httpServer);
-
-io.on("connection", (socket) => {
-    console.log("a user connected"); 
-    });
-
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./docs');
-const passport = require('./helpers/passport');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const morgan = require('./middleware/morgan');
 
 const routerOrders = require('./src/route/Orders');
 const routerItems = require('./src/route/Items');
@@ -24,6 +8,30 @@ const routerCustomers = require('./src/route/Customers');
 const routerAdmin = require('./src/route/Admins');
 const routerSellers = require('./src/route/Sellers');
 const errorHandler = require('./middleware/errHandler');
+
+const app = express();
+const server = require('http').Server(app);
+const io = new Server(server);
+
+const chatHandler = require('./socket/chat');
+
+const onConnection = (socket) => {
+    console.log('New connection: ', socket);
+    chatHandler(io, socket);
+
+    socket.on('disconnect', (reason) => {
+        console.log(reason, 'Client disconnected');
+    })
+}
+
+io.on("connection", onConnection);
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs');
+const passport = require('./helpers/passport');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const morgan = require('./middleware/morgan');
 
 
 app.use(bodyParser.json());
@@ -60,7 +68,7 @@ app.use('/api/seller', routerSellers);
 app.use(errorHandler);
 
 if (process.env.NODE_ENV !== 'test') {
-    io.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
       console.log('<<<< SERVER RUNNING ON PORT', process.env.PORT);
     })
   }
