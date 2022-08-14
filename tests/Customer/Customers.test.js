@@ -2,6 +2,8 @@ const app = require('../../server');
 const request = require('supertest');
 const {Customers} = require('../../models/Customers');
 
+let validToken = '';
+let invalidToken = 'Invalid-token-for-negative-cases';
 
 const testCustomer = {
   name: 'Tester',
@@ -17,8 +19,7 @@ afterAll(() => {
   })
  });
 
-let validToken = '';
-let invalidToken = 'Invalid-token-for-negative-cases';
+
 
 
 describe('Customers Endpoints', () => {

@@ -60,7 +60,7 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(201).send({
+                    res.status(200).send({
                         message: 'Login successfully',
                         token: token
                     });

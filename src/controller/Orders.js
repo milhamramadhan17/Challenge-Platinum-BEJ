@@ -39,22 +39,22 @@ controller.getAll = async (req, res) => {
 }
 
 controller.addOrder = async (req, res, next) => {
-    try {
+    const {customer_id, item_id, qty, status, payment_method} = req.body;
         const orderItem = await Items.findOne({
             where: {
                  id: req.body.item_id
             }
-        })
-
+        });
+          
         const order = {
-            customer_id   : req.body.customer_id,
-            item_id       : req.body.item_id,
-            qty           : req.body.qty,
-            amount        : req.body.qty * orderItem.dataValues.price,
-            status        : req.body.status,
-            payment_method: req.body.payment_method,
+            customer_id   : customer_id,
+            item_id       : item_id,
+            qty           : qty,
+            amount        : qty * orderItem.dataValues.price,
+            status        : status,
+            payment_method: payment_method,
         }
-    
+
         await Orders.create(order)
         .then(() => {
             res.status(201).send({
@@ -62,10 +62,7 @@ controller.addOrder = async (req, res, next) => {
                 message: "Added order is successfully"
             })
         })
-
-    } catch (err) {
-        next(err)
-    }
+    .catch (err => next(err)); 
 }
 
 controller.getOrderById = async (req, res, next) => {
