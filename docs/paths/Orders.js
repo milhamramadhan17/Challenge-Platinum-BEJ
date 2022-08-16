@@ -13,9 +13,11 @@ module.exports = {
                             properties: {
                                 customer_id: {
                                     type: 'UUID',    
+                                    format: 'uuid',
                                 },
                                 item_id: {
                                     type: 'UUID',
+                                    format: 'uuid',
                                 },
                                 qty: {
                                     type: 'number',
@@ -177,7 +179,7 @@ module.exports = {
                     name: 'customer_id',
                     in: 'query',
                     description: 'customer_id',
-                    required: false,
+                    required: true,
                     schema: {
                         type: 'string',
                         format: 'uuid',
@@ -266,9 +268,10 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of order that needs to be fetched',
-                    required: false,
+                    required: true,
                     schema : {
-                        type: 'uuid',
+                        type: 'string',
+                        format: 'uuid',
                     }
                 }
             ],
@@ -351,9 +354,10 @@ module.exports = {
                     name: 'id',
                     in: 'path',
                     description: 'ID of order that needs to be updated',
-                    required: false,
+                    required: true,
                     schema : {
-                        type: 'uuid',
+                        type: 'string',
+                        format: 'uuid',
                     }
                 }
             ],
@@ -466,9 +470,10 @@ module.exports = {
                     in: 'path',
                     name: 'id',
                     description: 'Order id',
-                    required: false,
+                    required: true,
                     schema: {
-                        type: 'uuid',
+                        type: 'string',
+                        format: 'uuid',
                     }
                 }
             ],

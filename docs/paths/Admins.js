@@ -18,6 +18,7 @@ module.exports = {
                                 },
                                 password: {
                                     type: 'string',
+                                    format: 'password'
                                 },
                                 profile: {
                                     type: 'string',
@@ -82,6 +83,7 @@ module.exports = {
                                 },
                                 password: {
                                     type: 'string',
+                                    format: 'password'
                                 },
                             },
                             required: ['email', 'password'],
