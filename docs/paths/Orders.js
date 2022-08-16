@@ -12,11 +12,11 @@ module.exports = {
                             type: 'object',
                             properties: {
                                 customer_id: {
-                                    type: 'UUID',    
+                                    type: 'string',    
                                     format: 'uuid',
                                 },
                                 item_id: {
-                                    type: 'UUID',
+                                    type: 'string',
                                     format: 'uuid',
                                 },
                                 qty: {
@@ -30,7 +30,7 @@ module.exports = {
                                 }
 
                             },
-                            required: ['item_id', 'qty', 'status', 'payment_method'],
+                            required: ['customer_id', 'item_id', 'qty', 'status', 'payment_method'],
                         },
                     }
                 }

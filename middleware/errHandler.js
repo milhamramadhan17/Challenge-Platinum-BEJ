@@ -155,6 +155,11 @@ function errorHandler (err, req, res, next) {
         message = "customer_id or item_id is incorrect";
       }
 
+      else if (err.error === "Cannot find Customer or Item with id") {
+        status = 404;
+        message = `Cannot find Customer or Item with id ${id}.`;
+      }
+
 
 
     return res.status(status).json({

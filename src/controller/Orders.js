@@ -1,6 +1,7 @@
 const db = require('../../models')
 const Orders = db.Orders;
 const Items = db.Items;
+const Customers = db.Customers;
 const Op = db.Sequelize.Op;
 const controller = {};
 
