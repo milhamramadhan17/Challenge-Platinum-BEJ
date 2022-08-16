@@ -20,6 +20,7 @@ module.exports = {
                   },
                   password: {
                     type: 'string',
+                    format: 'password'
                   },
                   photo: {
                     type: 'string',
@@ -104,8 +105,7 @@ module.exports = {
               'application/json': {
                 example: {
                   status: 200,
-                  message: 'Successfully login as seller',
-                  token: 'eyJhbGciOiJIUzI1NiIsInR5cNmw'
+                  message: 'Successfully login. Check your email',
                 }
               }
             }

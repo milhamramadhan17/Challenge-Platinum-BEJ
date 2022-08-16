@@ -2,6 +2,7 @@ const fs = require('fs');
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
+const { sendMail } = require('../../helpers/nodemailer');
 const { upload1 } = require('../../helpers/upload');
 const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
@@ -21,6 +22,13 @@ controller.getAll = async (req, res,) => {
 
 controller.register = async (req, res, next) => {
     const { name, email, password} = req.body;
+        if (!password) {
+            res.status(400).send({
+                status: "400",
+                message: 'Password is empty'
+            });
+        }
+        
         await Admins.findOne({
             where: {
                 email: email
@@ -60,6 +68,8 @@ controller.login = async (req, res, next) => {
                 email: email
             }
         })
+
+
         .then(results => {
             console.log(results)
             if(results){
@@ -69,9 +79,16 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(200).send({
-                        message: 'Login successfully',
-                        token: token
+                    const dataEmail = {
+                        from: 'Admin',
+                        to: results.email,
+                        subject: 'Login Successfully',
+                        text: 'Token: ' + token
+                    }
+                    sendMail(dataEmail)
+                    return res.status(200).send({
+                        status: true,
+                        message: 'Login successfully, token ada di gmail',
                     });
                 } else {throw {error: 'password is incorrect'}}
             } else {

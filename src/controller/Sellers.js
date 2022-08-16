@@ -5,6 +5,7 @@ const Op = db.Sequelize.Op;
 const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
+const { sendMail } = require('../../helpers/nodemailer');
 const controller = {};
 
 controller.register = async (req, res, next) => {
@@ -53,10 +54,16 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(200).send({
+                    const templateEmail = {
+                        from: 'Admin',
+                        to: results.email,
+                        subject: 'Seller Login Successfully',
+                        text: 'Keep the token for sign in. Token: ' + token
+                    }
+                    sendMail(templateEmail)
+                    return res.status(200).send({
                         status: 200,
-                        message: 'Successfully login as seller',
-                        token: token
+                        message: 'Successfully login. Check your email',
                     });
                 } else {throw {error: 'Password is incorrect'}}
             } 
