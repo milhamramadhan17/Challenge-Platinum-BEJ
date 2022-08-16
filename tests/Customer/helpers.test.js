@@ -62,7 +62,7 @@ describe('upload.js', () => {
   })
 })
 
-describe('passport.js', () => {
+describe('nodemailer.js', () => {
   test('nodemailer chat', () => {
     expect(nodemailer).toBeTruthy();
   })

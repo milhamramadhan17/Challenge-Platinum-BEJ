@@ -20,6 +20,7 @@ module.exports = {
                 },
                 password: {
                   type: 'string',
+                  format: 'password'
                 },
                 photo: {
                   type: 'string',

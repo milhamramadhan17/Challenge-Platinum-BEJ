@@ -1,10 +1,9 @@
+require('dotenv').config();
 const app = require('../../server');
 const request = require('supertest');
-const {Customers} = require('../../models/Customers');
-const { authentication, authorization } = require('../../authmiddleware/auth');
-const { url } = require('../../cloudinary.config');
-const {Customers} = require('../../models/Customers');
-
+const db = require('../../models');
+const {Customers} = require('../../models/Customers'); 
+const { source } = require('../../config/cloudinary.config');
 
 const testCustomer =  {
   name: 'Tester',
@@ -12,26 +11,17 @@ const testCustomer =  {
   password: 'Password',
   photo: 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png'
 }
-let validToken = '';
-let invalidToken = 'Invalid-token-for-negative-cases';
-
-afterAll(() => {
-  Customers.destroy({
-    where: {
-      email: testCustomer.email
-    }
-  })
- });
-
-
 
 // afterAll(() => {
-//   Customers.create({
+//   Customers.destroy({
 //     where: {
 //       email: testCustomer.email
 //     }
 //   })
 //  });
+
+let validToken = '';
+let invalidToken = 'Invalid-token-for-negative-cases';
 
 
 describe('Customers Endpoints', () => {
@@ -51,15 +41,14 @@ describe('Customers Endpoints', () => {
 
   
   it('POST /api/customer/register with valid values, response should be 201', async () => {
-    const url = 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png';
+    // const url = 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png';
     const res = await request(app)
       .post('/api/customer/register')
       .send({ 
         name: 'Tester',
-        email: 'test',
+        email: 'test@mail',
         password: 'password',
-        role: 3,
-        photo: url
+        photo: source('http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png')
        })
       .set('Accept', 'multipart/form-data');
 
@@ -87,20 +76,50 @@ describe('Customers Endpoints', () => {
     expect(typeof res.body.message).toMatch('undefined');
   })
 
-  it('POST /api/customer/login with valid email and pass, response should be 201', async () => {
+  it('POST /api/customer/login with valid email and pass, response should be 200', async () => {
     const res = await request(app)
       .post('/api/customer/login')
       .set('Accept', 'application/x-www-form-urlencoded')
       .send({
         email: 'Tester',
         password: 'password'
+        //ambil localhost ,register blum bisa
       });
 
-    expect(res.status).toEqual(201);
+    expect(res.status).toEqual(200);
     expect(res.body).toHaveProperty('token');
     expect(typeof res.body.token).toMatch('string');
     validToken = res.body.token;
   })
+
+  it('POST /api/customer/login with invalid email or password, response should be 401', async () => {
+    const res = await request(app)
+      .post('/api/customer/login')
+      .set('Accept', 'application/x-www-form-urlencoded')
+      .send({
+        email: 'Tester',
+        password: 'passwordSalah'
+        //ambil localhost ,register blum bisa
+      });
+
+    expect(res.status).toEqual(401);
+    expect(typeof res.body.message).toMatch('undefined');
+  })
+
+  it('POST /api/customer/login with invalid email or password, response should be 401', async () => {
+    const res = await request(app)
+      .post('/api/customer/login')
+      .set('Accept', 'application/x-www-form-urlencoded')
+      .send({
+        email: 'TesterSalah',
+        password: 'password'
+        //ambil localhost ,register blum bisa
+      });
+
+    expect(res.status).toEqual(401);
+    expect(typeof res.body.message).toMatch('undefined');
+  })
+  
 
   it('GET /api/customer/customers with valid token, response should be 201.', async () => {
     const response = await request(app)
