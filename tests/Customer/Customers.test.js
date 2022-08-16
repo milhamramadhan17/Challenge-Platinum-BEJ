@@ -1,8 +1,9 @@
-const app = require('../server');
+const app = require('../../server');
 const request = require('supertest');
-const {Customers} = require('../models/Customers');
-const { authentication, authorization } = require('../middleware/auth');
-const { url } = require('../config/cloudinary.config');
+const {Customers} = require('../../models/Customers');
+const { authentication, authorization } = require('../../authmiddleware/auth');
+const { url } = require('../../cloudinary.config');
+const {Customers} = require('../../models/Customers');
 
 
 const testCustomer =  {
@@ -11,9 +12,18 @@ const testCustomer =  {
   password: 'Password',
   photo: 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png'
 }
-
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
+
+afterAll(() => {
+  Customers.destroy({
+    where: {
+      email: testCustomer.email
+    }
+  })
+ });
+
+
 
 // afterAll(() => {
 //   Customers.create({

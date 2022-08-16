@@ -1,8 +1,8 @@
-const jwt = require('../helpers/jwt');
-const bcrypt = require('../helpers/bcrypt');
-const passport = require('../helpers/passport');
-const upload = require('../helpers/upload');
-
+const jwt = require('../../helpers/jwt');
+const bcrypt = require('../../helpers/bcrypt');
+const passport = require('../../helpers/passport');
+const upload = require('../../helpers/upload');
+const nodemailer = require('../../helpers/nodemailer');
 
 describe('bcrypt.js', () => {
   test('Bcrypt, invalid password as param. Bcrypt should return false.', () => {
@@ -59,5 +59,11 @@ describe('upload.js', () => {
 
   test('Test for image', () => {
     expect(upload.upload2).toBeTruthy();
+  })
+})
+
+describe('passport.js', () => {
+  test('nodemailer chat', () => {
+    expect(nodemailer).toBeTruthy();
   })
 })

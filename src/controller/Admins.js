@@ -2,6 +2,7 @@ const fs = require('fs');
 const db = require('../../models')
 const Admins = db.Admins;
 const Op = db.Sequelize.Op;
+const { sendMail } = require('../../helpers/nodemailer');
 const { upload1 } = require('../../helpers/upload');
 const { validateText} = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
@@ -21,6 +22,25 @@ controller.getAll = async (req, res,) => {
 
 controller.register = async (req, res, next) => {
     const { name, email, password} = req.body;
+        if (!password) {
+            res.status(400).send({
+                status: "400",
+                message: 'Password is empty'
+            });
+        }
+
+        const dataEmail = {
+            from: 'Admin',
+            to: email,
+            subject: 'Register Successfully',
+            text: `You have register successfully`,
+            html: `<h1>You have register successfully</h1>
+            <p>hi ${name}</p>
+            <p>Your email is ${email}</p>
+            <p>Your password is ${password}</p>
+            `  
+        }
+
         await Admins.findOne({
             where: {
                 email: email
@@ -42,7 +62,8 @@ controller.register = async (req, res, next) => {
                     .then(() => {
                         res.status(201).send({
                             status: "201",
-                            message: 'Register successfully'
+                            message: 'Register successfully',
+                            sendMail: sendMail(dataEmail)
                         });
                     })
                 })
@@ -60,8 +81,9 @@ controller.login = async (req, res, next) => {
                 email: email
             }
         })
+
+
         .then(results => {
-            console.log(results)
             if(results){
                 if(validateText(password, results.password)){
                     const token = encode({
@@ -69,9 +91,9 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(200).send({
+                    return res.status(200).send({
                         message: 'Login successfully',
-                        token: token
+                        token: token,
                     });
                 } else {throw {error: 'password is incorrect'}}
             } else {

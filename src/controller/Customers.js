@@ -6,42 +6,65 @@ const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { url } = require('../../config/cloudinary.config');
 const { encode } = require('../../helpers/jwt');
+const { sendMail } = require('../../helpers/nodemailer');
 const controller = {};
 
-controller.register = async (req, res, next) => {
-    const { name, email, password, role } = req.body;
-    await Customers.findOne({
-        where: {
-            email: email
-        }
-    })
-    .then(results => {
-        if(results) throw {error: 'Email is already exist'} 
-        else {
-            const filePath = './files/' + req.filePath;
-            return upload1(filePath)
-            .then((url) => {
-               return Customers.create({
-                    name: name,
-                    email: email,
-                    password: password,
-                    role: 3,
-                    photo: url
-                })
-                .then(() => {
-                    res.status(200).send({
-                        status: 201,
-                        message: 'Register successfully'
-                    });
-                })
-            })
-            
-        }
-    })
 
-.catch (err => next(err));
-}
-  
+
+controller.register = async (req, res, next) => {
+    const { name, email, password} = req.body;
+        if (!password) {
+            res.status(400).send({
+                status: "400",
+                message: 'Password is empty'
+            });
+        }
+
+        const dataEmail = {
+            from: 'Customers',
+            to: email,
+            subject: 'Register Successfully',
+            text: `You have register successfully`,
+            html: `<h1>You have register successfully</h1>
+            <p>hi ${name}</p>
+            <p>Your email is ${email}</p>
+            <p>Your password is ${password}</p>
+            `  
+        }
+
+        await Customers.findOne({
+            where: {
+                email: email
+            }
+        })
+        .then(results => {
+            if(results) throw {error: 'Email is already exist'} 
+            else {
+                const filePath = './files/' + req.filePath;
+                return upload1(filePath)
+                .then((url) => {
+                   return Customers.create({
+                        name: name,
+                        email: email,
+                        password: password,
+                        role: 1,
+                        profile: url
+                    })
+                    .then(() => {
+                        res.status(201).send({
+                            status: "201",
+                            message: 'Register successfully',
+                            sendMail: sendMail(dataEmail)
+                        });
+                    })
+                })
+                
+            }
+        })
+
+    .catch (err => next(err));
+    }
+    
 controller.login = async (req, res, next) => {
     const {email} = req.body;
    
@@ -59,7 +82,7 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(201).send({
+                    res.status(200).send({
                         message: 'Login successfully',
                         token: token
                     });

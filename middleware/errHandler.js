@@ -150,6 +150,10 @@ function errorHandler (err, req, res, next) {
         message = `Cannot find Order with customer_id ${customer_id}`;
       }
 
+      else if (err.error === "customer_id or item_id is incorrect") {
+        status = 400;
+        message = "customer_id or item_id is incorrect";
+      }
 
 
 
