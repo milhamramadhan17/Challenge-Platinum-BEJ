@@ -47,8 +47,8 @@ controller.register = async (req, res, next) => {
                         name: name,
                         email: email,
                         password: password,
-                        role: 1,
-                        profile: url
+                        role: 3,
+                        photo: url
                     })
                     .then(() => {
                         res.status(201).send({

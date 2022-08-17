@@ -1,9 +1,10 @@
 require('dotenv').config();
 const app = require('../../server');
-const request = require('supertest');
 const db = require('../../models');
-const {Customers} = require('../../models/Customers'); 
-const { source } = require('../../config/cloudinary.config');
+const fs = require('fs');
+const Customers = db.Customers;
+const Op = db.Sequelize.Op;
+const request = require('supertest');
 
 const testCustomer =  {
   name: 'Tester',
@@ -39,22 +40,18 @@ describe('Customers Endpoints', () => {
 //     expect(typeof res.body.message).toMatch('string');
 // })
 
-  
-  it('POST /api/customer/register with valid values, response should be 201', async () => {
-    // const url = 'http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png';
-    const res = await request(app)
-      .post('/api/customer/register')
-      .send({ 
-        name: 'Tester',
-        email: 'test@mail',
-        password: 'password',
-        photo: source('http://res.cloudinary.com/bej-binar/image/upload/v1659957950/20220808202546290_gz6ooy.png')
-       })
-      .set('Accept', 'multipart/form-data');
+Upload = './files/Untitled Diagram.drawio.png';
+it('POST /api/customer/register with valid email and pass, response should be 200', async () => {
+  const res = await request(app)
+    .post('/api/customer/register')
+    .set('Accept', 'multipart/form-data')
+    .send({
+      testCustomer
+    });
 
-    expect(res.status).toEqual(201);
-    expect(typeof res.body.message).toMatch('string');
-  })
+  expect(res.status).toEqual(200);
+  expect(typeof res.body.message).toMatch('string');
+})
 
   it('POST /api/customer/register without password, response should be 404', async () => {
     const res = await request(app)
@@ -122,16 +119,17 @@ describe('Customers Endpoints', () => {
   
 
   it('GET /api/customer/customers with valid token, response should be 201.', async () => {
-    const response = await request(app)
+    const res = await request(app)
     .get('/api/customer/customers')
     .set('Accept', 'application/json')
     .set('authorization.Admins', validToken);
 
-  expect(response.status).toEqual(201);
-  expect(response.body).toHaveProperty('list');
+  expect(res.status).toEqual(201);
+  expect(res.body).toHaveProperty('list');
   expect(typeof res.body.token).toMatch('string');
   validToken = res.body.token;
 })
+
   it('GET /api/customer/customers without token, response should be 401.', async () => {
     const response = await request(app)
       .get('/api/customer/customers')
