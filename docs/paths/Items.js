@@ -298,9 +298,10 @@ module.exports = {
                     in: 'path',
                     name: 'id',
                     description: 'item id',
-                    required: false,
+                    required: true,
                     schema: {
-                        type: 'uuid',
+                        type: 'string',
+                        format: 'uuid',
                     }
                 }
             ],

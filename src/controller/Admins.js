@@ -81,8 +81,6 @@ controller.login = async (req, res, next) => {
                 email: email
             }
         })
-
-
         .then(results => {
             if(results){
                 if(validateText(password, results.password)){

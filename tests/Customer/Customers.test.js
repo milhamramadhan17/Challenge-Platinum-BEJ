@@ -27,6 +27,7 @@ describe('Customers Endpoints', () => {
     const res = await request(app)
       .post('/register')
       .send(testCustomer)
+      .attach('photo', './files/Untitled Diagram.drawio.png')
       .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(201);

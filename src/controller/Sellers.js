@@ -9,12 +9,21 @@ const controller = {};
 
 controller.register = async (req, res, next) => {
     const { name, email, password, role } = req.body;
+
+    if (!password) {
+        res.status(400).send({
+            status: "400",
+            message: 'Password is empty'
+        });
+    }
+
     await Sellers.findOne({
         where: {
             email: email}
     })
+
     .then(results => {
-        if(results) throw {error: 'Email already exists.'} 
+        if(results) throw {error: 'Email is already exist'} 
         else {
             const filePath = './files/' + req.filePath;
             return upload1(filePath)
@@ -45,7 +54,6 @@ controller.login = async (req, res, next) => {
             where: {email: email}
         })
         .then(results => {
-            console.log(results)
             if(results){
                 if(validateText(password, results.password)){
                     const token = encode({
@@ -59,8 +67,7 @@ controller.login = async (req, res, next) => {
                         token: token
                     });
                 } else {throw {error: 'Password is incorrect'}}
-            } 
-            else {
+            } else {
                 throw {error: 'Email is incorrect'}
             }
         })

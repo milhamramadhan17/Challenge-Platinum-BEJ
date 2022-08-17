@@ -97,8 +97,7 @@ controller.updateItems = async (req, res, next) => {
        });
   } catch (err){
     next(err);   
-}
-}
+}}
 
 controller.deleteItem = async (req, res, next) => {
     const id = req.params.id;
@@ -111,18 +110,17 @@ controller.deleteItem = async (req, res, next) => {
                         id: id
                     }
                 })
-                .then((results) => {
+                .then(() => {
                     res.send({
                         status: 204,
-                        msg: "Deleted Successfully"
+                        message: "Deleted Successfully"
                     });
                 })
-            } 
+            } else {throw {error: "Cannot find Order with id"}}
         })
-    } catch (err) {
-        next(err);   
-} 
-  }
+
+    } catch (err) {next(err)}
+}
 
 
 module.exports = controller;

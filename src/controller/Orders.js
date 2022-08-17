@@ -16,7 +16,11 @@ controller.getOrderByCustomerId = async (req, res, next) => {
         })
         .then(results => {
             if (results) {
-                res.send(results);
+                res.status(200).send({
+                    status: 200,
+                    message: "Successfully get order by customer id",
+                    data: results
+                });
             } else {throw {error: `Cannot find Order with customer_id`}};
         });
     } catch (err) {
