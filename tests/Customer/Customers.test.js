@@ -65,7 +65,7 @@ it('POST /api/customer/register with valid email and pass, response should be 20
 
   it('POST /api/customer/register with already email, response should be 404', async () => {
     const res = await request(app)
-      .post('/api/customer/register')
+      .post('/register')
       .send({ email: 'test@invalid.com', password: 'pass' })
       .set('Accept', 'multipart/form-data');
 
