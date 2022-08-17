@@ -53,20 +53,20 @@ it('POST /api/customer/register with valid email and pass, response should be 20
   expect(typeof res.body.message).toMatch('string');
 })
 
-  it('POST /api/customer/register without password, response should be 404', async () => {
+  it('POST /api/customer/register without password, response should be 400', async () => {
     const res = await request(app)
-      .post('/register')
+      .post('/api/customer/register')
       .send({ name: 'Test invalid', email: 'test@invalid.com' })
       .set('Accept', 'multipart/form-data');
 
-    expect(res.status).toBe(404);
-    expect(typeof res.body.message).toMatch('undefined');
+    expect(res.status).toBe(400);
+    expect(typeof res.body.message).toMatch('string');
   })
 
-  it('POST /api/customer/register without email, response should be 404', async () => {
+  it('POST /api/customer/register with already email, response should be 404', async () => {
     const res = await request(app)
-      .post('/register')
-      .send({ name: 'Test invalid', password: 'pass' })
+      .post('/api/customer/register')
+      .send({ email: 'test@invalid.com', password: 'pass' })
       .set('Accept', 'multipart/form-data');
 
     expect(res.status).toBe(404);
