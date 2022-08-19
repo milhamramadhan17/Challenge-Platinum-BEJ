@@ -5,25 +5,17 @@ const Op = db.Sequelize.Op;
 const { upload1 } = require('../../helpers/upload');
 const { validateText, hash } = require('../../helpers/bcrypt');
 const { encode } = require('../../helpers/jwt');
+const { sendMail } = require('../../helpers/nodemailer');
 const controller = {};
 
 controller.register = async (req, res, next) => {
     const { name, email, password, role } = req.body;
-
-    if (!password) {
-        res.status(400).send({
-            status: "400",
-            message: 'Password is empty'
-        });
-    }
-
     await Sellers.findOne({
         where: {
             email: email}
     })
-
     .then(results => {
-        if(results) throw {error: 'Email is already exist'} 
+        if(results) throw {error: 'Email already exists.'} 
         else {
             const filePath = './files/' + req.filePath;
             return upload1(filePath)
@@ -54,6 +46,7 @@ controller.login = async (req, res, next) => {
             where: {email: email}
         })
         .then(results => {
+            console.log(results)
             if(results){
                 if(validateText(password, results.password)){
                     const token = encode({
@@ -61,13 +54,20 @@ controller.login = async (req, res, next) => {
                         email: results.email,
                         role: results.role
                     });
-                    res.status(200).send({
+                    const templateEmail = {
+                        from: 'Admin',
+                        to: results.email,
+                        subject: 'Seller Login Successfully',
+                        text: 'Keep the token for sign in. Token: ' + token
+                    }
+                    sendMail(templateEmail)
+                    return res.status(200).send({
                         status: 200,
-                        message: 'Successfully login as seller',
-                        token: token
+                        message: 'Successfully login. Check your email',
                     });
                 } else {throw {error: 'Password is incorrect'}}
-            } else {
+            } 
+            else {
                 throw {error: 'Email is incorrect'}
             }
         })
