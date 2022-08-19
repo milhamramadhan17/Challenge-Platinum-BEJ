@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('../../helpers/jwt');
 const bcrypt = require('../../helpers/bcrypt');
 
@@ -31,4 +32,20 @@ describe('jwt.js', () => {
   test('Decode using invalid secret-key. Should throw Error.', () => {
     expect(() => jwt.decode('dsadabwhebfhb')).toThrow();
   })
+
+  test('Decode using valid secret-key. Should return decoded object.', () => {
+    expect(() => jwt.decode(process.env.SECRET_KEY)).toBeTruthy();
+  })
 })
+
+
+describe('node-mailer', () => {
+  test('Send email using invalid email. Should throw Error.', () => {
+    expect(() => sendEmail('invalid-email')).toThrow();
+  });
+
+  test('Send email using valid email. Should return true.', () => {
+    expect(() => sendEmail(process.env.LOGIN_EMAIL)).toBeTruthy();
+  })
+})
+

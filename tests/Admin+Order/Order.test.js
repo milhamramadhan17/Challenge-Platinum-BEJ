@@ -27,8 +27,8 @@ describe('Order Endpoints', () => {
           .post('/api/customer/login')
           .set('Accept', 'application/json')
           .send({
-            email: 'testing@mail.com',
-            password: 'testing'
+            email: 'test1@gmail.com',
+            password: 'test1'
           });
     
         expect(res.status).toBe(200);
@@ -38,6 +38,7 @@ describe('Order Endpoints', () => {
       })
 
     it('POST /api/order/addOrders with valid values, response should be 201', async () => {
+        jest.setTimeout(5000);
         const res = await request(app)
             .post('/api/order/addOrders')
             .send(testAddOrder)
@@ -168,7 +169,7 @@ describe('Order Endpoints', () => {
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GET /api/order/orders/:id <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     it('GET /api/order/orders/:id with valid token, response should be 200', async () => {
         const res = await request(app)
-            .get('/api/order/orders/020c3352-e0de-44b9-ab7a-19bb83c37e76')
+            .get('/api/order/orders/89a3f98a-8233-4091-8f02-583ede96a046')
             .set('Accept', 'application/json')
             .set('authorization', validToken)
             .expect(200);
