@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'connectors',
+          model: 'Items',
           key: 'id'
         }
       },
@@ -31,10 +31,16 @@ module.exports = {
         type: Sequelize.BIGINT
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'pending',
+        format: 'enum',
+        values: ['pending', 'approved', 'rejected']
       },
       payment_method: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'cash',
+        format: 'enum',
+        values: ['cash', 'credit']
       },
       createdAt: {
         allowNull: false,

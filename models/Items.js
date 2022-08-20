@@ -5,10 +5,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Items extends Model {
     static associate(models) {
-      Items.belongsTo(models.connectors, {foreignKey: 'id'})
-      Items.hasOne(models.connector, {
+      Items.belongsTo(models.Orders, {foreignKey: 'id'})
+      Items.hasOne(models.Orders, {
         foreignKey: 'item_id',
-        as        : 'connectors'
+        as        : 'Orders'
       });
     }
   }
@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     store_name: DataTypes.STRING,
     category: DataTypes.STRING,
     brand: DataTypes.STRING,
+    status: DataTypes.STRING,
     photo: DataTypes.STRING
   }, {
     sequelize,

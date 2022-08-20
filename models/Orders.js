@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
   class Orders extends Model {
     static associate(models) {
       Orders.belongsTo(models.Customers, {foreignKey: 'customer_id',});
-      Orders.belongsTo(models.connectors, {foreignKey: 'id'})
-      Orders.hasOne(models.connector, {
+      Orders.belongsTo(models.Items, {foreignKey: 'id'})
+      Orders.hasOne(models.Items, {
         foreignKey: 'item_id',
-        as        : 'connectors'
+        as        : 'Items'
       });
 
     }

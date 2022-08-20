@@ -17,10 +17,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       category: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        format: 'category',
+        defaultValue: 'other'
       },
       brand: {
         type: Sequelize.STRING
+      },
+      status: {
+        type: Sequelize.STRING,
+        defaultValue: 'active',
+        format: 'enum',
+        values: ['active', 'inactive']
       },
       createdAt: {
         allowNull: false,

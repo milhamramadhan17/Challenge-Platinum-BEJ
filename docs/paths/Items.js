@@ -25,6 +25,12 @@ module.exports = {
                                 brand: {
                                     type: 'string',
                                 },
+                                status: {
+                                    type: 'string',
+                                    defaultValue: 'active',
+                                    format: 'enum',
+                                    enum: ['active', 'inactive']
+                                },
                                 photo: {
                                     type: 'array',
                                     items: {
@@ -244,7 +250,7 @@ module.exports = {
                                 },
                                 brand: {
                                     type: 'string'
-                                },
+                                }
                             },
                             required: [
                                 'name',
