@@ -24,9 +24,14 @@ module.exports = {
                                 },
                                 status: {
                                     type: 'string',
+                                    default: 'pending',
+                                    format: 'enum',
+                                    enum: ['pending', 'approved', 'rejected']
                                 },
                                 payment_method: {
-                                    type: 'string'
+                                    type: 'string',
+                                    format: 'enum',
+                                    enum: ['cash', 'credit']
                                 }
 
                             },

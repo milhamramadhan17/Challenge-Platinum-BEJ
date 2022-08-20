@@ -9,6 +9,6 @@ router.post('/addItem', authorization.Sellers, multer.array('photo'), controller
 router.get('/items', authorization.Sellers, controller.getAll);
 router.get('/items/:id', authorization.Sellers, controller.getByID);
 router.put('/items/:id', authorization.Sellers, controller.updateItems);
-router.delete('/items/:id', authorization.Sellers, controller.deleteItem);
+router.put('/items/delete/:id', authorization.Sellers, controller.statusItem);
 
 module.exports = router; 

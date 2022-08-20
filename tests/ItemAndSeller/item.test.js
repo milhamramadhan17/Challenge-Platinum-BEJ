@@ -12,7 +12,8 @@ const testItem = {
   price: 100,
   store_name: 'Test',
   category: 'Test',
-  brand: 'Test'
+  brand: 'Test',
+  status: 'ACTIVE',
 }
 
 const newItem = {
@@ -20,7 +21,7 @@ const newItem = {
   price: '200',
   store_name: 'Test2',
   category: 'Test2',
-  brand: 'Test2'
+  brand: 'Test2',
 }
 
 Upload = './files/Untitled Diagram.drawio.png';
@@ -35,8 +36,8 @@ describe('Items Endpoints', () => {
         .post('/api/seller/login')
         .set('Accept', 'application/json')
         .send({
-          email: 'qwe@gmail.com',
-          password: 'qwe'
+          email: process.env.LOGIN_EMAIL,
+          password: process.env.LOGIN_PASSWORD
         });
 
         expect(res.status).toBe(200);
@@ -54,6 +55,7 @@ describe('Items Endpoints', () => {
         .field('store_name', testItem.store_name)
         .field('category', testItem.category)
         .field('brand', testItem.brand)
+        .field('status', testItem.status)
         .attach('photo', Upload)
         .set('authorization', validToken)
         .set('Accept', 'application/x-www-form-urlencoded')
@@ -71,6 +73,7 @@ describe('Items Endpoints', () => {
         .field('store_name', testItem.store_name)
         .field('category', testItem.category)
         .field('brand', testItem.brand)
+        .field('status', testItem.status)
         .attach('photo', Upload)
         .set('authorization', invalidToken)
         .set('Accept', 'application/x-www-form-urlencoded')
@@ -88,6 +91,7 @@ describe('Items Endpoints', () => {
         .field('store_name', testItem.store_name)
         .field('category', testItem.category)
         .field('brand', testItem.brand)
+        .field('status', testItem.status)
         .attach('photo', Upload)
         .set('Accept', 'application/x-www-form-urlencoded')
         
@@ -128,7 +132,7 @@ describe('Items Endpoints', () => {
 
     it('GET /api/item/items/:id with id, response should be 200.', async () => {
       const response = await request(app)
-        .get('/api/item/items/1c62f47e-439c-4a3a-a024-ca292e35e38d')
+        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
         .set('authorization', validToken)
         .set('Accept', 'application/json');
 
@@ -139,7 +143,7 @@ describe('Items Endpoints', () => {
         // it get invalid token
     it('GET /api/item/items/:id invalid token, response should be 401.', async () => {
       const response = await request(app)
-        .get('/api/item/items/1c62f47e-439c-4a3a-a024-ca292e35e38d')
+        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
         .set('authorization', invalidToken)
         .set('Accept', 'application/json');
 
@@ -149,7 +153,7 @@ describe('Items Endpoints', () => {
 
     it('GET /api/item/items/:id without token, response should be 401.', async () => {
       const response = await request(app)
-        .get('/api/item/items/1c62f47e-439c-4a3a-a024-ca292e35e38d')
+        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
         .set('Accept', 'application/json');
 
         expect(response.status).toEqual(401);
@@ -160,7 +164,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/:id update item success, response should be 203.', async () => {
         const response = await request(app)
-          .put('/api/item/items/1c62f47e-439c-4a3a-a024-ca292e35e38d')
+          .put('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
           .send(newItem)
           .set('authorization', validToken)
           .set('Accept', 'application/json');
@@ -171,7 +175,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/:id update item without token, response should be 401.', async () => {
         const response = await request(app)
-          .put('/api/item/items/1c62f47e-439c-4a3a-a024-ca292e35e38d')
+          .put('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
           .send(newItem)
           .set('Accept', 'application/json');
 
@@ -182,7 +186,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/:id update item with invalid token, response should be 401.', async () => {
         const response = await request(app)
-          .put('/api/item/items/1c62f47e-439c-4a3a-a024-ca292e35e38d')
+          .put('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
           .send(newItem)
           .set('authorization', invalidToken)
           .set('Accept', 'application/json');
@@ -193,37 +197,38 @@ describe('Items Endpoints', () => {
 
       })
 
-    it('DELETE /api/item/items/:id delete item success, response should be 200.', async () => {
-      const response = await request(app)
-        .delete('/api/item/items/ed0c2978-0024-4a28-bcba-ebcbf961369e')
-        .set('authorization', validToken)
-        .set('Accept', 'application/json');
+      it('PUT /api/item/items/delete/:id ACTICE to INACTIVE, response should be 203.', async () => {
+        const response = await request(app)
+          .put('/api/item/items/delete/307277a7-49a5-4487-98b2-3b5576907789')
+          .field('status', 'INACTIVE')
+          .set('authorization', validToken)
+          .set('Accept', 'application/json');
 
-        expect(response.status).toBe(200);
-        expect(typeof response.body.message).toMatch('string');
-    })
+          expect(response.status).toBe(203);
+          expect(typeof response.body.message).toMatch('object');
+      })
 
-    it('DELETE /api/item/items/:id delete item without token, response should be 401.', async () => {
-        const res = await request(app)
-            .delete('/api/item/items/a42334ab-46b0-4bbd-ad2d-e1a3571fff4a')
-            .set('Accept', 'application/json')
-            .expect(401);
+      it('PUT /api/item/items/delete/:id ACTICE to INACTIVE without token, response should be 401.', async () => {
+        const response = await request(app)
+          .put('/api/item/items/delete/307277a7-49a5-4487-98b2-3b5576907789')
+          .field('status', 'INACTIVE')
+          .set('Accept', 'application/json');
 
-        expect(res.body).toHaveProperty('message');
-    })
+          expect(response.status).toBe(401);
+          expect(typeof response.body.message).toMatch('string');
+      })
 
-    it('DELETE /api/item/items/:id delete item with invalid token, response should be 401.', async () => {
-        const res = await request(app)
-            .delete('/api/item/items/a42334ab-46b0-4bbd-ad2d-e1a3571fff4a')
-            .set('Accept', 'application/json')
-            .set('authorization', invalidToken)
-            .expect(401);
+      it('PUT /api/item/items/delete/:id ACTICE to INACTIVE with invalid token, response should be 401.', async () => {
+        const response = await request(app)
+          .put('/api/item/items/delete/307277a7-49a5-4487-98b2-3b5576907789')
+          .field('status', 'INACTIVE')
+          .set('authorization', invalidToken)
+          .set('Accept', 'application/json');
 
-        expect(res.body).toHaveProperty('message');
-    })
-
-  
-    
+          expect(response.status).toBe(401);
+          expect(typeof response.body).toMatch('object');
+          expect(response.body.message).toBe('Invalid token');
+      })
     
 })
 

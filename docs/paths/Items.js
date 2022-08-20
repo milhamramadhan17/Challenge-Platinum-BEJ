@@ -27,9 +27,6 @@ module.exports = {
                                 },
                                 status: {
                                     type: 'string',
-                                    defaultValue: 'active',
-                                    format: 'enum',
-                                    enum: ['active', 'inactive']
                                 },
                                 photo: {
                                     type: 'array',
@@ -258,6 +255,7 @@ module.exports = {
                                 'store_name',
                                 'category',
                                 'brand',
+                                'status'
                             ]
                         }
                     }
@@ -291,8 +289,10 @@ module.exports = {
                     token: []
                 }
             ],
-        },
-        delete: {
+        }
+    },
+        '/api/item/items/delete/{id}': {
+        put: {
             tags: ['item'],
             summary: 'Delete item by id',
             description: 'Delete item by id',
@@ -311,6 +311,24 @@ module.exports = {
                     }
                 }
             ],
+            requestBody: {
+                required: true,
+                content: {
+                    'application/x-www-form-urlencoded':{
+                        schema:{
+                            type: 'object',
+                            properties: {
+                                status: {
+                                    type: 'string',
+                                }
+                            },
+                            required: [
+                                'status',
+                            ]
+                        }
+                    }
+                }
+            },
             responses: {
                 204: {
                     description: 'Success',
@@ -318,7 +336,18 @@ module.exports = {
                         'application/json': {
                             example: {
                                 status: '204',
-                                msg: 'Deleted Successfully',
+                                msg: 'Item deleted successfully',
+                            }
+                        }
+                    }
+                },
+                204: {
+                    description: 'Success',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: '204',
+                                msg: 'Item restored successfully',
                             }
                         }
                     }
@@ -355,4 +384,5 @@ module.exports = {
             ]
         }
     }
+
 }

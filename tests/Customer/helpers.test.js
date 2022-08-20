@@ -36,6 +36,14 @@ describe('jwt.js', () => {
   test('Decode using valid secret-key. Should return decoded object.', () => {
     expect(() => jwt.decode(process.env.SECRET_KEY)).toBeTruthy();
   })
+
+  test('encode using invalid secret-key. Should throw Error.', () => {
+    expect(() => jwt.encode('dsadabwhebfhb')).toThrow();
+  })
+
+  test('encode using valid secret-key. Should return encoded object.', () => {
+    expect(() => jwt.encode(process.env.SECRET_KEY)).toBeTruthy();
+  })
 })
 
 

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const app = require('../../server');
 const db = require('../../models');
 const fs = require('fs');
@@ -13,10 +14,10 @@ let invalidId = 'Invalid-id-for-negative-cases';
 
 
 const testAddOrder = {
-    customer_id: "19531131-13d2-40fb-b4f6-8e09649e598b",
-    item_id: "a42334ab-46b0-4bbd-ad2d-e1a3571fff4a",
+    customer_id: "b3bd81e4-50f3-473a-ae32-0d1604875eea",
+    item_id: "886ada3a-f975-4e1a-b865-b95a7545595f",
     qty: 80,
-    amount: 64000,
+    amount: 80 * 100,
     status: "pending",
     payment_method: "cash"
 }
@@ -27,8 +28,8 @@ describe('Order Endpoints', () => {
           .post('/api/customer/login')
           .set('Accept', 'application/json')
           .send({
-            email: 'test1@gmail.com',
-            password: 'test1'
+            email: process.env.LOGIN_EMAIL,
+            password: process.env.LOGIN_PASSWORD
           });
     
         expect(res.status).toBe(200);
@@ -169,7 +170,7 @@ describe('Order Endpoints', () => {
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GET /api/order/orders/:id <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     it('GET /api/order/orders/:id with valid token, response should be 200', async () => {
         const res = await request(app)
-            .get('/api/order/orders/89a3f98a-8233-4091-8f02-583ede96a046')
+            .get('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
             .set('Accept', 'application/json')
             .set('authorization', validToken)
             .expect(200);
@@ -221,14 +222,14 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with valid token, response should be 203', async () => {
         const res = await request(app)
-            .put('/api/order/orders/020c3352-e0de-44b9-ab7a-19bb83c37e76')
+            .put('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
             .send({
-                customer_id   : "19531131-13d2-40fb-b4f6-8e09649e598b",
-                item_id       : "a42334ab-46b0-4bbd-ad2d-e1a3571fff4a",
+                customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
+                item_id       : "18268373-e24d-45bc-a559-02b167e89113",
                 qty           : 11,
                 amount        : 11 * 8000,
-                status        : "pending",
-                payment_method: "Pay Pal"
+                status        : "approved",
+                payment_method: "credit"
             })
             .set('Accept', 'application/json')
             .set('authorization', validToken)
@@ -239,10 +240,10 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with invalid token, response should be 401', async () => {
         const res = await request(app)
-            .put('/api/order/orders/020c3352-e0de-44b9-ab7a-19bb83c37e76')
+            .put('/api/order/orders/d053ce18-e21f-4b4d-9b81-e10c03148c8e')
             .send({
-                customer_id   : "19531131-13d2-40fb-b4f6-8e09649e598b",
-                item_id       : "a42334ab-46b0-4bbd-ad2d-e1a3571fff4a",
+                customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
+                item_id       : "18268373-e24d-45bc-a559-02b167e89113",
                 qty           : 11,
                 amount        : 11 * 8000,
                 status        : "pending",
@@ -257,10 +258,10 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with without token, response should be 401', async () => {
         const res = await request(app)
-            .put('/api/order/orders/020c3352-e0de-44b9-ab7a-19bb83c37e76')
+            .put('/api/order/orders/d053ce18-e21f-4b4d-9b81-e10c03148c8e')
             .send({
-                customer_id   : "19531131-13d2-40fb-b4f6-8e09649e598b",
-                item_id       : "a42334ab-46b0-4bbd-ad2d-e1a3571fff4a",
+                customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
+                item_id       : "18268373-e24d-45bc-a559-02b167e89113",
                 qty           : 11,
                 amount        : 11 * 8000,
                 status        : "pending",

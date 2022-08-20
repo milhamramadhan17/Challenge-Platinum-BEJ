@@ -28,6 +28,7 @@ controller.addItem =  async (req, res, next) => {
         store_name: req.body.store_name,
         category: req.body.category,
         brand: req.body.brand,
+        status: req.body.status,
         photo: ''
       })
     
@@ -83,7 +84,7 @@ controller.updateItems = async (req, res, next) => {
           price       : req.body.price,
           store_name  : req.body.store_name,
           category    : req.body.category,
-          brand       : req.body.brand,
+          brand       : req.body.brand
       }
        await Items.update(items,{
            where: {
@@ -99,27 +100,25 @@ controller.updateItems = async (req, res, next) => {
     next(err);   
 }}
 
-controller.deleteItem = async (req, res, next) => {
-    const id = req.params.id;
+controller.statusItem = async (req, res, next) => {
     try {
-        await Items.findByPk(id)
-        .then(results => {
-            if(results) {
-                Items.destroy({
-                    where: {
-                        id: id
-                    }
-                })
-                .then(() => {
-                    res.send({
-                        status: 204,
-                        message: "Deleted Successfully"
-                    });
-                })
-            } else {throw {error: "Cannot find Order with id"}}
-        })
-
-    } catch (err) {next(err)}
+         await Items.update({
+              status: req.body.status
+         },{
+             where: {
+                 id: req.params.id
+             }
+         });
+         
+         return res.status(203).json(
+             {
+                 "message": {
+                      "status": "Updated Status Successfully"
+                 }
+         });
+    } catch (err){
+      next(err);   
+  }
 }
 
 

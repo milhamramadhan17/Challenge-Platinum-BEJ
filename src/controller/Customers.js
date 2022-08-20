@@ -73,11 +73,7 @@ controller.login = async (req, res, next) => {
     .catch (err => next(err));
 }
 
-
-
-  
 controller.getAll = async (req, res) => {
-
   const dataCustomer = req.query.dataCustomer;
   const condition = dataCustomer ? { dataCustomer: { [Op.like]: `%${req.query.dataCustomer}%` } } : null;
   await Customers.findAll({
