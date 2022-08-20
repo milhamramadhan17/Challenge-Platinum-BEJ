@@ -35,9 +35,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles",
-    "start": "npx nodemon server.js",
-    "run-migrate": "npx sequelize-cli db:migrate"
+    "test": "jest",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
