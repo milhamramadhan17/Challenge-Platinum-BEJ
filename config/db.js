@@ -26,6 +26,9 @@ module.exports = {
     host: process.env.HOST_SECRET,
     port: process.env.PORT_SECRET,
     dialect: process.env.DIALECT_SECRET,
-    logging: false
+    logging: false,
+    dialectOptions: {
+      ssl: true
+    }
   }
 }
