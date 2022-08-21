@@ -35,7 +35,15 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node server.js"
+    "start": "node server.js",
+    "_migrate": "sequelize db:migrate",
+    "_seed": "sequelize db:seed:all",
+    "_reset": "sequelize db:migrate:reset && sequelize db:seed:all",
+    "_migrate:undo": "sequelize db:migrate:undo",
+    "_migrate:redo": "sequelize db:migrate:redo",
+    "_migrate:status": "sequelize db:migrate:status",
+    "seed": "sequelize db:seed:all",
+    "migrate": "npm-run-all config _migrate"
   },
   "repository": {
     "type": "git",
