@@ -18,7 +18,7 @@
     "password": "november2001",
     "database": "bingles",
     "port": "5432",
-    "host": "127.0.0.1",
+    "host": "https://challenge-platinum-bej-kel-2.herokuapp.com",
     "dialect": "postgres",
     "logging": false,
     "dialectOptions": {
