@@ -14,11 +14,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "zmjvhcczntntwq",
-    "password": "1146a1f29088c74d8e24e3917a5014e82774f685ead68d1bc0c0fc40acfa7001",
-    "database": "ddoh1d81dc5p8b",
+    "username": "postgres",
+    "password": "november2001",
+    "database": "bingles",
     "port": "5432",
-    "host": "ec2-44-205-64-253.compute-1.amazonaws.com",
+    "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false,
     "dialectOptions": {
