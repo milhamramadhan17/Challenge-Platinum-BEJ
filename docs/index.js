@@ -1,3 +1,4 @@
+require('dotenv').config();
 const itemsSchema = require('./schemas/Items');
 const itemsPath = require('./paths/Items');
 const ordersSchema = require('./schemas/Orders');
@@ -23,7 +24,7 @@ module.exports = {
 
   servers: [
     {
-      url: 'http://localhost:3000',
+      url: process.env.HOST,
       description: 'Swagger Bingle'
     }
   ],
