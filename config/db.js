@@ -28,7 +28,7 @@ module.exports = {
     "dialect": process.env.DIALECT_SECRET,
     "logging": false,
     "dialectOptions": {
-      "ssl": true
+      "ssl": {rejectUnathorized: false}
     }
   }
 }
