@@ -64,41 +64,6 @@ describe('Items Endpoints', () => {
         expect(typeof res.body.message).toMatch('string');
     }, 10000);
 
-    it('POST /api/item/addItem with invalid token, response should be 401', async () => {
-      jest.setTimeout(5000)
-      const res = await request(app)
-        .post('/api/item/addItem')
-        .field('name', testItem.name)
-        .field('price', testItem.price)
-        .field('store_name', testItem.store_name)
-        .field('category', testItem.category)
-        .field('brand', testItem.brand)
-        .field('status', testItem.status)
-        .attach('photo', Upload)
-        .set('authorization', invalidToken)
-        .set('Accept', 'application/x-www-form-urlencoded')
-
-        expect(res.status).toEqual(401);
-        expect(typeof res.body.message).toBe('string');
-    })
-
-    it('POST /api/item/addItem with no token, response should be 401', async () => {
-      jest.setTimeout(5000)
-      const res = await request(app)
-        .post('/api/item/addItem')
-        .field('name', testItem.name)
-        .field('price', testItem.price)
-        .field('store_name', testItem.store_name)
-        .field('category', testItem.category)
-        .field('brand', testItem.brand)
-        .field('status', testItem.status)
-        .attach('photo', Upload)
-        .set('Accept', 'application/x-www-form-urlencoded')
-        
-        expect(res.status).toEqual(401);
-        expect(typeof res.body.message).toBe('string');
-    })
-
     it('GET /api/item/items with valid token, response should be 200.', async () => {
       const response = await request(app)
         .get('/api/item/items')
@@ -137,6 +102,17 @@ describe('Items Endpoints', () => {
         .set('Accept', 'application/json');
 
         expect(response.status).toEqual(200);
+        expect(typeof response.body).toMatch('object');
+      })
+
+        // it get invalid token
+    it('GET /api/item/items/:id invalid token, response should be 401.', async () => {
+      const response = await request(app)
+        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+        .set('authorization', invalidToken)
+        .set('Accept', 'application/json');
+
+        expect(response.status).toEqual(401);
         expect(typeof response.body).toMatch('object');
       })
 
