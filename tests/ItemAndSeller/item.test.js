@@ -140,17 +140,6 @@ describe('Items Endpoints', () => {
         expect(typeof response.body).toMatch('object');
       })
 
-        // it get invalid token
-    it('GET /api/item/items/:id invalid token, response should be 401.', async () => {
-      const response = await request(app)
-        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
-        .set('authorization', invalidToken)
-        .set('Accept', 'application/json');
-
-        expect(response.status).toEqual(401);
-        expect(typeof response.body).toMatch('object');
-      })
-
     it('GET /api/item/items/:id without token, response should be 401.', async () => {
       const response = await request(app)
         .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
