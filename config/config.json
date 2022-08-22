@@ -14,11 +14,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "process.env.USERNAME_SECRET",
-    "password": "process.env.PASSWORD_SECRET",
-    "database": "process.env.DATABASE_SECRET",
-    "host": "process.env.HOST_SECRET",
-    "port": "process.env.PORT_SECRET",
-    "dialect": "process.env.DIALECT_SECRET"
+    "username": "tmqxusiemyguvj",
+    "password": "b91122865697d971ce33113959125a2d0f40d8dfeb3f214df52eb805a03e7e9a",
+    "database": "dc65n2lhva12v2",
+    "host": "ec2-50-19-255-190.compute-1.amazonaws.com",
+    "port": "5432",
+    "dialect": "postgresql-contoured-43115"
   }
 }
