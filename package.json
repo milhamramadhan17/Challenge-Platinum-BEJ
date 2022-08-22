@@ -34,8 +34,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
-    "start": "node server.js",
+    "test": "jest --forceExit",
+    "start": "nodemon server.js",
     "_migrate": "sequelize db:migrate",
     "_seed": "sequelize db:seed:all",
     "_reset": "sequelize db:migrate:reset && sequelize db:seed:all",
