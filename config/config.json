@@ -19,6 +19,6 @@
     "database": "dc65n2lhva12v2",
     "host": "ec2-50-19-255-190.compute-1.amazonaws.com",
     "port": "5432",
-    "dialect": "postgresql-contoured-43115"
+    "dialect": "postgres"
   }
 }
