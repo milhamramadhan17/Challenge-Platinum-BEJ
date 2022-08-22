@@ -10,30 +10,18 @@ module.exports = {
       customer_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        _references_1: {
-          model: 'Customers',
-          key: 'id'
-        },
-        get references() {
-          return this._references_1;
-        },
-        set references(value) {
-          this._references_1 = value;
-        },
+        // // references: {
+        // //   model: 'Customers',
+        // //   key: 'id'
+        // }
       },
       item_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        _references: {
-          model: 'Items',
-          key: 'id'
-        },
-        get references() {
-          return this._references;
-        },
-        set references(value) {
-          this._references = value;
-        },
+        // references: {
+        //   model: 'Items',
+        //   key: 'id'
+        // }
       },
       qty: {
         allowNull: false,
