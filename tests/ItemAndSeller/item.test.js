@@ -56,7 +56,7 @@ describe('Items Endpoints', () => {
         .field('category', testItem.category)
         .field('brand', testItem.brand)
         .field('status', testItem.status)
-        .attach('photo', Upload)
+        .attach('photo', 'Upload')
         .set('authorization', validToken)
         .set('Accept', 'application/x-www-form-urlencoded')
   
