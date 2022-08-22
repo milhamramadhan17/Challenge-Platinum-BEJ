@@ -11,8 +11,6 @@
     "express-sesssion": "^1.15.5",
     "file-system": "^1.2.2",
     "fs": "^0.0.1-security",
-    "googleapis": "^105.0.0",
-    "got": "^12.3.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
@@ -23,6 +21,7 @@
     "password-hash": "^1.2.2",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
+    "psql": "^0.0.1",
     "sequelize": "^6.21.3",
     "socket.io": "^4.5.1",
     "supertest": "^6.2.4",
@@ -35,9 +34,16 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles",
-    "start": "npx nodemon server.js",
-    "run-migrate": "npx sequelize-cli db:migrate"
+    "test": "jest --forceExit",
+    "start": "nodemon server.js",
+    "_migrate": "sequelize db:migrate",
+    "_seed": "sequelize db:seed:all",
+    "_reset": "sequelize db:migrate:reset && sequelize db:seed:all",
+    "_migrate:undo": "sequelize db:migrate:undo",
+    "_migrate:redo": "sequelize db:migrate:redo",
+    "_migrate:status": "sequelize db:migrate:status",
+    "seed": "sequelize db:seed:all",
+    "migrate": "npm-run-all config _migrate"
   },
   "repository": {
     "type": "git",

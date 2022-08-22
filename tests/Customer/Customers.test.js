@@ -25,7 +25,7 @@ const testCustomer = {
 }
 
 
-Upload = './files/Untitled Diagram.drawio.png';
+const Upload = './files/Untitled Diagram.drawio.png';
 
 describe('Customers Endpoints', () => {
   it('POST /api/customer/register with valid values, response should be 201', async () => {
@@ -66,8 +66,8 @@ describe('Customers Endpoints', () => {
       .post('/api/customer/login')
       .set('Accept', 'application/json')
       .send({
-        email: testCustomer.email,
-        password: testCustomer.password
+        email: process.env.LOGIN_EMAIL,
+        password: process.env.LOGIN_PASSWORD
       });
 
     expect(res.status).toBe(200);

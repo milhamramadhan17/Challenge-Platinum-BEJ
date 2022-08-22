@@ -28,6 +28,7 @@ Upload = './files/Untitled Diagram.drawio.png';
     describe('Admin Endpoints', () => {
 
         it('POST /api/admin/register with valid values, response should be 201', async () => {
+            jest.setTimeout(5000);
             const res = await request(app)
                 .post('/api/admin/register')
                 .field('name', 'mimin1')

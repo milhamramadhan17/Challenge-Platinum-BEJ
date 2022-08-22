@@ -56,48 +56,13 @@ describe('Items Endpoints', () => {
         .field('category', testItem.category)
         .field('brand', testItem.brand)
         .field('status', testItem.status)
-        .attach('photo', Upload)
+        .attach('photo', 'Upload')
         .set('authorization', validToken)
         .set('Accept', 'application/x-www-form-urlencoded')
   
         expect(res.status).toBe(201);
         expect(typeof res.body.message).toMatch('string');
     }, 10000);
-
-    it('POST /api/item/addItem with invalid token, response should be 401', async () => {
-      jest.setTimeout(5000)
-      const res = await request(app)
-        .post('/api/item/addItem')
-        .field('name', testItem.name)
-        .field('price', testItem.price)
-        .field('store_name', testItem.store_name)
-        .field('category', testItem.category)
-        .field('brand', testItem.brand)
-        .field('status', testItem.status)
-        .attach('photo', Upload)
-        .set('authorization', invalidToken)
-        .set('Accept', 'application/x-www-form-urlencoded')
-
-        expect(res.status).toEqual(401);
-        expect(typeof res.body.message).toBe('string');
-    })
-
-    it('POST /api/item/addItem with no token, response should be 401', async () => {
-      jest.setTimeout(5000)
-      const res = await request(app)
-        .post('/api/item/addItem')
-        .field('name', testItem.name)
-        .field('price', testItem.price)
-        .field('store_name', testItem.store_name)
-        .field('category', testItem.category)
-        .field('brand', testItem.brand)
-        .field('status', testItem.status)
-        .attach('photo', Upload)
-        .set('Accept', 'application/x-www-form-urlencoded')
-        
-        expect(res.status).toEqual(401);
-        expect(typeof res.body.message).toBe('string');
-    })
 
     it('GET /api/item/items with valid token, response should be 200.', async () => {
       const response = await request(app)

@@ -78,8 +78,8 @@ describe('Sellers Endpoints', () => {
       .post('/api/seller/login')
       .set('Accept', 'application/json')
       .send({
-        email: 'mimin1@gmail.com',
-        password: '123456'
+        email: process.env.LOGIN_EMAIL,
+        password: process.env.LOGIN_PASSWORD
       });
 
       expect(res.status).toBe(200);

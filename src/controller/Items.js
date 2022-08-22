@@ -19,7 +19,7 @@ controller.addItem =  async (req, res, next) => {
           asset_id: uploadRes.asset_id,
           public_id: uploadRes.public_id
         })
-    }
+      }
 
       await Items.create({
         id: newItemID,
