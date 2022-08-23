@@ -44,20 +44,20 @@ describe('Sellers Endpoints', () => {
   //     expect(typeof res.body.message).toMatch('string');
   // })
 
-  it('POST /api/seller/register with email has been ready, response should be 400', async () => {
-    jest.setTimeout(5000)
-    const res = await request(app)
-        .post('/api/seller/register')
-        .field('name', 'mimin1')
-        .field('email', 'mimin1@gmail.com')
-        .field('password', '123456')
-        .attach('photo', Upload)
-        .set('Accept', 'application/x-www-form-urlencoded');
+  // it('POST /api/seller/register with email has been ready, response should be 400', async () => {
+  //   jest.setTimeout(5000)
+  //   const res = await request(app)
+  //       .post('/api/seller/register')
+  //       .field('name', 'mimin1')
+  //       .field('email', 'mimin1@gmail.com')
+  //       .field('password', '123456')
+  //       .attach('photo', Upload)
+  //       .set('Accept', 'application/x-www-form-urlencoded');
 
-    expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty('error.message');
-    expect(typeof res.body.message).toBe('undefined');
-  })
+  //   expect(res.status).toBe(400);
+  //   expect(res.body).toHaveProperty('error.message');
+  //   expect(typeof res.body.message).toBe('undefined');
+  // })
 
   it('POST /api/seller/register without password, response should be 400', async () => {
   const res = await request(app) 
