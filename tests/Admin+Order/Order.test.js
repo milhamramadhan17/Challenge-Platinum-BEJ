@@ -159,8 +159,9 @@ describe('Order Endpoints', () => {
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GET /api/order/orders/:id <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     it('GET /api/order/orders/:id with valid token, response should be 200', async () => {
         const res = await request(app)
-            .get('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
-            .set('Accept', 'application/json')
+        // .get('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
+        .get('/api/order/orders/fdafbdee-1b9b-486a-aabc-945f94de4e6d')
+        .set('Accept', 'application/json')
             .set('authorization', validToken)
             .expect(200);
 
@@ -211,10 +212,13 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with valid token, response should be 203', async () => {
         const res = await request(app)
-            .put('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
+            // .put('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
+            .put('/api/order/orders/fdafbdee-1b9b-486a-aabc-945f94de4e6d')
             .send({
-                customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
-                item_id       : "18268373-e24d-45bc-a559-02b167e89113",
+                // customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
+                customer_id   : "fafe7519-de46-4cce-bcb1-7f1b092c8257",
+                // item_id       : "18268373-e24d-45bc-a559-02b167e89113",
+                item_id       : "96498a0b-5f59-4526-827d-fe83eb142c08",
                 qty           : 11,
                 amount        : 11 * 8000,
                 status        : "approved",
