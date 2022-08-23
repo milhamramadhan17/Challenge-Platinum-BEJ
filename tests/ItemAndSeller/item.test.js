@@ -97,8 +97,9 @@ describe('Items Endpoints', () => {
 
     it('GET /api/item/items/:id with id, response should be 200.', async () => {
       const response = await request(app)
-        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
-        .set('authorization', validToken)
+      // .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+      .get('/api/item/items/96498a0b-5f59-4526-827d-fe83eb142c08')
+      .set('authorization', validToken)
         .set('Accept', 'application/json');
 
         expect(response.status).toEqual(200);

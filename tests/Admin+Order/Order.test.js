@@ -14,8 +14,10 @@ let invalidId = 'Invalid-id-for-negative-cases';
 
 
 const testAddOrder = {
-    customer_id: "b3bd81e4-50f3-473a-ae32-0d1604875eea",
-    item_id: "886ada3a-f975-4e1a-b865-b95a7545595f",
+    // customer_id: "b3bd81e4-50f3-473a-ae32-0d1604875eea",
+    customer_id: "fafe7519-de46-4cce-bcb1-7f1b092c8257",
+    // item_id: "886ada3a-f975-4e1a-b865-b95a7545595f",
+    item_id: "96498a0b-5f59-4526-827d-fe83eb142c08",
     qty: 80,
     amount: 80 * 100,
     status: "pending",
@@ -120,7 +122,8 @@ describe('Order Endpoints', () => {
             .set('Accept', 'application/x-www-form-urlencoded')
             .set('authorization', validToken)
             .query({
-                customer_id: '19531131-13d2-40fb-b4f6-8e09649e598b'
+                // customer_id: '19531131-13d2-40fb-b4f6-8e09649e598b'
+                customer_id: 'fafe7519-de46-4cce-bcb1-7f1b092c8257'
             })
 
         expect(res.status).toEqual(200);
@@ -152,20 +155,6 @@ describe('Order Endpoints', () => {
         expect(res.status).toEqual(401);
         expect(typeof res.body.message).toMatch('string');
     })
-
-    // it('GET /api/order/orders/cusId with invalid customer_id, response should be 401', async () => {
-    //     const res = await request(app)
-    //         .get('/api/order/orders/cusId')
-    //         .set('Accept', 'application/x-www-form-urlencoded')
-    //         .set('authorization', validToken)
-    //         .query({
-    //             customer_id: "invalid-customer-id"
-    //         })
-
-    //     expect(res.status).toEqual(401);
-    //     expect(res.body).toHaveProperty('error');
-    //     expect(typeof res.body.message).toBe('string');
-    // })
 
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GET /api/order/orders/:id <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     it('GET /api/order/orders/:id with valid token, response should be 200', async () => {
