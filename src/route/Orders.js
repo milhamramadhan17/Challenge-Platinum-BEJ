@@ -3,7 +3,7 @@ const router = require('express').Router();
 const { authentication, authorization } = require('../../middleware/auth');
 
 router.use(authentication);
-// router.get('/orders', authorization.Customers , controller.getAll);
+router.get('/orders', authorization.Customers , controller.getAll);
 router.post('/addOrders', authorization.Customers, controller.addOrder);
 router.get('/orders/cusId', authorization.Customers , controller.getOrderByCustomerId);
 router.get('/orders/:id', authorization.Customers , controller.getOrderById);
