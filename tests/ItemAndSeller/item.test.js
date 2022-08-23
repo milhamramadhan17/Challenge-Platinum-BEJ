@@ -24,7 +24,6 @@ const newItem = {
   brand: 'Test2',
 }
 
-Upload = './files/Untitled Diagram.drawio.png';
 
 let validToken = '';
 let invalidToken = 'Invalid-token-for-negative-cases';
@@ -56,7 +55,7 @@ describe('Items Endpoints', () => {
         .field('category', testItem.category)
         .field('brand', testItem.brand)
         .field('status', testItem.status)
-        .attach('photo', 'Upload')
+        .attach('photo', '')
         .set('authorization', validToken)
         .set('Accept', 'application/x-www-form-urlencoded')
   
@@ -97,8 +96,7 @@ describe('Items Endpoints', () => {
 
     it('GET /api/item/items/:id with id, response should be 200.', async () => {
       const response = await request(app)
-      // .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
-      .get('/api/item/items/96498a0b-5f59-4526-827d-fe83eb142c08')
+      .get('/api/item/items/'+process.env.ITEM_ID)
       .set('authorization', validToken)
         .set('Accept', 'application/json');
 
@@ -109,7 +107,7 @@ describe('Items Endpoints', () => {
         // it get invalid token
     it('GET /api/item/items/:id invalid token, response should be 401.', async () => {
       const response = await request(app)
-        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+        .get('/api/item/items/'+process.env.ITEM_ID)
         .set('authorization', invalidToken)
         .set('Accept', 'application/json');
 
@@ -119,7 +117,7 @@ describe('Items Endpoints', () => {
 
     it('GET /api/item/items/:id without token, response should be 401.', async () => {
       const response = await request(app)
-        .get('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+        .get('/api/item/items/'+process.env.ITEM_ID)
         .set('Accept', 'application/json');
 
         expect(response.status).toEqual(401);
@@ -130,7 +128,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/:id update item success, response should be 203.', async () => {
         const response = await request(app)
-          .put('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+          .put('/api/item/items/'+process.env.ITEM_ID)
           .send(newItem)
           .set('authorization', validToken)
           .set('Accept', 'application/json');
@@ -141,7 +139,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/:id update item without token, response should be 401.', async () => {
         const response = await request(app)
-          .put('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+          .put('/api/item/items/'+process.env.ITEM_ID)
           .send(newItem)
           .set('Accept', 'application/json');
 
@@ -152,7 +150,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/:id update item with invalid token, response should be 401.', async () => {
         const response = await request(app)
-          .put('/api/item/items/307277a7-49a5-4487-98b2-3b5576907789')
+          .put('/api/item/items/'+process.env.ITEM_ID)
           .send(newItem)
           .set('authorization', invalidToken)
           .set('Accept', 'application/json');
@@ -165,7 +163,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/delete/:id ACTICE to INACTIVE, response should be 203.', async () => {
         const response = await request(app)
-          .put('/api/item/items/delete/307277a7-49a5-4487-98b2-3b5576907789')
+          .put('/api/item/items/delete/'+process.env.ITEM_ID)
           .field('status', 'INACTIVE')
           .set('authorization', validToken)
           .set('Accept', 'application/json');
@@ -176,7 +174,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/delete/:id ACTICE to INACTIVE without token, response should be 401.', async () => {
         const response = await request(app)
-          .put('/api/item/items/delete/307277a7-49a5-4487-98b2-3b5576907789')
+          .put('/api/item/items/delete/'+process.env.ITEM_ID)
           .field('status', 'INACTIVE')
           .set('Accept', 'application/json');
 
@@ -186,7 +184,7 @@ describe('Items Endpoints', () => {
 
       it('PUT /api/item/items/delete/:id ACTICE to INACTIVE with invalid token, response should be 401.', async () => {
         const response = await request(app)
-          .put('/api/item/items/delete/307277a7-49a5-4487-98b2-3b5576907789')
+          .put('/api/item/items/delete/'+process.env.ITEM_ID)
           .field('status', 'INACTIVE')
           .set('authorization', invalidToken)
           .set('Accept', 'application/json');

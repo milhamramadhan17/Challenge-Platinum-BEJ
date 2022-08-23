@@ -90,10 +90,8 @@ controller.login = async (req, res, next) => {
 }
 
 controller.getAll = async (req, res) => {
-
     const allSellers = req.query.allSellers;
-
-    const condition = allSellers ? { allSellers: { [Op.like]: `%${allSeller}%` } } : null;
+    const condition = allSellers ? { allSellers: { [Op.like]: `%${allSellers}%` } } : null;
     await Sellers.findAll({
       where: condition
   })

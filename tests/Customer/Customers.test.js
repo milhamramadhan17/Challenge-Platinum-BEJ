@@ -35,7 +35,7 @@ describe('Customers Endpoints', () => {
       .field('email', 'mimin1@gmail.com')
       .field('password', '123456')
       .attach('photo', Upload)
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/x-www-form-urlencoded');
 
     expect(res.status).toBe(201);
     expect(typeof res.body.message).toMatch('string');

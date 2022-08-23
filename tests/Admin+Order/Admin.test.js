@@ -23,7 +23,7 @@ const email = 'mimin1@gmail.com';
         })
       });
 
-Upload = './files/Untitled Diagram.drawio.png';
+const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
@@ -42,6 +42,7 @@ Upload = './files/Untitled Diagram.drawio.png';
         })
 
         it('POST /api/admin/register with email has been ready, response should be 400', async () => {
+            jest.setTimeout(5000)
             const res = await request(app)
                 .post('/api/admin/register')
                 .field('name', 'mimin1')

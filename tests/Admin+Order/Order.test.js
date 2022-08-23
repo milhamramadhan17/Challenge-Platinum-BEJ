@@ -14,10 +14,8 @@ let invalidId = 'Invalid-id-for-negative-cases';
 
 
 const testAddOrder = {
-    // customer_id: "b3bd81e4-50f3-473a-ae32-0d1604875eea",
-    customer_id: "fafe7519-de46-4cce-bcb1-7f1b092c8257",
-    // item_id: "886ada3a-f975-4e1a-b865-b95a7545595f",
-    item_id: "96498a0b-5f59-4526-827d-fe83eb142c08",
+    customer_id: process.env.CUSTOMER_ID,
+    item_id: process.env.ITEM_ID,
     qty: 80,
     amount: 80 * 100,
     status: "pending",
@@ -122,8 +120,7 @@ describe('Order Endpoints', () => {
             .set('Accept', 'application/x-www-form-urlencoded')
             .set('authorization', validToken)
             .query({
-                // customer_id: '19531131-13d2-40fb-b4f6-8e09649e598b'
-                customer_id: 'fafe7519-de46-4cce-bcb1-7f1b092c8257'
+                customer_id: process.env.CUSTOMER_ID
             })
 
         expect(res.status).toEqual(200);
@@ -137,7 +134,7 @@ describe('Order Endpoints', () => {
             .set('Accept', 'application/x-www-form-urlencoded')
             .set('authorization', invalidToken)
             .query({
-                customer_id: "d75c070f-06ce-4d16-b640-34492bb3069e"
+                customer_id: process.env.CUSTOMER_ID
             })
 
         expect(res.status).toEqual(401);
@@ -149,7 +146,7 @@ describe('Order Endpoints', () => {
             .get('/api/order/orders/cusId')
             .set('Accept', 'application/x-www-form-urlencoded')
             .query({
-                customer_id: "d75c070f-06ce-4d16-b640-34492bb3069e"
+                customer_id: process.env.CUSTOMER_ID
             })
 
         expect(res.status).toEqual(401);
@@ -159,8 +156,7 @@ describe('Order Endpoints', () => {
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GET /api/order/orders/:id <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     it('GET /api/order/orders/:id with valid token, response should be 200', async () => {
         const res = await request(app)
-        // .get('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
-        .get('/api/order/orders/fdafbdee-1b9b-486a-aabc-945f94de4e6d')
+        .get('/api/order/orders/'+process.env.ORDER_ID)
         .set('Accept', 'application/json')
             .set('authorization', validToken)
             .expect(200);
@@ -179,7 +175,7 @@ describe('Order Endpoints', () => {
 
     it('GET /api/order/orders/:id with invalid token, response should be 401', async () => {
         const res = await request(app)
-            .get('/api/order/orders/020c3352-e0de-44b9-ab7a-19bb83c37e76')
+            .get('/api/order/orders/'+process.env.ORDER_ID)
             .set('Accept', 'application/json')
             .set('authorization', invalidToken)
 
@@ -189,7 +185,7 @@ describe('Order Endpoints', () => {
 
     it('GET /api/order/orders/:id with without token, response should be 401', async () => {
         const res = await request(app)
-            .get('/api/order/orders/020c3352-e0de-44b9-ab7a-19bb83c37e76')
+            .get('/api/order/orders/'+process.env.ORDER_ID)
             .set('Accept', 'application/json')
 
         expect(res.status).toBe(401);
@@ -212,13 +208,10 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with valid token, response should be 203', async () => {
         const res = await request(app)
-            // .put('/api/order/orders/c4cb5618-d299-4a12-8d32-cadd91930aad')
-            .put('/api/order/orders/fdafbdee-1b9b-486a-aabc-945f94de4e6d')
+            .put('/api/order/orders/'+process.env.ORDER_ID)
             .send({
-                // customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
-                customer_id   : "fafe7519-de46-4cce-bcb1-7f1b092c8257",
-                // item_id       : "18268373-e24d-45bc-a559-02b167e89113",
-                item_id       : "96498a0b-5f59-4526-827d-fe83eb142c08",
+                customer_id   : process.env.CUSTOMER_ID,
+                item_id       : process.env.ITEM_ID,
                 qty           : 11,
                 amount        : 11 * 8000,
                 status        : "approved",
@@ -233,10 +226,10 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with invalid token, response should be 401', async () => {
         const res = await request(app)
-            .put('/api/order/orders/d053ce18-e21f-4b4d-9b81-e10c03148c8e')
+            .put('/api/order/orders/'+process.env.ORDER_ID)
             .send({
-                customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
-                item_id       : "18268373-e24d-45bc-a559-02b167e89113",
+                customer_id   : process.env.CUSTOMER_ID,
+                item_id       : process.env.ITEM_ID,
                 qty           : 11,
                 amount        : 11 * 8000,
                 status        : "pending",
@@ -251,10 +244,10 @@ describe('Order Endpoints', () => {
 
     it('PUT /api/order/orders/:id with without token, response should be 401', async () => {
         const res = await request(app)
-            .put('/api/order/orders/d053ce18-e21f-4b4d-9b81-e10c03148c8e')
+            .put('/api/order/orders/'+process.env.ORDER_ID)
             .send({
-                customer_id   : "b3bd81e4-50f3-473a-ae32-0d1604875eea",
-                item_id       : "18268373-e24d-45bc-a559-02b167e89113",
+                customer_id   : process.env.CUSTOMER_ID,
+                item_id       : process.env.ITEM_ID,
                 qty           : 11,
                 amount        : 11 * 8000,
                 status        : "pending",

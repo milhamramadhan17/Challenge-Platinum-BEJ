@@ -40,7 +40,6 @@ controller.register = async (req, res, next) => {
             <p>Your password is ${password}</p>
             `  
         }
-
         await Admins.findOne({
             where: {
                 email: email

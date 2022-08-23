@@ -55,6 +55,7 @@ describe('node-mailer', () => {
   test('Send email using valid email. Should return true.', () => {
     expect(() => sendEmail(process.env.LOGIN_EMAIL)).toBeTruthy();
   })
+
 })
 
 

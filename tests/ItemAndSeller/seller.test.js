@@ -26,11 +26,12 @@ afterAll(() => {
  });
 
 
-Upload = './files/Untitled Diagram.drawio.png';
+const Upload = './files/Untitled Diagram.drawio.png';
 
 
 describe('Sellers Endpoints', () => {
   it('POST /api/seller/register with valid values, response should be 201', async () => {
+    jest.setTimeout(5000)
     const res = await request(app)
       .post('/api/seller/register')
       .field('name', 'mimin1')
@@ -44,6 +45,7 @@ describe('Sellers Endpoints', () => {
   })
 
   it('POST /api/seller/register with email has been ready, response should be 400', async () => {
+    jest.setTimeout(5000)
     const res = await request(app)
         .post('/api/seller/register')
         .field('name', 'mimin1')
