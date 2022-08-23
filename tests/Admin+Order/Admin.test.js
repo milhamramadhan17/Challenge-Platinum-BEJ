@@ -27,19 +27,19 @@ const Upload = './files/Untitled Diagram.drawio.png';
 
     describe('Admin Endpoints', () => {
 
-        it('POST /api/admin/register with valid values, response should be 201', async () => {
-            jest.setTimeout(5000);
-            const res = await request(app)
-                .post('/api/admin/register')
-                .field('name', 'mimin1')
-                .field('email', 'mimin1@gmail.com')
-                .field('password', '123456')
-                .attach('profile', Upload)
-                .set('Accept', 'application/json');
+        // it('POST /api/admin/register with valid values, response should be 201', async () => {
+        //     jest.setTimeout(5000);
+        //     const res = await request(app)
+        //         .post('/api/admin/register')
+        //         .field('name', 'mimin1')
+        //         .field('email', 'mimin1@gmail.com')
+        //         .field('password', '123456')
+        //         .attach('profile', Upload)
+        //         .set('Accept', 'application/json');
 
-            expect(res.status).toBe(201);
-            expect(typeof res.body.message).toMatch('string');
-        })
+        //     expect(res.status).toBe(201);
+        //     expect(typeof res.body.message).toMatch('string');
+        // })
 
         it('POST /api/admin/register with email has been ready, response should be 400', async () => {
             jest.setTimeout(5000)
